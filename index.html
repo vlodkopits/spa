@@ -8,19 +8,14 @@
 
 	<body>
 		<header>
-			<nav>
-				<a href>events map</a>
-				<a href>events list</a>
-				<a href>add event</a>
-				<a href>find event</a>
-			</nav>
+			<event-nav></event-nav>
 		</header>
-		
+
 		<section>
-			<event-map></event-map>
-			<event-list></event-list>
-			<event-add></event-add>
-			<event-find></event-find>
+			<event-map ng-show="link.isLink(1)"></event-map>
+			<event-list ng-show="link.isLink(2)" ng-controller="EventController as eventlist"></event-list>
+			<event-add ng-show="link.isLink(3)"></event-add>
+			<event-find ng-show="link.isLink(4)"></event-find>
 		</section>
 
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>

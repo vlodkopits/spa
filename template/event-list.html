@@ -1,4 +1,8 @@
 ﻿<div class="container">
-
-
+	<div class="event-list-item" ng-repeat="event in eventlist.events">
+		<h1>{{event.title}}</h1>
+		<date>{{event.startdate}}</date> - <date>{{event.enddate}}</date>
+		<div>{{event.description}}</div>
+		<div>{{event.location}}</div>
+	</div>
 </div>
