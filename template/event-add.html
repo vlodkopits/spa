@@ -1,16 +1,16 @@
 ﻿<div class="container">
-	<form action="" method="post" enctype="multipart/form-data">
+	<form name="eventAdd" ng-submit="eventAdd.$valid" novalidate>
 
-			<i class="fa fa-plus"></i> add event image
-			<input name="event_image" type="file" class="event-image">
-			<div class="clr mb10"></div>
+			add event image
+			<input name="event_image" type="file">
+			<div class="clr"></div>
 
 			Events Title:
-			<input type="text" name="event-title" class="" placeholder="Event Title">
-			<div class="clr mb10"></div>
+			<input type="text" name="event-title" placeholder="Event Title" required>
+			<div class="clr"></div>
 
 			Events Category:
-			<select class="" name="event-categoty">
+			<select  name="event-categoty" required>
 				<option>- select category -</option>
 				<option value="1">music</option>
 				<option value="2">cinema</option>
@@ -19,49 +19,50 @@
 				<option value="5">lecture/presentation</option>
 				<option value="6">other</option>
 			</select>
-			<div class="clr mb10"></div>
+			<div class="clr"></div>
 
 			Start Date:
-			<input type="text" name="event-startdate" class="" placeholder="Event Start Date" id="events-add-startdate">
-			<div class="clr mb10"></div>
+			<input type="text" name="event-startdate" placeholder="Event Start Date" id="events-add-startdate" required>
+			<div class="clr"></div>
 
 			End Date:
-			<input type="text" name="event-enddate" class="" placeholder="Event End Date" id="events-add-enddate">
-			<div class="clr mb10"></div>
+			<input type="text" name="event-enddate" placeholder="Event End Date" id="events-add-enddate" required>
+			<div class="clr"></div>
 
 			Tickets cost:
-			<input type="text" name="event-tickets" class="" placeholder="Free or ticket price" >
-			<div class="clr mb10"></div>
+			<input type="text" name="event-tickets" placeholder="Free or ticket price" >
+			<div class="clr"></div>
 
 			Location:
-			<input type="text" name="event-location" class="" placeholder="Event location" >
-			<div class="clr mb10"></div>
+			<input type="text" name="event-location" placeholder="Event location" required>
+			<div class="clr"></div>
 
 			Location address:
-			<input id="geocomplete" class="" type="text" placeholder="Type location address">
+			<input id="geocomplete" type="text" placeholder="Type location address" required>
 			<div class="clr"></div>
-			<div id="event-map" class="events-add-map"></div>
+
+			<div id="event-map"></div>
 			<input name="event-lat" type="text" value="" class="hidden">
 			<input name="event-lng" type="text" value="" class="hidden">
-			<div class="clr mb10"></div>
+			<div class="clr"></div>
 
 			website:
-			<input type="text" name="event-web" class="" placeholder="Event website" >
-			<div class="clr mb10"></div>
+			<input type="text" name="event-web" placeholder="Event website" >
+			<div class="clr"></div>
 
 			e-mail:
-			<input type="text" name="email" class="" placeholder="e-mail" >
-			<div class="clr mb10"></div>
+			<input type="text" name="email" placeholder="e-mail" >
+			<div class="clr"></div>
 
 			phone:
-			<input type="text" name="event-phone" class="" placeholder="phone" >
-			<div class="clr mb10"></div>
+			<input type="text" name="event-phone" placeholder="phone" >
+			<div class="clr"></div>
 
 			Event Description:
-			<textarea  class="" name="event-description" rows="20" placeholder="Event Description" ></textarea>
+			<textarea  name="event-description" rows="20" placeholder="Event Description" required></textarea>
 
-			<div class="clr mb10"></div>
-			<div class="mb10"><button type="submit" name="submit" class="btn"><i class="fa fa-check"></i> Add Event</button></div>
+			<div class="clr"></div>
+			<button type="submit" name="submit" class="btn">Add Event</button>
 			
 	</form>
 </div>
