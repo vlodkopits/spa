@@ -1,0 +1,95 @@
+﻿<div  id="events-gmap"></div>		
+
+
+<?php
+	$host="db7.unlim.com"; // Host name
+	$username="h3u111_mapadmin"; // Mysql username
+	$password="43204320map"; // Mysql password
+	$db_name="h3u111_map"; // Database name
+	$tbl_name="events"; // Table name
+
+	// Connect to server and select database.
+	mysql_connect("$host", "$username", "$password")or die("cannot connect");
+	mysql_query("SET NAMES utf8");
+	mysql_select_db("$db_name")or die("cannot select DB");
+
+	// Retrieve data from database
+	$sql="SELECT title, lat, lng, id  FROM $tbl_name ";
+	$result=mysql_query($sql);
+	
+	// Start looping rows in mysql database.
+	while($rows=mysql_fetch_assoc($result)){
+		$singleEvents[] = $rows;	
+	// close while loop
+	}
+	$mapEvents = json_encode($singleEvents);
+	mysql_close();
+?>
+<script>
+	// Note: This example requires that you consent to location sharing when
+	// prompted by your browser. If you see the error "The Geolocation service
+	// failed.", it means you probably did not give permission for the browser to
+	// locate you.
+
+	function initMap() {
+	  var map = new google.maps.Map(document.getElementById('events-gmap'), {
+		center: {lat: 49.832, lng: 24.012},
+		zoom: 13
+	  });
+	  var infoWindow = new google.maps.InfoWindow({map: map});
+
+	  // Try HTML5 geolocation.
+	  if (navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(function(position) {
+		  var pos = {
+			lat: position.coords.latitude,
+			lng: position.coords.longitude
+		  };
+
+		  infoWindow.setPosition(pos);
+		  infoWindow.setContent('You are here');
+		  map.setCenter(pos);
+		}, function() {
+		  handleLocationError(true, infoWindow, map.getCenter());
+		});
+	  } else {
+		// Browser doesn't support Geolocation
+		handleLocationError(false, infoWindow, map.getCenter());
+	  }
+	  
+	  setMarkers(map);
+	}
+	
+	var response = <?php echo $mapEvents; ?>,
+    events = [];
+	for (var i = 0; i < response.length; i++) {
+	    events[i] = [];
+	    events[i].push(response[i].title);
+	    events[i].push(parseFloat(response[i].lat));
+	    events[i].push(parseFloat(response[i].lng));
+	    events[i].push(parseFloat(response[i].id));
+	}
+	
+	function setMarkers(map) {
+		
+		for (var i = 0; i < events.length; i++) {
+			var event = events[i];
+			var marker = new google.maps.Marker({
+			  position: {lat: event[1], lng: event[2]},
+			  map: map,
+			  //icon: image,
+			  //shape: shape,
+			  title: event[0],
+			  zIndex: event[3]
+			});
+		  }
+	}
+
+	function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+	  infoWindow.setPosition(pos);
+	  infoWindow.setContent(browserHasGeolocation ?
+							'Error: The Geolocation service failed.' :
+							'Error: Your browser doesn\'t support geolocation.');
+	}
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcQ7O6FhwFVRX-C91mc0SqX9s4XcFS9lM&callback=initMap"></script>
