@@ -1,16 +1,58 @@
 ﻿<div class="container">
-	<form name="eventAdd" novalidate>
-
+	<form name="eventAdd" >
+		<div class="col-1">
 			add event image
 			<input name="event_image" type="file">
-			<div class="clr"></div>
+			<div class="clr mb10"></div>
 
+			<i class="fa fa-calendar blue"></i>
+			Start Date:
+			<input type="text" name="event-startdate" placeholder="" id="events-add-startdate" >
+			<div class="clr mb10"></div>
+
+			<i class="fa fa-calendar blue"></i>
+			End Date:
+			<input type="text" name="event-enddate" placeholder="" id="events-add-enddate" >
+			<div class="clr mb10"></div>
+
+			<i class="fa fa-ticket blue"></i>
+			Tickets cost:
+			<input type="text" name="event-tickets" placeholder="Free or ticket price" >
+			<div class="clr mb10"></div>
+
+			<i class="fa fa-map-marker blue"></i>
+			Location:
+			<input type="text" name="event-location" placeholder="Event location" >
+			<div class="clr mb10"></div>
+
+			Location address:
+			<input id="geocomplete" type="text" placeholder="Type location address" >
+			<div class="clr mb10"></div>
+
+			<div id="event-map"></div>
+			<input name="event-lat" type="text" value="" class="hidden">
+			<input name="event-lng" type="text" value="" class="hidden">
+			<div class="clr mb10"></div>
+
+			website:
+			<input type="text" name="event-web" placeholder="Event website" >
+			<div class="clr mb10"></div>
+
+			e-mail:
+			<input type="text" name="email" placeholder="e-mail" >
+			<div class="clr mb10"></div>
+
+			phone:
+			<input type="text" name="event-phone" placeholder="phone" >
+			<div class="clr mb10"></div>
+		</div>
+		<div class="col-3">
 			Events Title:
-			<input type="text" name="event-title" placeholder="Event Title" required>
-			<div class="clr"></div>
+			<input type="text" name="event-title" placeholder="Event Title" >
+			<div class="clr mb10"></div>
 
 			Events Category:
-			<select  name="event-categoty" required>
+			<select  name="event-categoty" >
 				<option>- select category -</option>
 				<option value="1">music</option>
 				<option value="2">cinema</option>
@@ -19,50 +61,14 @@
 				<option value="5">lecture/presentation</option>
 				<option value="6">other</option>
 			</select>
-			<div class="clr"></div>
-
-			Start Date:
-			<input type="text" name="event-startdate" placeholder="Event Start Date" id="events-add-startdate" required>
-			<div class="clr"></div>
-
-			End Date:
-			<input type="text" name="event-enddate" placeholder="Event End Date" id="events-add-enddate" required>
-			<div class="clr"></div>
-
-			Tickets cost:
-			<input type="text" name="event-tickets" placeholder="Free or ticket price" >
-			<div class="clr"></div>
-
-			Location:
-			<input type="text" name="event-location" placeholder="Event location" required>
-			<div class="clr"></div>
-
-			Location address:
-			<input id="geocomplete" type="text" placeholder="Type location address" required>
-			<div class="clr"></div>
-
-			<div id="event-map"></div>
-			<input name="event-lat" type="text" value="" class="hidden">
-			<input name="event-lng" type="text" value="" class="hidden">
-			<div class="clr"></div>
-
-			website:
-			<input type="text" name="event-web" placeholder="Event website" >
-			<div class="clr"></div>
-
-			e-mail:
-			<input type="text" name="email" placeholder="e-mail" >
-			<div class="clr"></div>
-
-			phone:
-			<input type="text" name="event-phone" placeholder="phone" >
-			<div class="clr"></div>
+			<div class="clr mb10"></div>
 
 			Event Description:
-			<textarea  name="event-description" rows="20" placeholder="Event Description" required></textarea>
+			<textarea  name="event-description" rows="20" placeholder="Event Description" ></textarea>
+			<div class="clr mb10"></div>
 
-			<div class="clr"></div>
-			<button type="submit" name="submit" class="btn">Add Event</button>
+			<button type="submit" name="submit" class="btn"><i class="fa fa-check"></i> Add Event</button>
+		</div>
 			
 	</form>
 </div>

@@ -54,3 +54,10 @@ app.controller('EventController', ['$http',function($http){
     eventlist.events = data;
   });
   }]);
+
+  /* event add start */
+
+  /* event add end */
+
+
+

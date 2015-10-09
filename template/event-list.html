@@ -1,21 +1,19 @@
 ﻿<div class="container">
-	<div class="event-list-item p10" ng-repeat="event in eventlist.events | orderBy: 'startdeta'">
-		<h1>{{event.title}}</h1>
-		<span>{{event.image}}</span>
-		<span>{{event.category}}</span>
-		<date>{{event.startdate}}</date> - <date>{{event.enddate}}</date>
-		<div>
-			<i class="fa fa-ticket blue"></i> {{event.tickets}}
-			<span ng-show="event.buy_tick.length>0"><a href="{{event.buy_tick}}" target="_blank" >Buy</a></span>
-		</div>
-		<div>{{event.description}}</div>
-		<div class="fr">
-			<i class="fa fa-map-marker blue"></i> {{event.location}}
+	<div class="row">
+		<div class="event-list-item col-1" ng-repeat="event in eventlist.events | orderBy: 'startdeta'">
+			<span>
+				<img ng-src="{{event.image}}" class="img-respons w100p" />
+			</span>
+			<h1 ng-click="linkSingle.setLink(1)">{{event.title}}</h1>
+			<span>{{event.category}}</span>
+			<date><i class="fa fa-calendar blue"></i><strong> {{event.startdate}}</date> - <date>{{event.enddate}}</strong></date>
+			<div><i class="fa fa-map-marker blue"></i> {{event.location}}</div>
+			<div>
+				<i class="fa fa-ticket blue"></i> {{event.tickets}}
+				<span ng-show="event.buy_tick.length>0"><a href="{{event.buy_tick}}" target="_blank" >Buy</a></span>
+			</div>
+			<div>{{event.description | limitTo: 100}}</div>		
 			<div class="clr"></div>
-			<a href="https://www.google.com/maps/@{{event.lat}},{{event.lng}},14z" target="_blank">
-				<img src="https://maps.googleapis.com/maps/api/staticmap?center={{event.lat}},{{event.lng}}&amp;zoom=14&amp;markers=color:red%7C{{event.lat}},{{event.lng}}&amp;size=300x200" alt="" />
-			</a>
 		</div>
-		<div class="clr"></div>
 	</div>
 </div>
