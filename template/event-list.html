@@ -1,12 +1,12 @@
 ﻿<div class="container">
-	<div class="event-list-item p10" ng-repeat="event in eventlist.events">
+	<div class="event-list-item p10" ng-repeat="event in eventlist.events | orderBy: 'startdeta'">
 		<h1>{{event.title}}</h1>
 		<span>{{event.image}}</span>
 		<span>{{event.category}}</span>
 		<date>{{event.startdate}}</date> - <date>{{event.enddate}}</date>
 		<div>
 			<i class="fa fa-ticket blue"></i> {{event.tickets}}
-			<span><a href="{{event.buy_tick}}" target="_blank" >Buy</a></span>
+			<span ng-show="event.buy_tick.length>0"><a href="{{event.buy_tick}}" target="_blank" >Buy</a></span>
 		</div>
 		<div>{{event.description}}</div>
 		<div class="fr">
