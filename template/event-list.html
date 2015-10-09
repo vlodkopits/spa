@@ -1,6 +1,11 @@
 ﻿<div class="container">
+	<div class="mb10">
+	<br/>
+	Find event:
+	<input type="text" ng-model="search">
+	</div>
 	<div class="row">
-		<div class="event-list-item col-1" ng-repeat="event in eventlist.events | orderBy: 'startdeta'">
+		<div class="event-list-item col-1" ng-repeat="event in eventlist.events | orderBy: 'startdeta' | filter : search">
 			<span>
 				<img ng-src="{{event.image}}" class="img-respons w100p" />
 			</span>
