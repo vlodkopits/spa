@@ -1,12 +1,13 @@
 ﻿<div class="container">
 	<div class="mb10">
 	<br/>
+	<i class="fa fa-search blue"></i>
 	Find event:
 	<input type="text" ng-model="search">
 	</div>
 	<div class="row">
-		<div class="event-list-item col-1" ng-repeat="event in eventlist.events | orderBy: 'startdeta' | filter : search">
-			<span>
+		<div class="event-list-item col-1" ng-repeat="event in eventlist.events | orderBy: 'startdate' | filter : search">
+			<span class="event-img">
 				<img ng-src="{{event.image}}" class="img-respons w100p" />
 			</span>
 			<h1 ng-click="linkSingle.setLink(1)">{{event.title}}</h1>
