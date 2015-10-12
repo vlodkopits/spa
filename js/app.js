@@ -51,11 +51,11 @@ app.controller('EventController', ['$http',function($http){
     var eventlist = this;
     eventlist.events = [];
     $http.get('data/events.json').success(function(data){
-    eventlist.events = data;
-  });
+      eventlist.events = data;
+    });
   }]);
 
-  /* event add start */
+  /* event add start 
 
   /* event add end */
 

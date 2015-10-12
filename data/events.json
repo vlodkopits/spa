@@ -169,7 +169,7 @@
         "description": "\u0424\u0456\u043b\u044c\u043c \u0415\u0432\u0435\u0440\u0435\u0441\u0442 \u0424\u0456\u043b\u044c\u043c \u0415\u0432\u0435\u0440\u0435\u0441\u0442 \u0424\u0456\u043b\u044c\u043c \u0415\u0432\u0435\u0440\u0435\u0441\u0442",
         "startdate": "10\/09\/2015",
         "enddate": "10\/28\/2015",
-        "tickets": "150 \u0433\u0440\u043d",
+        "tickets": "170 \u0433\u0440\u043d",
         "buy_tick": null,
         "location": "\u041a\u0456\u043d\u043e\u0442\u0435\u0430\u0442\u0440 \u041f\u043b\u0430\u043d\u0435\u0442\u0430 \u043a\u0456\u043d\u043e IMAX",
         "lat": "49.773513012768404",
@@ -177,6 +177,6 @@
         "web": "http:\/\/planetakino.ua\/lvov\/movies\/everest\/",
         "email": "",
         "phone": "123 456 789",
-        "enable": "1"
+        "enable": "0"
     }
 ]
