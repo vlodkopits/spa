@@ -15,7 +15,7 @@
             <input type="text" name="event-enddate" placeholder="" id="events-add-enddate" value="{{ data.date | date:'dd-MM-yyyy HH:mm' }}">
 			<div class="clr mb10"></div>
 		</div>
-		<div class="col-1">
+		<div class="col-2">
 			<i class="fa fa-ticket blue"></i> Tickets cost:
 			<input type="text" name="event-tickets" placeholder="Free or ticket price" >
 			<div class="clr mb10"></div>
@@ -27,9 +27,9 @@
 			Location address:
 			<input id="geocomplete" class="form-control" type="text" placeholder="Type location address">
 			<div class="clr"></div>
-			<div id="event-map" class="events-add-map"></div>
-			<input name="event-lat" type="text" value="" class="hidden">
-			<input name="event-lng" type="text" value="" class="hidden">
+			<div id="event-map" class="events-add-map" style="width: 100%; height: 200px;"></div>
+			<input name="event-lat" type="text" value="" class="">
+			<input name="event-lng" type="text" value="" class="">
 
 			website:
 			<input type="text" name="event-web" placeholder="Event website" >
@@ -43,7 +43,7 @@
 			<input type="text" name="event-phone" placeholder="phone" >
 			<div class="clr mb10"></div>
 		</div>
-		<div class="col-2">
+		<div class="col-4">
 			Events Title:
 			<input type="text" name="event-title" placeholder="Event Title" >
 			<div class="clr mb10"></div>
@@ -70,7 +70,7 @@
 	</form>
 </div>
 <!--<script src="../js/jquery.geocomplete.js"></script>-->
-<!--
+
 <script>
   $(function(){
     $("#geocomplete").geocomplete({
@@ -92,4 +92,3 @@
     }).click();
   });
 </script>
--->
