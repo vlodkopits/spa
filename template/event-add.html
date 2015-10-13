@@ -24,13 +24,17 @@
 			<input type="text" name="event-location" placeholder="Event location" >
 			<div class="clr mb10"></div>
 
-			Location address:
-			<input id="geocomplete" class="form-control" type="text" placeholder="Type location address">
-			<a id="reset" href="#" style="display:none;">Reset</a>
+			Location address:<br/>
+			<input id="geocomplete" type="text" placeholder="Type location address" value="Ратуша, площа Ринок, 1, Львів, Львівська область, Україна, 79000" class="fl" style="width: 70%;">
+			<input id="find" type="button" value="find" class="fl" style="width: 30%;" />
 			<div class="clr"></div>
 			<div id="event-map" class="events-add-map" style="width: 100%; height: 200px;"></div>
-			<input name="event-lat" type="text" value="" class="">
-			<input name="event-lng" type="text" value="" class="">
+			<div style="height:1px; overflow:hidden;"> 
+				<input name="lat" type="text" value="" class="" />
+				<input name="lng" type="text" value="" class="" />
+				<input name="formatted_address" type="text" value="" />
+			</div>
+			<a id="reset" href="#" style="display:none;">Reset</a>
 		</div>
 		<div class="col-1">
 			website:
@@ -78,6 +82,9 @@
         $("#geocomplete").geocomplete({
           map: "#event-map",
           details: "form",
+          mapOptions: {
+		    zoom: 16
+		  },
           markerOptions: {
             draggable: true
           }

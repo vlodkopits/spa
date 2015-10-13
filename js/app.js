@@ -20,7 +20,7 @@ app.directive("eventNav", function() {
       restrict: 'E',
       templateUrl: "template/event-nav.html",
       controller: function() {
-          this.link = 1;
+          this.link = 3;
 
           this.isLink = function(checkLink) {
             return this.link === checkLink;
