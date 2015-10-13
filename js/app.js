@@ -1,4 +1,19 @@
-var app = angular.module ('eventApp', [] );
+var app = angular.module ('eventApp', ['ui.bootstrap.datetimepicker'] );
+
+
+var eventData = (function () {
+    var json = null;
+    $.ajax({
+        'async': false,
+        'global': false,
+        'url': 'data/events.json',
+        'dataType': "json",
+        'success': function (data) {
+            json = data;
+        }
+    });
+    return json;
+})(); 
 
 app.directive("eventNav", function() { 
     return {
@@ -55,9 +70,47 @@ app.controller('EventController', ['$http',function($http){
     });
   }]);
 
+app.controller ('EventMapCtrl',function ($scope){
+  var mapOptions = {
+        zoom: 13,
+        center: new google.maps.LatLng(49.832, 24.012),
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+
+    $scope.map = new google.maps.Map(document.getElementById('events-gmap'), mapOptions);
+
+    $scope.markers = [];
+    
+    var infoWindow = new google.maps.InfoWindow();
+    
+    var createMarker = function (info){
+        
+        var marker = new google.maps.Marker({
+            map: $scope.map,
+            position: new google.maps.LatLng(info.lat, info.lng),
+            title: info.title
+        });
+        marker.content = '<div class="infoWindowContent">' + info.title + info.description + '</div>';
+        
+        google.maps.event.addListener(marker, 'click', function(){
+            infoWindow.setContent('<h2>' + marker.title + '</h2>' + marker.content);
+            infoWindow.open($scope.map, marker);
+        });
+        
+        $scope.markers.push(marker);
+        
+    }  
+    
+    for (i = 0; i < eventData.length; i++){
+        createMarker(eventData[i]);
+    }
+
+    $scope.openInfoWindow = function(e, selectedMarker){
+        e.preventDefault();
+        google.maps.event.trigger(selectedMarker, 'click');
+    }
+});
+
   /* event add start 
 
   /* event add end */
-
-
-

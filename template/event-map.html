@@ -1,7 +1,9 @@
-﻿<div  id="events-gmap" style="width: 100%; height: 100%;"></div>	
-<script src="//maps.googleapis.com/maps/api/js?key=AIzaSyDcQ7O6FhwFVRX-C91mc0SqX9s4XcFS9lM&amp;callback=initMap&amp;callback=initialize"></script>	
+﻿<div ng-controller="EventMapCtrl" style="width: 100%; height: 100%;">
+  <div  id="events-gmap" style="width: 100%; height: 100%;" ></div>	
+</div>
+
 <script>
-/* google map start */
+/* google map start 
 
 function initialize() {
     var map = new google.maps.Map(document.getElementById('events-gmap'), {
@@ -33,7 +35,7 @@ function initialize() {
   }
 
 
-/*
+
   var response = $.getJSON( "data/events.json"),
     events = [];
   for (var i = 0; i < response.responseJSON.length; i++) {
@@ -58,7 +60,7 @@ function initialize() {
       });
       }
   }
-  */
+  
 
   function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     infoWindow.setPosition(pos);
@@ -67,7 +69,7 @@ function initialize() {
               'Error: Your browser doesn\'t support geolocation.');
   }
 
-  /* google map end */
+   google map end */
 </script>
 
     

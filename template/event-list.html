@@ -1,9 +1,19 @@
 ﻿<div class="container">
-	<div class="mb10">
-	<br/>
-	<i class="fa fa-search blue"></i>
-	Find event:
-	<input type="text" ng-model="search">
+	<div class="w100p">
+		<div class="col-1">
+			<i class="fa fa-search blue"></i> Find event:
+			<input type="text" ng-model="search">
+		</div>
+		<div class="col-3">
+			<br/>
+			<a href class="btn bg-red"><i class="fa fa-music"></i> music</a>
+			<a href class="btn bg-green"><i class="fa fa-film"></i> cinema</a>
+			<a href class="btn bg-blue"><i class="fa fa-picture-o"></i> exhibition</a>
+			<a href class="btn bg-yellow"><i class="fa fa-users"></i> thearte</a>
+			<a href class="btn bg-grey"><i class="fa fa-graduation-cap"></i> presentation/lecture</a>
+			<a href class="btn bg-brown"><i class="fa fa-globe"></i> other</a>
+		</div>
+		<div class="clr"></div>
 	</div>
 	<div class="row">
 		<div class="event-list-item col-1" ng-repeat="event in eventlist.events | orderBy: 'startdate' | filter : search">

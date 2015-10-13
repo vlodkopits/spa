@@ -4,20 +4,30 @@ body, html {height: 100%; width: 100%;}
 body {font-family: Verdana, Tahoma, Arial; font-size: 14px; color: #000;}
 h1,h2,h3 {color:#2196F3;}
 h1 {font-size: 18px;}
-a {color:#2196F3;}
+a {color:#2196F3; text-decoration: none;}
+a:hover{}
 input,select,textarea{padding: 5px; border: 1px solid #ccc; display: block; border-radius: 5px 5px 5px 5px; -moz-border-radius: 5px 5px 5px 5px; -webkit-border-radius: 5px 5px 5px 5px; width: 100%;}
+table {width: 100%;}
 
 .fl{float: left;}
 .fr {float: right;}
 .clr {clear: both;}
 .p10 {padding: 10px;}
-.mb10 {margin: 0 0 10px 0;}
+.mb10 {margin-bottom: 10px;}
+.mr10{ margin-right:10px;}
 .w100p {width: 100%;}
 .hidden {visibility: hidden;}
 .btn {background-color: #0D47A1; color: #fff; border: 0;padding: 10px;border-radius: 5px 5px 5px 5px;-moz-border-radius: 5px 5px 5px 5px;-webkit-border-radius: 5px 5px 5px 5px;}
 .ng-invalid.ng-dirty {border-color: red;}   
 .ng-valid.ng-dirty {border-color: green;}
 .blue{color: #2196F3;}
+[class*='bg-']:hover{opacity: 0.6;}
+.bg-red {background-color: #B71C1C !important;}
+.bg-green {background-color: #4CAF50;}
+.bg-blue {background-color: #0091EA;}
+.bg-yellow {background-color: #FF9800;}
+.bg-grey {background-color: #757575;}
+.bg-brown {background-color: #795548;}
 
 
 *, *::before, *::after {-webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }

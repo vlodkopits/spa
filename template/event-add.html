@@ -1,38 +1,35 @@
 <div class="container" >
 	<form name="eventAdd" id="eventAdd" >
 		<div class="col-1">
-			add event image
+			<i class="fa fa-picture-o blue"></i> add event image
 			<input name="event_image" type="file">
 			<div class="clr mb10"></div>
 
-			<i class="fa fa-calendar blue"></i>
-			Start Date:
-			<input type="text" name="event-startdate" placeholder="" id="events-add-startdate" >
+			<i class="fa fa-calendar blue"></i> Start Date:
+            <datetimepicker data-ng-model="data.date" ></datetimepicker>
+            <input type="text" name="event-startdate" placeholder="" id="events-add-startdate" value="{{ data.date | date:'dd-MM-yyyy HH:mm' }}">
 			<div class="clr mb10"></div>
 
-			<i class="fa fa-calendar blue"></i>
-			End Date:
-			<input type="text" name="event-enddate" placeholder="" id="events-add-enddate" >
+			<i class="fa fa-calendar blue"></i> End Date:
+			<datetimepicker data-ng-model="data.date" ></datetimepicker>
+            <input type="text" name="event-enddate" placeholder="" id="events-add-enddate" value="{{ data.date | date:'dd-MM-yyyy HH:mm' }}">
 			<div class="clr mb10"></div>
-
-			<i class="fa fa-ticket blue"></i>
-			Tickets cost:
+		</div>
+		<div class="col-1">
+			<i class="fa fa-ticket blue"></i> Tickets cost:
 			<input type="text" name="event-tickets" placeholder="Free or ticket price" >
 			<div class="clr mb10"></div>
 
-			<i class="fa fa-map-marker blue"></i>
-			Location:
+			<i class="fa fa-map-marker blue"></i> Location:
 			<input type="text" name="event-location" placeholder="Event location" >
 			<div class="clr mb10"></div>
 
 			Location address:
-			<input id="geocomplete" type="text" placeholder="Type location address" >
-			<div class="clr mb10"></div>
-
-			<div id="event-map"></div>
+			<input id="geocomplete" class="form-control" type="text" placeholder="Type location address">
+			<div class="clr"></div>
+			<div id="event-map" class="events-add-map"></div>
 			<input name="event-lat" type="text" value="" class="hidden">
 			<input name="event-lng" type="text" value="" class="hidden">
-			<div class="clr mb10"></div>
 
 			website:
 			<input type="text" name="event-web" placeholder="Event website" >
@@ -46,7 +43,7 @@
 			<input type="text" name="event-phone" placeholder="phone" >
 			<div class="clr mb10"></div>
 		</div>
-		<div class="col-3">
+		<div class="col-2">
 			Events Title:
 			<input type="text" name="event-title" placeholder="Event Title" >
 			<div class="clr mb10"></div>
@@ -72,3 +69,27 @@
 			
 	</form>
 </div>
+<!--<script src="../js/jquery.geocomplete.js"></script>-->
+<!--
+<script>
+  $(function(){
+    $("#geocomplete").geocomplete({
+      map: "#event-map",
+      details: "form ",
+      markerOptions: {
+        draggable: true
+      }
+    });
+    
+    $("#geocomplete").bind("geocode:dragged", function(event, latLng){
+      $("input[name=event-lat]").val(latLng.lat());
+      $("input[name=event-lng]").val(latLng.lng());
+      $("#reset").show();
+    });
+    
+    $("#find").click(function(){
+      $("#geocomplete").trigger("geocode");
+    }).click();
+  });
+</script>
+-->
