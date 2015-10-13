@@ -26,6 +26,7 @@
 
 			Location address:
 			<input id="geocomplete" class="form-control" type="text" placeholder="Type location address">
+			<a id="reset" href="#" style="display:none;">Reset</a>
 			<div class="clr"></div>
 			<div id="event-map" class="events-add-map" style="width: 100%; height: 200px;"></div>
 			<input name="event-lat" type="text" value="" class="">
@@ -74,22 +75,29 @@
 
 <script>
   $(function(){
-    $("#geocomplete").geocomplete({
-      map: "#event-map",
-      details: "form ",
-      markerOptions: {
-        draggable: true
-      }
-    });
-    
-    $("#geocomplete").bind("geocode:dragged", function(event, latLng){
-      $("input[name=event-lat]").val(latLng.lat());
-      $("input[name=event-lng]").val(latLng.lng());
-      $("#reset").show();
-    });
-    
-    $("#find").click(function(){
-      $("#geocomplete").trigger("geocode");
-    }).click();
-  });
+        $("#geocomplete").geocomplete({
+          map: "#event-map",
+          details: "form",
+          markerOptions: {
+            draggable: true
+          }
+        });
+        
+        $("#geocomplete").bind("geocode:dragged", function(event, latLng){
+          $("input[name=lat]").val(latLng.lat());
+          $("input[name=lng]").val(latLng.lng());
+          $("#reset").show();
+        });
+        
+        
+        $("#reset").click(function(){
+          $("#geocomplete").geocomplete("resetMarker");
+          $("#reset").hide();
+          return false;
+        });
+        
+        $("#find").click(function(){
+          $("#geocomplete").trigger("geocode");
+        }).click();
+      });
 </script>
