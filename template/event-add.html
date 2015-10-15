@@ -1,32 +1,22 @@
 <div class="container" >
-	<form name="eventAdd" id="eventAdd" >
+	<form name="eventAdd" id="eventAdd" method="POST" action="add.php">
 		<div class="col-1">
 			<i class="fa fa-picture-o blue"></i> add event image
 			<input name="event_image" type="file">
 			<div class="clr mb10"></div>
-
-			<i class="fa fa-calendar blue"></i> Start Date:
-            <datetimepicker data-ng-model="data.date" ></datetimepicker>
-            <input type="text" name="event-startdate" placeholder="" id="events-add-startdate" value="{{ data.date | date:'dd-MM-yyyy HH:mm' }}">
-			<div class="clr mb10"></div>
-
-			<i class="fa fa-calendar blue"></i> End Date:
-			<datetimepicker data-ng-model="data.date" ></datetimepicker>
-            <input type="text" name="event-enddate" placeholder="" id="events-add-enddate" value="{{ data.date | date:'dd-MM-yyyy HH:mm' }}">
-			<div class="clr mb10"></div>
-
-			<i class="fa fa-ticket blue"></i> Tickets cost:
-			<input type="text" name="event-tickets" placeholder="Free or ticket price" >
-			<div class="clr mb10"></div>
 		</div>
 		<div class="col-2">
-			<i class="fa fa-map-marker blue"></i> Location:
+			Events Title <span class="color-red">*</span>:
+			<input type="text" name="event-title" placeholder="Event Title" >
+			<div class="clr mb10"></div>			
+
+			<i class="fa fa-map-marker blue"></i> Location <span class="color-red">*</span>:
 			<input type="text" name="event-location" placeholder="Event location" >
 			<div class="clr mb10"></div>
 
-			Location address:<br/>
-			<input id="geocomplete" type="text" placeholder="Type location address" value="Ратуша, площа Ринок, 1, Львів, Львівська область, Україна, 79000" class="fl" style="width: 70%;">
-			<input id="find" type="button" value="find" class="fl" style="width: 30%;" />
+			Location address <span class="color-red">*</span>:<br/>
+			<input id="geocomplete" type="text" placeholder="Type location address" value="Ратуша, площа Ринок, 1, Львів, Львівська область, Україна, 79000" class="fl mr10" style="width: 70%; ">
+			<input id="find" type="button" value="find" class="fl btn" style="width: 25%; padding: 6px 0;" />
 			<div class="clr"></div>
 			<div id="event-map" class="events-add-map" style="width: 100%; height: 200px;"></div>
 			<div style="height:1px; overflow:hidden;"> 
@@ -37,6 +27,22 @@
 			<a id="reset" href="#" style="display:none;">Reset</a>
 		</div>
 		<div class="col-1">
+			Events Category <span class="color-red">*</span>:
+			<select  name="event-categoty" >
+				<option>- select category -</option>
+				<option value="1">music</option>
+				<option value="2">cinema</option>
+				<option value="3">exhibition</option>
+				<option value="4">thearte</option>
+				<option value="5">lecture/presentation</option>
+				<option value="6">other</option>
+			</select>
+			<div class="clr mb10"></div>
+
+			<i class="fa fa-ticket blue"></i> Tickets cost:
+			<input type="text" name="event-tickets" placeholder="Free or ticket price" >
+			<div class="clr mb10"></div>
+
 			website:
 			<input type="text" name="event-web" placeholder="Event website" >
 			<div class="clr mb10"></div>
@@ -49,28 +55,23 @@
 			<input type="text" name="event-phone" placeholder="phone" >
 			<div class="clr mb10"></div>
 		</div>
-		<div class="col-3">
-			Events Title:
-			<input type="text" name="event-title" placeholder="Event Title" >
+		<div class="clr"></div>
+		<div class="col-1">
+			<i class="fa fa-calendar blue"></i> Select Satrt Date <span class="color-red">*</span>:
+            <!-- <datetimepicker data-ng-model="data.date" ></datetimepicker>
+            <input type="text" name="event-startdate" placeholder="" id="events-add-startdate" value="{{ data.date | date:'dd-MM-yyyy HH:mm' }}"> -->
+            <input type="text" name="event-startdate" placeholder="" id="events-add-startdate" value="">
+			<div class="clr mb10"></div>
+			<i class="fa fa-calendar blue"></i> Select End Date <span class="color-red">*</span>:
+            <input type="text" name="event-enddate" placeholder="" id="events-add-enddate" value="">
+			<div class="clr mb10"></div>
+		</div>
+		<div class="col-3">			
+			Event Description <span class="color-red">*</span>:
+			<textarea  name="event-description" rows="15" placeholder="Event Description" ></textarea>
 			<div class="clr mb10"></div>
 
-			Events Category:
-			<select  name="event-categoty" >
-				<option>- select category -</option>
-				<option value="1">music</option>
-				<option value="2">cinema</option>
-				<option value="3">exhibition</option>
-				<option value="4">thearte</option>
-				<option value="5">lecture/presentation</option>
-				<option value="6">other</option>
-			</select>
-			<div class="clr mb10"></div>
-
-			Event Description:
-			<textarea  name="event-description" rows="20" placeholder="Event Description" ></textarea>
-			<div class="clr mb10"></div>
-
-			<button type="submit" name="submit" class="btn"><i class="fa fa-check"></i> Add Event</button>
+			<button type="submit" name="submit" class="btn" ><i class="fa fa-check"></i> Add Event</button>
 		</div>
 			
 	</form>
@@ -107,4 +108,16 @@
           $("#geocomplete").trigger("geocode");
         }).click();
       });
+</script>
+<script>
+$(function () {
+                $('#events-add-startdate').datetimepicker({
+                	format: 'DD-MM-YYYY HH:mm',
+                	sideBySide:true
+                });
+                $('#events-add-enddate').datetimepicker({
+                	format: 'DD-MM-YYYY HH:mm',
+                	sideBySide:true
+                });
+            });
 </script>

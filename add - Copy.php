@@ -19,8 +19,8 @@ if(isset($_POST['submit'])){ // Fetching variables of the form which travels in 
 	$enddate = $_POST['event-enddate'];
 	$tickets = $_POST['event-tickets'];
 	$location = $_POST['event-location'];
-	$lat = $_POST['lat'];
-	$lng = $_POST['lng'];
+	$lat = $_POST['event-lat'];
+	$lng = $_POST['event-lng'];
 	$web = $_POST['event-web'];
 	$email = $_POST['event-email'];
 	$phone = $_POST['event-phone'];

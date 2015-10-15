@@ -1,4 +1,4 @@
-var app = angular.module ('eventApp', ['ui.bootstrap.datetimepicker'] );
+var app = angular.module ('eventApp', [] );
 
 
 var eventData = (function () {
@@ -20,7 +20,7 @@ app.directive("eventNav", function() {
       restrict: 'E',
       templateUrl: "template/event-nav.html",
       controller: function() {
-          this.link = 3;
+          this.link = 1;
 
           this.isLink = function(checkLink) {
             return this.link === checkLink;
@@ -55,20 +55,24 @@ app.directive("eventAdd", function() {
     };
   });
 
+/*
 app.directive("eventFind", function() {
     return {
       restrict: 'E',
       templateUrl: "template/event-find.html"
     };
   });
+*/
 
 app.controller('EventController', ['$http',function($http){
     var eventlist = this;
     eventlist.events = [];
-    $http.get('data/events.json').success(function(data){
-      eventlist.events = data;
-    });
+    //$http.get('data/events.json').success(function(data){
+      eventlist.events = eventData;
+    //});
   }]);
+
+/* big map with events */
 
 app.controller ('EventMapCtrl',function ($scope){
   var mapOptions = {
@@ -78,6 +82,21 @@ app.controller ('EventMapCtrl',function ($scope){
     }
 
     $scope.map = new google.maps.Map(document.getElementById('events-gmap'), mapOptions);
+
+    navigator.geolocation.getCurrentPosition(function(position) {
+        
+            var geolocate = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+            
+            var infowindow = new google.maps.InfoWindow({
+                map: $scope.map,
+                position: geolocate,
+                content:
+                    'you are here'
+            });
+            
+            $scope.map.setCenter(geolocate);
+            
+        });
 
     $scope.markers = [];
     
@@ -109,8 +128,10 @@ app.controller ('EventMapCtrl',function ($scope){
         e.preventDefault();
         google.maps.event.trigger(selectedMarker, 'click');
     }
+
+
 });
 
-  /* event add start 
+  /* event add start */
 
   /* event add end */

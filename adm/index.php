@@ -49,6 +49,11 @@
 			       $query = "UPDATE $tbl_name SET enable=1 WHERE id=$id"; 
 			       $result = mysql_query($query);
 			    }
+			    if(isset($_POST['disable'])){
+			       $id = $_POST['disable_rec_id'];  
+			       $query = "UPDATE $tbl_name SET enable=0 WHERE id=$id"; 
+			       $result = mysql_query($query);
+			    }
 
 				$sql="SELECT * FROM $tbl_name ";
 				$result=mysql_query($sql);
@@ -73,6 +78,12 @@
 							<form id="enable" method="post" action="">
 								<input type="hidden" name="enable_rec_id" value="<? echo $rows['id']; ?>" />
 						        <button type="submit" name="enable" class="btn bg-green mb10 mr10 fl "><i class="fa fa-check"></i> enable</button>
+					        </form>
+					    <?}?>
+					    <?if ($rows['enable'] == 1) {?>
+							<form id="disable" method="post" action="">
+								<input type="hidden" name="disable_rec_id" value="<? echo $rows['id']; ?>" />
+						        <button type="submit" name="disable" class="btn bg-red mb10 mr10 fl "><i class="fa fa-check"></i> disable</button>
 					        </form>
 					    <?}?>
 
