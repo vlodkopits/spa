@@ -7,7 +7,6 @@ h1 {font-size: 18px;}
 a {color:#2196F3; text-decoration: none;}
 a:hover{}
 input,select,textarea{padding: 5px; border: 1px solid #ccc; display: block; border-radius: 5px 5px 5px 5px; -moz-border-radius: 5px 5px 5px 5px; -webkit-border-radius: 5px 5px 5px 5px; width: 100%;}
-table {width: 100%;}
 
 .fl{float: left;}
 .fr {float: right;}
@@ -15,6 +14,7 @@ table {width: 100%;}
 .p10 {padding: 10px;}
 .mb10 {margin-bottom: 10px;}
 .mr10{ margin-right:10px;}
+.h45p {height: 45px;}
 .w100p {width: 100%;}
 .hidden {visibility: hidden;}
 .btn {background-color: #0D47A1; color: #fff; border: 0;padding: 10px;border-radius: 5px 5px 5px 5px;-moz-border-radius: 5px 5px 5px 5px;-webkit-border-radius: 5px 5px 5px 5px;}
@@ -37,7 +37,7 @@ table {width: 100%;}
 [class*='col-'] {float: left; min-height: 1px; padding: 10px; width: 100%;}
 .img-respons {display: block; height: auto; max-width: 100%;}
 
-header {background-color: #2196F3; width: 100%;}
+header {background-color: #2196F3; width: 100%; position: fixed; width: 100%; z-index: 7; top: 0;}
 nav > span:first-child {padding: 0;}
 nav > span{ width: 25%; display: inline-block; text-align: center; padding: 10px 0; float:left;}
 nav > span.active{background-color: #1565C0; color: #fff;}
