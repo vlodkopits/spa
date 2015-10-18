@@ -55,21 +55,10 @@ app.directive("eventAdd", function() {
     };
   });
 
-/*
-app.directive("eventFind", function() {
-    return {
-      restrict: 'E',
-      templateUrl: "template/event-find.html"
-    };
-  });
-*/
-
 app.controller('EventController', ['$http',function($http){
     var eventlist = this;
     eventlist.events = [];
-    //$http.get('data/events.json').success(function(data){
-      eventlist.events = eventData;
-    //});
+    eventlist.events = eventData;
   }]);
 
 /* big map with events */
