@@ -1,35 +1,43 @@
-﻿<div class="container">
+﻿<div class="container" >
 	<div class="w100p">
 		<div class="col-1">
 			<i class="fa fa-search blue"></i> Find event:
 			<input type="text" ng-model="search">
 		</div>
-		<div class="col-3">
-			<br/>
-			<a href class="btn bg-red"><i class="fa fa-music"></i> music</a>
-			<a href class="btn bg-green"><i class="fa fa-film"></i> cinema</a>
-			<a href class="btn bg-blue"><i class="fa fa-picture-o"></i> exhibition</a>
-			<a href class="btn bg-yellow"><i class="fa fa-users"></i> thearte</a>
-			<a href class="btn bg-grey"><i class="fa fa-graduation-cap"></i> presentation/lecture</a>
-			<a href class="btn bg-brown"><i class="fa fa-globe"></i> other</a>
+		<div class="col-3 mt10">
+			<a href class="btn "><i class="fa fa-asterisk"></i> all</a>
+			<a href class="btn bg-red cat_1"><i class="fa fa-music"></i> music</a>
+			<a href class="btn bg-green cat_2"><i class="fa fa-film"></i> cinema</a>
+			<a href class="btn bg-blue cat_3"><i class="fa fa-picture-o"></i> exhibition</a>
+			<a href class="btn bg-yellow cat_4"><i class="fa fa-users"></i> thearte</a>
+			<a href class="btn bg-grey cat_5"><i class="fa fa-graduation-cap"></i> presentation/lecture</a>
+			<a href class="btn bg-brown cat_6"><i class="fa fa-globe"></i> other</a>
 		</div>
 		<div class="clr"></div>
 	</div>
-	<div class="row">
-		<div class="event-list-item col-1" ng-repeat="event in eventlist.events | orderBy: 'startdate' | filter : search">
-			<span class="event-img">
-				<img ng-src="{{event.image}}" class="img-respons w100p" />
-			</span>
-			<h1 ng-click="linkSingle.setLink(1)">{{event.title}}</h1>
-			<span>{{event.category}}</span>
-			<date><i class="fa fa-calendar blue"></i><strong> {{event.startdate}}</date> - <date>{{event.enddate}}</strong></date>
-			<div><i class="fa fa-map-marker blue"></i> {{event.location}}</div>
-			<div>
-				<i class="fa fa-ticket blue"></i> {{event.tickets}}
-				<span ng-show="event.buy_tick.length>0"><a href="{{event.buy_tick}}" target="_blank" >Buy</a></span>
+	<div class="row event-list-item" ng-repeat="event in eventlist.events | orderBy: 'startdate' | filter : search " >
+		<div >
+			
+			<div class="col-1">
+				<span class="event-img">
+					<img ng-src="{{event.image}}" class="img-respons w100p" />
+				</span>
+				<date><i class="fa fa-calendar blue"></i><strong> {{event.startdate}}</date> - <date>{{event.enddate}}</strong></date>
+				<span class="btn cat_{{event.category}}">{{event.category}}</span>
 			</div>
-			<div>{{event.description | limitTo: 100}}</div>		
-			<div class="clr"></div>
+
+			<div class="col-3">
+				<h2 ng-click="linkSingle.setLink(1)">{{event.title}}</h2>
+				<div>{{event.description}}</div>
+				<div class="clr"></div>
+				
+				<div class="mt10"><i class="fa fa-map-marker blue"></i> {{event.location}}</div>
+				<div>
+					<i class="fa fa-ticket blue"></i> {{event.tickets}}
+					<span ng-show="event.buy_tick.length>0"><a href="{{event.buy_tick}}" target="_blank" >Buy</a></span>
+				</div>	
+			</div>			
 		</div>
+		<div class="clr"></div>
 	</div>
 </div>

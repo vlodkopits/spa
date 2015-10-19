@@ -23,7 +23,7 @@
 				</nav>
 			</div>
 		</header>
-
+		<div class="h45p"></div>
 		<section>
 			<div class="container">
 				
@@ -36,7 +36,7 @@
 						<a href="" target="_blank" class="btn bg-grey">show out of date</a>
 					<br/>
 				</div>
-				<div class="clr mb10"></div>
+				<div class="clr mb10"><br/></div>
 
 				<?
 				if(isset($_POST['delete'])){
@@ -70,7 +70,7 @@
 						<br />
 						<b>Start Date:</b><? echo $rows['startdate']; ?><br />
 						<b>End Date:</b><? echo $rows['enddate']; ?><br />
-						<b>Events Category:</b> <? echo $rows['categoty']; ?><br />
+						<b>Events Category:</b> <? echo $rows['category']; ?><br />
 						<b>Tickets cost:</b><? echo $rows['tickets']; ?>
 						<div class="clr mb10"></div>
 						

@@ -1,7 +1,8 @@
 ﻿<?php
 
 	include 'config.php';
-	$sql="select * from $tbl_name where enable=1"; 
+
+	$sql="SELECT * FROM $tbl_name WHERE enable=1 AND startdate>DATE_FORMAT(NOW(),'%m-%d-%Y ') AND enddate>DATE_FORMAT(NOW(),'%m-%d-%Y ')"; 
 
 	$response = array();
 	$events = array();
@@ -33,7 +34,8 @@
 	$response['events'] = $events;
 	
 	$fp = fopen('../data/events.json', 'w');
-	fwrite($fp, json_encode($events,JSON_PRETTY_PRINT));
+	fwrite($fp, json_encode($events,JSON_PRETTY_PRINT));//nice JSON
+	//fwrite($fp, json_encode($events));//small JSON
 	fclose($fp);
 	mysql_close();
 ?>

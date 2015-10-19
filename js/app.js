@@ -1,6 +1,6 @@
 var app = angular.module ('eventApp', [] );
 
-
+// data from JSON file
 var eventData = (function () {
     var json = null;
     $.ajax({
@@ -15,6 +15,7 @@ var eventData = (function () {
     return json;
 })(); 
 
+// navigation
 app.directive("eventNav", function() { 
     return {
       restrict: 'E',
@@ -34,6 +35,7 @@ app.directive("eventNav", function() {
     };
   });
 
+// map page
 app.directive("eventMap", function() {
     return {
       restrict: 'E',
@@ -41,6 +43,7 @@ app.directive("eventMap", function() {
     };
   });
 
+// events list page
 app.directive("eventList", function() {
     return {
       restrict: 'E',
@@ -48,6 +51,7 @@ app.directive("eventList", function() {
     };
   });
 
+// add event page
 app.directive("eventAdd", function() {
     return {
       restrict: 'E',
@@ -61,8 +65,7 @@ app.controller('EventController', ['$http',function($http){
     eventlist.events = eventData;
   }]);
 
-/* big map with events */
-
+// big map with events 
 app.controller ('EventMapCtrl',function ($scope){
   var mapOptions = {
         zoom: 13,
@@ -72,6 +75,7 @@ app.controller ('EventMapCtrl',function ($scope){
 
     $scope.map = new google.maps.Map(document.getElementById('events-gmap'), mapOptions);
 
+    
     navigator.geolocation.getCurrentPosition(function(position) {
         
             var geolocate = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
@@ -120,7 +124,3 @@ app.controller ('EventMapCtrl',function ($scope){
 
 
 });
-
-  /* event add start */
-
-  /* event add end */

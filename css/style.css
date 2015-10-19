@@ -12,6 +12,7 @@ input,select,textarea{padding: 5px; border: 1px solid #ccc; display: block; bord
 .fr {float: right;}
 .clr {clear: both;}
 .p10 {padding: 10px;}
+.mt10 {margin-top: 10px;}
 .mb10 {margin-bottom: 10px;}
 .mr10{ margin-right:10px;}
 .h45p {height: 45px;}
@@ -23,12 +24,12 @@ input,select,textarea{padding: 5px; border: 1px solid #ccc; display: block; bord
 .blue{color: #2196F3;}
 [class*='bg-']:hover{opacity: 0.6;}
 .color-red {color: #B71C1C;}
-.bg-red {background-color: #B71C1C !important;}
-.bg-green {background-color: #4CAF50;}
-.bg-blue {background-color: #0091EA;}
-.bg-yellow {background-color: #FF9800;}
-.bg-grey {background-color: #757575;}
-.bg-brown {background-color: #795548;}
+.bg-red, .cat_1 {background-color: #B71C1C !important;}
+.bg-green, .cat_2 {background-color: #4CAF50;}
+.bg-blue, .cat_3 {background-color: #0091EA;}
+.bg-yellow, .cat_4 {background-color: #FF9800;}
+.bg-grey, .cat_5 {background-color: #757575;}
+.bg-brown, .cat_6 {background-color: #795548;}
 
 
 *, *::before, *::after {-webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
