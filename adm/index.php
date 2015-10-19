@@ -28,16 +28,6 @@
 			<div class="container">
 				
 				<? include 'config.php'; ?>
-
-				<div>
-					<br/>
-						<a href="getevents.php" target="_blank" class="btn bg-green">generate .json</a>
-						<a href="" target="_blank" class="btn bg-red">show disable</a>
-						<a href="" target="_blank" class="btn bg-grey">show out of date</a>
-					<br/>
-				</div>
-				<div class="clr mb10"><br/></div>
-
 				<?
 				if(isset($_POST['delete'])){
 			       $id = $_POST['delete_rec_id'];  
@@ -54,82 +44,91 @@
 			       $query = "UPDATE $tbl_name SET enable=0 WHERE id=$id"; 
 			       $result = mysql_query($query);
 			    }
+			    ?>
+			    <div>
+					<br/>
+						<a href="getevents.php" target="_blank" class="btn bg-green">generate .json</a>
+						<a href="" target="_blank" class="btn bg-red">show disable</a>
+						<a href="" target="_blank" class="btn bg-grey">show out of date</a>
+					<br/>
+				</div>
+				<div class="clr mb10"><br/></div>
 
-				$sql="SELECT * FROM $tbl_name ";
-				$result=mysql_query($sql);
+				<table>
+					<tr>
+						<td>image</td>
+						<td>start date</td>
+						<td>end date</td>
+						<td>category</td>
+						<td>description</td>
+						<td>location</td>
+						<td></td>
+						<td></td>
 
-				// Start looping rows in mysql database.
-				while($rows=mysql_fetch_array($result)){
-				?>
+					</tr>
+				    <?
+					$sql="SELECT * FROM $tbl_name ";
+					$result=mysql_query($sql);
 
-				<div class="event-list-item <?if ($rows['enable'] == 0) {?>bg-red<?}?>" >
-					<div class="mb10 p10 col-1">
-						<div >
-							<img src="../data/posters/<? echo $rows['image']; ?>" class="img-respons" style="max-height: 100px;" />
-						</div>
-						<br />
-						<b>Start Date:</b><? echo $rows['startdate']; ?><br />
-						<b>End Date:</b><? echo $rows['enddate']; ?><br />
-						<b>Events Category:</b> <? echo $rows['category']; ?><br />
-						<b>Tickets cost:</b><? echo $rows['tickets']; ?>
-						<div class="clr mb10"></div>
-						
-						<?if ($rows['enable'] == 0) {?>
-							<form id="enable" method="post" action="">
-								<input type="hidden" name="enable_rec_id" value="<? echo $rows['id']; ?>" />
-						        <button type="submit" name="enable" class="btn bg-green mb10 mr10 fl "><i class="fa fa-check"></i> enable</button>
-					        </form>
-					    <?}?>
-					    <?if ($rows['enable'] == 1) {?>
-							<form id="disable" method="post" action="">
-								<input type="hidden" name="disable_rec_id" value="<? echo $rows['id']; ?>" />
-						        <button type="submit" name="disable" class="btn bg-red mb10 mr10 fl "><i class="fa fa-check"></i> disable</button>
-					        </form>
-					    <?}?>
-
-					    <button type="submit" name="enable" class="btn bg-green mb10 mr10 fl"><i class="fa fa-pencil-square-o"></i> edit</button>
-						
-						<form id="delete" method="post" action="">
-							<input type="hidden" name="delete_rec_id" value="<? echo $rows['id']; ?>" />
-					        <button type="submit" name="delete" class="btn bg-red fl"><i class="fa fa-trash"></i> delete</button>
-				        </form>
-					</div>
-					
-					<div class="mb10 col-2">
-						<h2><? echo $rows['title']; ?></h2>
-						<div class="clr"></div>
-						<br />
-						<? echo $rows['description']; ?>
-					</div>				
-					
-					<div class="mb10 col-1">
-						<div class="events-add-location  mb10">
-							<b>Location:</b>
+					// Start looping rows in mysql database.
+					while($rows=mysql_fetch_array($result)){
+					?>
+					<tr class="event-list-item <?if ($rows['enable'] == 0) {?>bg-red<?}?>" >
+						<td>
+							<img src="../data/posters/<? echo $rows['image']; ?>" class="img-respons" style="max-height: 100px;" /></td>
+						<td><? echo $rows['startdate']; ?></td>
+						<td><? echo $rows['enddate']; ?></td>
+						<td><? echo $rows['category']; ?></td>
+						<td>
+							<h2><? echo $rows['title']; ?></h2>
+							<? echo $rows['description']; ?>
+						</td>
+						<td>
 							<? echo $rows['location']; ?>
-						</div>
-						<div class="events-add-location-address  mb10">
-							<b>Location address:</b>
 							<div class="clr"></div>
 							<a href="https://www.google.com/maps/place/<? echo $rows['lat']; ?>,<? echo $rows['lng']; ?>/" target="_blank">
-							<img src="http://maps.googleapis.com/maps/api/staticmap?center=<? echo $rows['lat']; ?>,<? echo $rows['lng']; ?>&zoom=15&scale=false&size=400x200&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:1%7C<? echo $rows['lat']; ?>,<? echo $rows['lng']; ?>" class="img-respons" alt="Google Map">
+							<img src="http://maps.googleapis.com/maps/api/staticmap?center=<? echo $rows['lat']; ?>,<? echo $rows['lng']; ?>&zoom=15&scale=false&size=200x200&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:1%7C<? echo $rows['lat']; ?>,<? echo $rows['lng']; ?>" class="img-respons" alt="Google Map">
 							</a>
 							<br/>
 							lat:<? echo $rows['lat']; ?> - lng:<? echo $rows['lng']; ?>
+						</td>
+						<td>
+							<b>Tickets cost:</b><? echo $rows['tickets']; ?><br/>	
+							<b>website:</b> <? echo $rows['web']; ?><br/>
+							<b>e-mail:</b> <? echo $rows['email']; ?><br/>
+							<b>phone:</b> <? echo $rows['phone']; ?>
+						</td>
+						<td>
+							<?if ($rows['enable'] == 0) {?>
+								<form id="enable" method="post" action="">
+									<input type="hidden" name="enable_rec_id" value="<? echo $rows['id']; ?>" />
+							        <button type="submit" name="enable" class="btn bg-green mb10 mr10 fl "><i class="fa fa-check"></i> enable</button>
+						        </form>
+						    <?}?>
+						    <?if ($rows['enable'] == 1) {?>
+								<form id="disable" method="post" action="">
+									<input type="hidden" name="disable_rec_id" value="<? echo $rows['id']; ?>" />
+							        <button type="submit" name="disable" class="btn bg-red mb10 mr10 fl "><i class="fa fa-check"></i> disable</button>
+						        </form>
+						    <?}?>
+
+						    <button type="submit" name="enable" class="btn bg-green mb10 mr10 fl"><i class="fa fa-pencil-square-o"></i> edit</button>
 							
-						</div>
-						<div class="mb10 ">
-							<b>website:</b> <? echo $rows['web']; ?> | <b>e-mail:</b> <? echo $rows['email']; ?> | <b>phone:</b> <? echo $rows['phone']; ?>
-						</div>
-					</div>
-					<div class="clr"></div>
-				</div>
-				<?
+							<form id="delete" method="post" action="">
+								<input type="hidden" name="delete_rec_id" value="<? echo $rows['id']; ?>" />
+						        <button type="submit" name="delete" class="btn bg-red fl"><i class="fa fa-trash"></i> delete</button>
+					        </form>
+						</td>
+					</tr>
+					<?
 				// close while loop
 				}
 
 				// close connection
 				mysql_close();
 				?>
+				</table>
+				
 			</div>
 		</section>
 
