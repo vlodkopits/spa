@@ -9,6 +9,7 @@ a {color:#2196F3; text-decoration: none;}
 a:hover{}
 input,select,textarea{padding: 5px; border: 1px solid #ccc; display: block; border-radius: 5px 5px 5px 5px; -moz-border-radius: 5px 5px 5px 5px; -webkit-border-radius: 5px 5px 5px 5px; width: 100%;}
 
+.dnone {display: none;}
 .fl{float: left;}
 .fr {float: right;}
 .clr {clear: both;}
@@ -16,6 +17,7 @@ input,select,textarea{padding: 5px; border: 1px solid #ccc; display: block; bord
 .mt10 {margin-top: 10px;}
 .mb5 {margin-bottom: 5px;}
 .mb10 {margin-bottom: 10px;}
+.mb20 {margin-bottom: 20px;}
 .mr10{ margin-right:10px;}
 .h45p {height: 45px;}
 .w100p {width: 100%;}

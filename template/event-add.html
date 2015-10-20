@@ -83,7 +83,7 @@
 
 
 <script>
-  $(function (){
+ 	 $(function (){
         $("#geocomplete").geocomplete({
           map: "#event-map",
           details: "form",
@@ -111,17 +111,13 @@
         $("#find").click(function(){
           $("#geocomplete").trigger("geocode");
         }).click();
-      })
+	});
 
-</script>
-<script>
-$(function()
-{
-$('#events-add-startdate-container').datepicker(
-	{
-		altField: "#events-add-startdate",
-    	altFormat: "DD, d MM, yy"
-	}
-	);
-})
+	$(function(){
+		$('#events-add-startdate-container').datepicker(
+			{
+				altField: "#events-add-startdate",
+		    	altFormat: "DD, d MM, yy"
+			});
+	});
 </script>

@@ -1,4 +1,4 @@
-var app = angular.module ('eventApp', [] );
+var eventApp = angular.module ('eventApp', ['ngRoute'] );
 
 // data from JSON file
 var eventData = (function () {
@@ -15,8 +15,32 @@ var eventData = (function () {
     return json;
 })(); 
 
+// configure our routes
+eventApp.config(function($routeProvider) {
+    $routeProvider
+
+        // route for the home page
+        .when('/map', {
+            templateUrl : 'template/event-map.html',
+            controller  : 'EventMapCtrl'
+        })
+
+        // route for the about page
+        .when('/list', {
+            templateUrl : 'template/event-list.html',
+            controller  : 'EventController'
+        })
+
+        // route for the contact page
+        .when('/add', {
+            templateUrl : 'template/event-add.html',
+            //controller  : 'contactController'
+        });
+});
+
+/*
 // navigation
-app.directive("eventNav", function() { 
+eventApp.directive("eventNav", function() { 
     return {
       restrict: 'E',
       templateUrl: "template/event-nav.html",
@@ -36,7 +60,7 @@ app.directive("eventNav", function() {
   });
 
 // map page
-app.directive("eventMap", function() {
+eventApp.directive("eventMap", function() {
     return {
       restrict: 'E',
       templateUrl: "template/event-map.html"
@@ -44,37 +68,30 @@ app.directive("eventMap", function() {
   });
 
 // events list page
-app.directive("eventList", function() {
+eventApp.directive("eventList", function() {
     return {
       restrict: 'E',
       templateUrl: "template/event-list.html"
     };
   });
 
-// events single page
-app.directive("eventSingle", function() {
-    return {
-      restrict: 'E',
-      templateUrl: "template/event-single.html"
-    };
-  });
-
 // add event page
-app.directive("eventAdd", function() {
+eventApp.directive("eventAdd", function() {
     return {
       restrict: 'E',
       templateUrl: "template/event-add.html"
     };
   });
+*/
 
-app.controller('EventController', ['$http',function($http){
+eventApp.controller('EventController', ['$http',function($http){
     var eventlist = this;
     eventlist.events = [];
     eventlist.events = eventData;
   }]);
 
 // big map with events 
-app.controller ('EventMapCtrl',function ($scope){
+eventApp.controller ('EventMapCtrl',function ($scope){
   var mapOptions = {
         zoom: 13,
         center: new google.maps.LatLng(49.832, 24.012),
@@ -133,5 +150,6 @@ app.controller ('EventMapCtrl',function ($scope){
 
 });
 
-// filter event list by category
+// add event
+
 
