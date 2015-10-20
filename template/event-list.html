@@ -1,10 +1,10 @@
 ﻿<div class="container" >
 	<div class="w100p">
-		<div class="col-1">
+		<div class="col-lg-4">
 			<i class="fa fa-search blue"></i> Find event:
 			<input type="text" ng-model="search">
 		</div>
-		<div class="col-3 mt10">
+		<div class="col-lg-8 mt10">
 			<a href class="btn "><i class="fa fa-asterisk"></i> all</a>
 			<a href class="btn bg-red cat_1"><i class="fa fa-music"></i> music</a>
 			<a href class="btn bg-green cat_2"><i class="fa fa-film"></i> cinema</a>
@@ -18,15 +18,15 @@
 	<div class="row event-list-item" ng-repeat="event in eventlist.events | orderBy: 'startdate' | filter : search " >
 		<div >
 			
-			<div class="col-1">
+			<div class="col-lg-2">
 				<span class="event-img">
-					<img ng-src="{{event.image}}" class="img-respons w100p" />
+					<img ng-src="{{event.image}}" class="img-responsive " />
 				</span>
-				<date><i class="fa fa-calendar blue"></i><strong> {{event.startdate}}</date> - <date>{{event.enddate}}</strong></date>
+				<date><i class="fa fa-calendar blue"></i> <strong>{{event.startdate}}</date> - <date>{{event.enddate}}</strong></date>
 				<span class="btn cat_{{event.category}}">{{event.category}}</span>
 			</div>
 
-			<div class="col-3">
+			<div class="col-lg-10">
 				<h2 ng-click="linkSingle.setLink(1)">{{event.title}}</h2>
 				<div>{{event.description}}</div>
 				<div class="clr"></div>

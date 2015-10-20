@@ -102,7 +102,7 @@ app.controller ('EventMapCtrl',function ($scope){
             position: new google.maps.LatLng(info.lat, info.lng),
             title: info.title
         });
-        marker.content = '<div class="infoWindowContent">' + info.title + info.description + '</div>';
+        marker.content = '<div class="infoWindowContent"><img src="'+ info.image +'" alt="" class="fl mr10 w100px" />' + info.title + info.description + '</div>';
         
         google.maps.event.addListener(marker, 'click', function(){
             infoWindow.setContent('<h2>' + marker.title + '</h2>' + marker.content);
