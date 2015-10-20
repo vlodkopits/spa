@@ -19,76 +19,41 @@ var eventData = (function () {
 eventApp.config(function($routeProvider) {
     $routeProvider
 
-        // route for the home page
+        // route for the map page
         .when('/map', {
             templateUrl : 'template/event-map.html',
             controller  : 'EventMapCtrl'
         })
 
-        // route for the about page
+        // route for the list page
         .when('/list', {
             templateUrl : 'template/event-list.html',
-            controller  : 'EventController'
+            controller  : 'EventListCtrl'
         })
 
-        // route for the contact page
+        // route for the add page
         .when('/add', {
             templateUrl : 'template/event-add.html',
-            //controller  : 'contactController'
+            controller  : 'AddEventCtrl'
+        })
+
+        // route for the single page
+        .when('/event/:eventId', {
+            templateUrl : 'template/event-single.html',
+            controller  : 'SingleEventCtrl'
         });
 });
 
-/*
-// navigation
-eventApp.directive("eventNav", function() { 
-    return {
-      restrict: 'E',
-      templateUrl: "template/event-nav.html",
-      controller: function() {
-          this.link = 1;
-
-          this.isLink = function(checkLink) {
-            return this.link === checkLink;
-          };
-
-          this.setLink = function(activeLink) {
-            this.link = activeLink;
-          };
-        },
-        controllerAs: "link"
-    };
+// event list 
+eventApp.controller('EventListCtrl', function ($scope) {
+    $scope.events = [];
+    $scope.events = eventData;
   });
 
-// map page
-eventApp.directive("eventMap", function() {
-    return {
-      restrict: 'E',
-      templateUrl: "template/event-map.html"
-    };
+// event single 
+eventApp.controller('SingleEventCtrl', function ($scope) {
+    
   });
-
-// events list page
-eventApp.directive("eventList", function() {
-    return {
-      restrict: 'E',
-      templateUrl: "template/event-list.html"
-    };
-  });
-
-// add event page
-eventApp.directive("eventAdd", function() {
-    return {
-      restrict: 'E',
-      templateUrl: "template/event-add.html"
-    };
-  });
-*/
-
-eventApp.controller('EventController', ['$http',function($http){
-    var eventlist = this;
-    eventlist.events = [];
-    eventlist.events = eventData;
-  }]);
 
 // big map with events 
 eventApp.controller ('EventMapCtrl',function ($scope){
@@ -99,7 +64,6 @@ eventApp.controller ('EventMapCtrl',function ($scope){
     }
 
     $scope.map = new google.maps.Map(document.getElementById('events-gmap'), mapOptions);
-
     
     navigator.geolocation.getCurrentPosition(function(position) {
         
@@ -112,8 +76,7 @@ eventApp.controller ('EventMapCtrl',function ($scope){
                     'you are here'
             });
             
-            $scope.map.setCenter(geolocate);
-            
+            $scope.map.setCenter(geolocate);            
         });
 
     $scope.markers = [];
@@ -134,8 +97,7 @@ eventApp.controller ('EventMapCtrl',function ($scope){
             infoWindow.open($scope.map, marker);
         });
         
-        $scope.markers.push(marker);
-        
+        $scope.markers.push(marker);        
     }  
     
     for (i = 0; i < eventData.length; i++){

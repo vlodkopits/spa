@@ -1,4 +1,4 @@
-﻿<div class="container" >
+﻿<div class="container" ng-controller="EventListCtrl">
 	<div class="w100p">
 		<div class="col-lg-12">
 			<i class="fa fa-search blue"></i> Find event:
@@ -17,7 +17,8 @@
 		</div>
 		<div class="clr mb10"></div>
 	</div>
-	<div class="event-list-item mb10" ng-repeat="event in eventlist.events | orderBy: 'startdate' | filter : search " >
+	<!-- ng-repeat="event in eventlist.events | orderBy: 'startdate' | filter : search "  -->
+	<div class="event-list-item mb10" ng-repeat="event in events | orderBy: 'startdate' | filter : search " >
 		<div class="link_cat_{{event.category}} link_cat_all ">
 			<div class="col-lg-2">
 				<span class="event-img">
@@ -27,7 +28,7 @@
 			</div>
 
 			<div class="col-lg-10">
-				<h2 class="show_event_{{event.id}}">{{event.title}}</h2>
+				<h2 class="show_event_{{event.id}}" ><a href="#event/{{event.id}}">{{event.title}}</a></h2>
 				
 				<div class="mt10"><i class="fa fa-clock-o blue"></i> <strong>{{event.startdate}} - {{event.enddate}}</strong></div>
 				<div class="mt10"><i class="fa fa-map-marker blue"></i> {{event.location}}</div>
