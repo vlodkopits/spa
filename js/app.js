@@ -51,6 +51,14 @@ app.directive("eventList", function() {
     };
   });
 
+// events single page
+app.directive("eventSingle", function() {
+    return {
+      restrict: 'E',
+      templateUrl: "template/event-single.html"
+    };
+  });
+
 // add event page
 app.directive("eventAdd", function() {
     return {
@@ -124,3 +132,6 @@ app.controller ('EventMapCtrl',function ($scope){
 
 
 });
+
+// filter event list by category
+
