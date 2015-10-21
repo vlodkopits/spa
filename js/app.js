@@ -41,7 +41,10 @@ eventApp.config(function($routeProvider) {
         .when('/event/:eventId', {
             templateUrl : 'template/event-single.html',
             controller  : 'SingleEventCtrl'
-        });
+        }).
+        otherwise({
+        redirectTo: '/map'
+      });
 
 });
 
@@ -65,19 +68,20 @@ eventApp.controller('SingleEventCtrl', ['$scope', '$routeParams', '$filter',
     $scope.eventId = $routeParams.eventId;
     $scope.event_single = $filter('filter')(eventData, function (d) {return d.id === $routeParams.eventId;})[0];
 
+    var Latlng = new google.maps.LatLng($scope.event_single.lat, $scope.event_single.lng);
     var mapOptions = {
         zoom: 13,
-        center: new google.maps.LatLng($scope.event_single.lat, $scope.event_single.lng),
+        center: Latlng,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     }
+
+    $scope.map = new google.maps.Map(document.getElementById('eventmap'), mapOptions);
     
     var marker = new google.maps.Marker({
-        position: { lat: 12.97, lng: 77.59 },
-        map: event-gmap,
+        position: Latlng,
+        map: $scope.map,
         title: $scope.event_single.location
-      });
-
-    $scope.map = new google.maps.Map(document.getElementById('event-gmap'), mapOptions);
+    });
 
   }]);
 

@@ -1,10 +1,11 @@
 ﻿<div class="container" >
+	<div class="h45p"></div>
 	<div class="event-single-item mt10" >
 		<div class="col-lg-2">
 			<img ng-src="{{event_single.image}}" class="img-responsive " />
 		</div>
 
-		<div class="col-lg-10">
+		<div class="col-lg-6">
 			<h1>{{event_single.title}}</h1>
 		
 			<span>{{event_single.category}}</span>
@@ -13,27 +14,25 @@
 		
 			<div class="mb10">
 				<i class="fa fa-ticket blue"></i> {{event_single.tickets}} 
-				<span ng-show="event_single.buy_tick.length>0"><a href="{{event_single.buy_tick}}" target="_blank" >Buy</a></span>
+				<span ng-show="event_single.buy_tick.length>0"><a href="{{event_single.buy_tick}}" target="_blank" class="btn bg-yellow">Buy</a></span>
 			</div>
 			
 			<div class="mb10">{{event_single.description}}</div>
 		</div>
-		<div class="clr"></div>
-		<div class="col-lg-12">
+
+		<div class="col-lg-4 mt10">
 		
-			<div>
+			<div class="mb10">
 				<i class="fa fa-map-marker blue"></i>
 				{{event_single.location}}
 			</div>
 		
 			
-			<div  id="event-gmap" style="width: 100%; height: 400px;" ></div>	
-			<div>{{event_single.lat}}</div>
-			<div>{{event_single.lng}}</div>
+			<div  id="eventmap" style="width: 100%; height: 400px;" class="mb10"></div>	
 
-			<div>{{event_single.web}}</div>
-			<div>{{event_single.email}}</div>
-			<div>{{event_single.phone}}</div>
+			<div class="mb10" ng-show="event_single.web.length>0"><i class="fa fa-link blue"></i> {{event_single.web}}</div>
+			<div class="mb10" ng-show="event_single.email.length>0"><i class="fa fa-envelope-o blue"></i> {{event_single.email}}</div>
+			<div class="mb10" ng-show="event_single.phone.length>0"><i class="fa fa-phone blue"></i> {{event_single.phone}}</div>
 		</div>
 	</div>
 </div>
