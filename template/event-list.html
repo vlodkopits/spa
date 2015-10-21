@@ -22,7 +22,7 @@
 		<div class="link_cat_{{event.category}} link_cat_all ">
 			<div class="col-lg-2">
 				<span class="event-img">
-					<img ng-src="{{event.image}}" class="img-responsive " />
+					<a href="#event/{{event.id}}"><img ng-src="{{event.image}}" class="img-responsive " /></a>
 				</span>
 				<button class=" dnone btn cat_{{event.category}} filter_cat_{{event.category}}">{{event.category}}</button>
 			</div>

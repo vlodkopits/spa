@@ -1,17 +1,37 @@
-﻿<div class="container" ng-controller="SingleEventCtrl">
-	<div class="event-single-item" >
-		<h1>{{event.title}}</h1>
-		<span>{{event.image}}</span>
-		<span>{{event.category}}</span>
-		<date>{{event.startdate}}</date> - <date>{{event.enddate}}</date>
-		<div>{{event.tickets}}</div>
-		<div>{{event.buy_tick}}</div>
-		<div>{{event.description}}</div>
-		<div>{{event.location}}</div>
-		<div>{{event.lat}}</div>
-		<div>{{event.lng}}</div>
-		<div>{{event.web}}</div>
-		<div>{{event.email}}</div>
-		<div>{{event.phone}}</div>
+﻿<div class="container" >
+	<div class="event-single-item mt10" >
+		<div class="col-lg-2">
+			<img ng-src="{{event_single.image}}" class="img-responsive " />
+		</div>
+
+		<div class="col-lg-10">
+			<h1>{{event_single.title}}</h1>
+		
+			<span>{{event_single.category}}</span>
+		
+			<div class="mb10"><i class="fa fa-clock-o blue"></i> {{event_single.startdate}} - {{event_single.enddate}}</div>
+		
+			<div class="mb10">
+				<i class="fa fa-ticket blue"></i> {{event_single.tickets}} 
+				<span ng-show="event_single.buy_tick.length>0"><a href="{{event_single.buy_tick}}" target="_blank" >Buy</a></span>
+			</div>
+			
+			<div class="mb10">{{event_single.description}}</div>
+		</div>
+		<div class="clr"></div>
+		<div class="col-lg-12">
+		
+			<div>
+				<i class="fa fa-map-marker blue"></i>
+				{{event_single.location}}
+			</div>
+		
+			<div>{{event_single.lat}}</div>
+			<div>{{event_single.lng}}</div>
+
+			<div>{{event_single.web}}</div>
+			<div>{{event_single.email}}</div>
+			<div>{{event_single.phone}}</div>
+		</div>
 	</div>
 </div>

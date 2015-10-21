@@ -42,18 +42,37 @@ eventApp.config(function($routeProvider) {
             templateUrl : 'template/event-single.html',
             controller  : 'SingleEventCtrl'
         });
+
 });
 
+
 // event list 
+
 eventApp.controller('EventListCtrl', function ($scope) {
     $scope.events = [];
     $scope.events = eventData;
   });
 
 // event single 
+/*
 eventApp.controller('SingleEventCtrl', function ($scope) {
+    $scope.events = [];
+    $scope.events = eventData;
+  });
+*/
+eventApp.controller('SingleEventCtrl', ['$scope', '$routeParams', '$filter',
+  function($scope, $routeParams, $filter) {
+    $scope.eventId = $routeParams.eventId;
+    $scope.event_single = $filter('filter')(eventData, function (d) {return d.id === $routeParams.eventId;})[0];
+  }]);
+
+// event add 
+
+eventApp.controller('AddEventCtrl', function ($scope) {
     
   });
+
+
 
 // big map with events 
 eventApp.controller ('EventMapCtrl',function ($scope){

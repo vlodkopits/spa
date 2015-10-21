@@ -27,7 +27,7 @@ input,select,textarea{padding: 5px; border: 1px solid #ccc; display: block; bord
 .ng-invalid.ng-dirty {border-color: red;}   
 .ng-valid.ng-dirty {border-color: green;}
 .blue{color: #2196F3;}
-[class*='bg-']:hover, .btn.active{opacity: 0.6;}
+[class*='bg-']:hover, .btn.active{opacity: 0.6; background-color: #ccc;}
 .color-red {color: #B71C1C;}
 .bg-red, .cat_1 {background-color: #B71C1C !important;}
 .bg-green, .cat_2 {background-color: #4CAF50;}
