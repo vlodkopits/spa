@@ -29,7 +29,7 @@ input,select,textarea{padding: 5px; border: 1px solid #ccc; display: block; bord
 .blue{color: #2196F3;}
 [class*='bg-']:hover, .btn.active{opacity: 0.6; background-color: #ccc;}
 .color-red {color: #B71C1C;}
-.bg-red, .cat_1 {background-color: #B71C1C !important;}
+.bg-red, .cat_1 {background-color: #B71C1C ;}
 .bg-green, .cat_2 {background-color: #4CAF50;}
 .bg-blue, .cat_3 {background-color: #0091EA;}
 .bg-yellow, .cat_4 {background-color: #FF9800;}
@@ -57,6 +57,7 @@ nav a {color:#fff; text-align: center; text-transform: uppercase; font-size: 18p
 
 /* Custom, iPhone Retina */ 
 @media only screen and (min-width : 320px) {
+	button.btn.active span { display: inline !important;}
 	/*.container {max-width: 300px;}
 	[class*='col-'] {width: 100%;}*/
 	nav > span span {display: none;}
@@ -64,6 +65,7 @@ nav a {color:#fff; text-align: center; text-transform: uppercase; font-size: 18p
 
 /* Extra Small Devices, Phones */ 
 @media only screen and (min-width : 480px) {
+	button.btn.active span { display: inline !important;}
 	/*.container {max-width: 460px;}
 	[class*='col-'] {width: 100%;}*/
 	nav > span span {display: none;}
