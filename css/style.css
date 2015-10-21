@@ -61,6 +61,8 @@ nav a {color:#fff; text-align: center; text-transform: uppercase; font-size: 18p
 	/*.container {max-width: 300px;}
 	[class*='col-'] {width: 100%;}*/
 	nav > span span {display: none;}
+	nav > span {width: 20%;}
+	nav span.logo {width:40%;}
 }
 
 /* Extra Small Devices, Phones */ 
@@ -69,12 +71,15 @@ nav a {color:#fff; text-align: center; text-transform: uppercase; font-size: 18p
 	/*.container {max-width: 460px;}
 	[class*='col-'] {width: 100%;}*/
 	nav > span span {display: none;}
+	nav > span {width: 20%;}
+	nav span.logo {width:40%;}
 }
 
 /* Small Devices, Tablets */
 @media only screen and (min-width : 768px) {
 	/*.container {max-width: 748px;}*/
 	nav > span span {display: inherit;}
+	nav > span, nav span.logo {width:25%;}
 	.col-1{width: 25%; }
 	.col-2{ width: 50%;}
 	.col-3{ width: 75%;}
@@ -85,6 +90,7 @@ nav a {color:#fff; text-align: center; text-transform: uppercase; font-size: 18p
 @media only screen and (min-width : 992px) {
 	/*.container {max-width: 972px;}*/
 	nav > span span {display: inherit;}
+	nav > span, nav span.logo {width:25%;}
 	.col-1{width: 25%; }
 	.col-2{ width: 50%;}
 	.col-3{ width: 75%;}
@@ -95,6 +101,7 @@ nav a {color:#fff; text-align: center; text-transform: uppercase; font-size: 18p
 @media only screen and (min-width : 1200px) {
 	/*.container {max-width: 1180px;}*/
 	nav > span span {display: inline-block;}
+	nav > span, nav span.logo {width:25%;}
 	.col-1{width: 25%; }
 	.col-2{ width: 50%;}
 	.col-3{ width: 75%;}

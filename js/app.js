@@ -57,12 +57,6 @@ eventApp.controller('EventListCtrl', function ($scope) {
   });
 
 // event single 
-/*
-eventApp.controller('SingleEventCtrl', function ($scope) {
-    $scope.events = [];
-    $scope.events = eventData;
-  });
-*/
 eventApp.controller('SingleEventCtrl', ['$scope', '$routeParams', '$filter',
   function($scope, $routeParams, $filter) {
     $scope.eventId = $routeParams.eventId;
@@ -86,12 +80,9 @@ eventApp.controller('SingleEventCtrl', ['$scope', '$routeParams', '$filter',
   }]);
 
 // event add 
-
 eventApp.controller('AddEventCtrl', function ($scope) {
     
   });
-
-
 
 // big map with events 
 eventApp.controller ('EventMapCtrl',function ($scope){
@@ -110,6 +101,7 @@ eventApp.controller ('EventMapCtrl',function ($scope){
             var infowindow = new google.maps.InfoWindow({
                 map: $scope.map,
                 position: geolocate,
+                zIndex: 1,
                 content:
                     'you are here'
             });
@@ -126,6 +118,7 @@ eventApp.controller ('EventMapCtrl',function ($scope){
         var marker = new google.maps.Marker({
             map: $scope.map,
             position: new google.maps.LatLng(info.lat, info.lng),
+            zIndex: info.id,
             title: info.title
         });
         marker.content = '<div class="infoWindowContent"><img src="'+ info.image +'" alt="" class="fl mr10 w100px" />' + info.title  + info.description + '</div>';
