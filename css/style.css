@@ -24,7 +24,7 @@ input,select,textarea{padding: 5px; border: 1px solid #ccc; display: block; bord
 .w100px {width: 100px;}
 .hidden {visibility: hidden;}
 .btn {background-color: #0D47A1; color: #fff;}
-.ng-invalid.ng-dirty {border-color: red;}   
+.ng-invalid  {border-color: red;}   
 .ng-valid.ng-dirty {border-color: green;}
 .blue{color: #2196F3;}
 [class*='bg-']:hover, .btn.active{opacity: 0.6; background-color: #ccc;}

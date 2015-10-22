@@ -8,12 +8,16 @@
 			<input name="event_image" type="file">
 		</div>
 		<div class="col-lg-6">
-			Events Title <span class="color-red">*</span>:
-			<input type="text" name="event-title" placeholder="Event Title" required>
-			<div class="clr mb10"></div>
+			<!-- title -->
+			<div class="form-group" ng-class="{ 'has-error' : addEvent.event_title.$invalid && !addEvent.event_title.$pristine }">
+				Events Title <span class="color-red">*</span>:
+				<input type="text" name="event_title" placeholder="Event Title" ng-model="event.event_title" required>
+            	<p ng-show="addEvent.event_title.$invalid && !addEvent.event_title.$pristine" class="help-block">Title is required.</p>
+				<div class="clr mb10"></div>
+			</div>
 
 			Events Category <span class="color-red">*</span>:
-			<select  name="event-category" required>
+			<select  name="event_category" required>
 				<option value="0">- select category -</option>
 				<option value="1">music</option>
 				<option value="2">cinema</option>
@@ -26,11 +30,11 @@
 			<div class="clr mb10"></div>
 
 			<i class="fa fa-map-marker blue"></i> Location <span class="color-red">*</span>:
-			<input type="text" name="event-location" placeholder="Event location" required>
+			<input type="text" name="event_location" placeholder="Event location" required>
 			<div class="clr mb10"></div>
 
 			Location address <span class="color-red">*</span>:<br/>
-			<input id="geocomplete" type="text" placeholder="Type location address" name="event-location-addr" value="" class="fl mr10" style="width: 70%; " required>
+			<input id="geocomplete" type="text" placeholder="Type location address" name="event_location_addr" value="" class="fl mr10" style="width: 70%; " required>
 			<input id="find" type="button" value="find" class="fl btn" style="width: 25%; padding: 6px 0;" />
 			<div class="clr"></div>
 			<a id="reset" href="#" style="display:none;">Reset</a>
@@ -48,33 +52,33 @@
 
 		<div class="col-lg-8">
 			<i class="fa fa-calendar blue"></i> Select Date <span class="color-red">*</span>:
-	        <input type="text" name="event-startdate" placeholder=""  value="" id="events-add-startdate" required>
+	        <input type="text" name="event_startdate" placeholder=""  value="" id="events-add-startdate" required>
 	        <div id="events-add-startdate-container"></div>
 	        <span id="date"></span>
 			<div class="clr mb10"></div>
 		</div>
 		<div class="col-lg-4">
 			<i class="fa fa-ticket blue"></i> Tickets cost:
-			<input type="text" name="event-tickets" placeholder="Free or ticket price" >
+			<input type="text" name="event_tickets" placeholder="Free or ticket price" >
 			<div class="clr mb10"></div>
 
 			website:
-			<input type="text" name="event-web" placeholder="Event website" >
+			<input type="text" name="event_web" placeholder="Event website" >
 			<div class="clr mb10"></div>
 
 			e-mail:
-			<input type="text" name="email" placeholder="e-mail" >
+			<input type="text" name="event_email" placeholder="e-mail" >
 			<div class="clr mb10"></div>
 
 			phone:
-			<input type="text" name="event-phone" placeholder="phone" >
+			<input type="text" name="event_phone" placeholder="phone" >
 			<div class="clr mb10"></div>
 		</div>
 		<div class="clr "></div>
 
 		<div class="col-lg-8">
 			Event Description <span class="color-red">*</span>:
-			<textarea  name="event-description" rows="15" placeholder="Event Description" required></textarea>
+			<textarea  name="event_description" rows="15" placeholder="Event Description" required></textarea>
 			<div class="clr mb10"></div>
 
 			<button type="submit" name="submit" class="btn" ><i class="fa fa-check"></i> Add Event</button>

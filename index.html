@@ -14,17 +14,16 @@
 
 	<body >
 		<header>
-			<!--<event-nav></event-nav>-->
 			<div class="container">
 				<nav>		
 					<span class="logo"><img src="images/logo.png" class="img-responsive" alt="EventsOnMap"/></span>
-					<span >
+					<span>
 						<a href="#map"><i class="fa fa-map-marker"></i> <span>events map</span></a>
 					</span>
-					<span >
+					<span>
 						<a href="#list" ><i class="fa fa-calendar"></i> <span>events list</span></a>
 					</span>
-					<span >
+					<span>
 						<a href="#add" ><i class="fa fa-plus"></i> <span>add event</span></a>
 					</span>
 					<div class="clr"></div>
@@ -33,12 +32,6 @@
 		</header>
 		<section >
 			<div ng-view style="height: 100%;"></div>
-			<!--
-			<event-map ng-show="link.isLink(1)"></event-map>
-			<event-list ng-show="link.isLink(2)" ng-controller="EventController as eventlist"></event-list>
-			<event-add ng-show="link.isLink(3)"></event-add>
-			<event-find ng-show="link.isLink(4)"></event-find>
-			-->
 		</section>
 		
 		<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
@@ -46,7 +39,6 @@
 		<script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
-		<!-- <script src="js/angular.js"></script> -->
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.js"></script>
 		
 		<script src="http://maps.googleapis.com/maps/api/js?v=3.exp&amp;libraries=places&amp;sensor=false&amp;language=uk_UA"></script>
