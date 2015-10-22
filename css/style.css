@@ -39,16 +39,12 @@ input,select,textarea{padding: 5px; border: 1px solid #ccc; display: block; bord
 
 
 *, *::before, *::after {-webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
-/*.container {margin: 0 auto; padding:0;	width: 100%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; position: relative;}
-.row:before, .row:after {content:""; display: table ; clear:both;}
-[class*='col-'] {float: left; min-height: 1px; padding: 10px; width: 100%;}
-.img-respons {display: block; height: auto; max-width: 100%;}*/
 
 header {background-color: #2196F3; width: 100%; position: fixed; width: 100%; z-index: 7; top: 0;}
 nav > span:first-child {padding: 0;}
 nav > span{ width: 25%; display: inline-block; text-align: center; padding: 10px 0; float:left;}
 nav > span.active{background-color: #1565C0; color: #fff;}
-nav span img {margin: auto;}
+/*nav span img {margin: auto;}*/
 nav a {color:#fff; text-align: center; text-transform: uppercase; font-size: 18px; display: block; text-decoration: none;}
 
 #events-gmap, section{ width: 100%; height: 100%;}
@@ -78,7 +74,7 @@ nav a {color:#fff; text-align: center; text-transform: uppercase; font-size: 18p
 /* Small Devices, Tablets */
 @media only screen and (min-width : 768px) {
 	/*.container {max-width: 748px;}*/
-	nav > span span {display: inherit;}
+	nav > span span {display: inlin-block;}
 	nav > span, nav span.logo {width:25%;}
 	.col-1{width: 25%; }
 	.col-2{ width: 50%;}
@@ -89,7 +85,7 @@ nav a {color:#fff; text-align: center; text-transform: uppercase; font-size: 18p
 /* Medium Devices, Desktops */
 @media only screen and (min-width : 992px) {
 	/*.container {max-width: 972px;}*/
-	nav > span span {display: inherit;}
+	nav > span span {display: inline-block;}
 	nav > span, nav span.logo {width:25%;}
 	.col-1{width: 25%; }
 	.col-2{ width: 50%;}
