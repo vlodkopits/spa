@@ -16,28 +16,39 @@
 				<div class="clr mb10"></div>
 			</div>
 
-			Events Category <span class="color-red">*</span>:
-			<select  name="event_category" required>
-				<option value="0">- select category -</option>
-				<option value="1">music</option>
-				<option value="2">cinema</option>
-				<option value="3">exhibition</option>
-				<option value="4">thearte</option>
-				<option value="5">festivals</option>
-				<option value="6">lecture/presentation</option>
-				<option value="7">other</option>
-			</select>
-			<div class="clr mb10"></div>
+			<!-- category -->
+			<div class="form-group" ng-class="{ 'has-error' : addEvent.event_category.$invalid && !addEvent.event_category.$pristine }">
+				Events Category <span class="color-red">*</span>:
+				<select  name="event_category" ng-model="event.event_category" required>
+					<option value="0">- select category -</option>
+					<option value="1">music</option>
+					<option value="2">cinema</option>
+					<option value="3">exhibition</option>
+					<option value="4">thearte</option>
+					<option value="5">festivals</option>
+					<option value="6">lecture/presentation</option>
+					<option value="7">other</option>
+				</select>
+				<p ng-show="addEvent.event_category.$invalid && !addEvent.event_category.$pristine" class="help-block">Category is required.</p>
+				<div class="clr mb10"></div>
+			</div>
 
-			<i class="fa fa-map-marker blue"></i> Location <span class="color-red">*</span>:
-			<input type="text" name="event_location" placeholder="Event location" required>
-			<div class="clr mb10"></div>
-
-			Location address <span class="color-red">*</span>:<br/>
-			<input id="geocomplete" type="text" placeholder="Type location address" name="event_location_addr" value="" class="fl mr10" style="width: 70%; " required>
-			<input id="find" type="button" value="find" class="fl btn" style="width: 25%; padding: 6px 0;" />
-			<div class="clr"></div>
-			<a id="reset" href="#" style="display:none;">Reset</a>
+			<!-- Location -->
+			<div class="form-group" ng-class="{ 'has-error' : addEvent.event_location.$invalid && !addEvent.event_location.$pristine }">
+				<i class="fa fa-map-marker blue"></i> Location <span class="color-red">*</span>:
+				<input type="text" name="event_location" placeholder="Event location" ng-model="event.event_location" required>
+				<p ng-show="addEvent.event_location.$invalid && !addEvent.event_location.$pristine" class="help-block">Location is required.</p>
+				<div class="clr mb10"></div>
+			</div>
+			<!-- location addr -->
+			<div class="form-group" ng-class="{ 'has-error' : addEvent.event_location_addr.$invalid && !addEvent.event_location_addr.$pristine }">
+				Location address <span class="color-red">*</span>:<br/>
+				<input id="geocomplete" type="text" placeholder="Type location address" name="event_location_addr" value="" class="fl mr10" style="width: 70%; "  ng-model="event.event_location_addr" required>
+				<input id="find" type="button" value="find" class="fl btn" style="width: 25%; padding: 6px 0;" />
+				<a id="reset" class="fl btn" href="#" style="display:none;">Reset</a>
+				<div class="clr"></div>
+				<p ng-show="addEvent.event_location_addr.$invalid && !addEvent.event_location_addr.$pristine" class="help-block">Location is required.</p>
+			</div>
 		</div>	
 		<div class="col-lg-4">
 			<br/>
@@ -77,11 +88,14 @@
 		<div class="clr "></div>
 
 		<div class="col-lg-8">
-			Event Description <span class="color-red">*</span>:
-			<textarea  name="event_description" rows="15" placeholder="Event Description" required></textarea>
-			<div class="clr mb10"></div>
-
-			<button type="submit" name="submit" class="btn" ><i class="fa fa-check"></i> Add Event</button>
+			<!-- description -->
+			<div class="form-group" ng-class="{ 'has-error' : addEvent.event_description.$invalid && !addEvent.event_description.$pristine }">
+				Event Description <span class="color-red">*</span>:
+				<textarea  name="event_description" rows="15" placeholder="Event Description" ng-model="event.event_description" required></textarea>
+				<p ng-show="addEvent.event_description.$invalid && !addEvent.event_description.$pristine" class="help-block">Description is required.</p>
+				<div class="clr mb10"></div>
+			</div>
+			<button type="submit" name="submit" class="btn" ng-disabled="addEvent.$invalid"><i class="fa fa-check"></i> Add Event</button>
 		</div>
 		<div class="clr "><br/></div>
 	<form>
