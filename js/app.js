@@ -209,6 +209,7 @@ eventApp.controller('SingleEventCtrl', ['$scope', '$routeParams', '$filter',
 
 // event add 
 eventApp.controller('AddEventCtrl', function ($scope) {
+  
     
   });
 

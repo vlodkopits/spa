@@ -5,6 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
     	<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Events On Map - admin</title>
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.5/custom/bootstrap.min.css">
 		<link rel="stylesheet" href="../css/style.css">
 		<link rel="stylesheet" href="../css/jquery.datetimepicker.css">
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -17,7 +18,7 @@
 				<nav>
 					<span><img src="../images/logo.png" class="img-respons" alt="EventsOnMap"/></span>
 					<span>
-						<a href=""><i class="fa fa-map-marker"></i> <span>go to site</span></a>
+						<a href="/map"><i class="fa fa-map-marker"></i> <span>go to site</span></a>
 					</span>
 					<div class="clr"></div>
 				</nav>
@@ -25,7 +26,7 @@
 		</header>
 		<div class="h45p"></div>
 		<section>
-			<div class="container">
+			<div class="">
 				
 				<? include 'config.php'; ?>
 				<?
@@ -45,20 +46,19 @@
 			       $result = mysql_query($query);
 			    }
 			    ?>
-			    <div>
+			    <div class="container">
 					<br/>
 						<a href="getevents.php" target="_blank" class="btn bg-green">generate .json</a>
-						<a href="" target="_blank" class="btn bg-red">show disable</a>
+						<span target="_blank" class="btn bg-red">show disable</span>
 						<a href="" target="_blank" class="btn bg-grey">show out of date</a>
 					<br/>
 				</div>
 				<div class="clr mb10"><br/></div>
 
-				<table>
+				<table class="table">
 					<tr>
 						<td>image</td>
 						<td>start date</td>
-						<td>end date</td>
 						<td>category</td>
 						<td>description</td>
 						<td>location</td>
@@ -77,7 +77,6 @@
 						<td>
 							<img src="../data/posters/<? echo $rows['image']; ?>" class="img-respons" style="max-height: 100px;" /></td>
 						<td><? echo $rows['startdate']; ?></td>
-						<td><? echo $rows['enddate']; ?></td>
 						<td><? echo $rows['category']; ?></td>
 						<td>
 							<h2><? echo $rows['title']; ?></h2>
