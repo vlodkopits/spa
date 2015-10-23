@@ -64,8 +64,8 @@ CREATE TABLE IF NOT EXISTS `events` (
 	$category = $_POST['event_category'];
 	$location = $_POST['event_location'];
 	$location_addr = $_POST['event_location_addr'];
-	$lat = $_POST['event_lat'];
-	$lng = $_POST['event_lng'];
+	$lat = $_POST['lat'];
+	$lng = $_POST['lng'];
 	$startdate = $_POST['event_startdate'];
 	$tickets = $_POST['event_tickets'];
 	$tickets_link = $_POST['event_tickets_link']; //event_tickets_link ??? admin
