@@ -1,30 +1,35 @@
 ﻿<div class="container" >
 	<div class="h45p"></div>
 	<div class="event-single-item mt10" >
-		<div class="col-lg-2">
-			<img ng-src="{{event_single.image}}" class="img-responsive " />
-		</div>
 
-		<div class="col-lg-6">
-			<h1>{{event_single.title}}</h1>
-		
-			<span>{{event_single.category}}</span>
-		
-			<div class="mb10"><i class="fa fa-clock-o blue"></i> {{event_single.startdate}} - {{event_single.enddate}}</div>
-		
-			<div class="mb10">
-				<i class="fa fa-ticket blue"></i> {{event_single.tickets}} 
-				<span ng-show="event_single.buy_tick.length>0"><a href="{{event_single.buy_tick}}" target="_blank" class="btn bg-yellow">Buy</a></span>
+		<div class="col-md-8 col-lg-8">
+			<div class="col-sm-4 col-md-4 col-lg-4">
+				<img ng-src="{{event_single.image}}" class="img-responsive " />
 			</div>
+
+			<div class="col-sm-8 col-md-8 col-lg-8 cat_{{event_single.category}}_border">
+				<h1>{{event_single.title}}</h1>
 			
-			<div class="mb10">{{event_single.description}}</div>
+				<span class="dnone btn cat_{{event_single.category}}">{{event_single.category}}</span>
+			
+				<div class="mb10"><i class="fa fa-clock-o blue"></i> <b>{{event_single.startdate | date: 'dd MMMM yyyy'}} </b></div>
+			
+				<div class="mb10" ng-show="event_single.tickets.length>0">
+					<i class="fa fa-ticket blue"></i> {{event_single.tickets}} 
+					<span ng-show="event_single.tickets_link.length>0"><a href="{{event_single.tickets_link}}" target="_blank" class="btn bg-yellow">Buy</a></span>
+				</div>
+			</div>
+			<div class="clr"></div>
+			<div class="mt10 mb10">{{event_single.description}}</div>
 		</div>
 
-		<div class="col-lg-4 mt10">
+		<div class="col-md-4 col-lg-4 mt10">
 		
 			<div class="mb10">
 				<i class="fa fa-map-marker blue"></i>
-				{{event_single.location}}
+				<b>{{event_single.location}}</b>
+				<br/>
+				Адреса: {{event_single.location_addr}}
 			</div>
 		
 			

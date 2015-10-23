@@ -2,47 +2,45 @@
 	<div class="h45p"></div>
 	<div class="w100p mt10">
 		<div class="col-lg-12">
-			<i class="fa fa-search blue"></i> Find event:
+			<i class="fa fa-search blue"></i> Знайти подію:
 			<input type="text" ng-model="search">
 		</div>
 		<div class="clr mb10"></div>
 		<div class="col-lg-12 ">
-			<button class="btn active disabled mb5 filter_cat_all"><i class="fa fa-asterisk "></i> <span class="hidden-xs">all</span></button>
-			<button class="btn bg-red cat_1 mb5 filter_cat_1"><i class="fa fa-music "></i> <span class="hidden-xs">music</span></button>
-			<button class="btn bg-green cat_2 mb5 filter_cat_2"><i class="fa fa-film "></i> <span class="hidden-xs">cinema</span></button>
-			<button class="btn bg-blue cat_3 mb5 filter_cat_3"><i class="fa fa-picture-o "></i> <span class="hidden-xs">exhibition</span></button>
-			<button class="btn bg-yellow cat_4 mb5 filter_cat_4"><i class="fa fa-users "></i> <span class="hidden-xs">thearte</span></button>
-			<button class="btn bg-dblue cat_5 mb5 filter_cat_5"><i class="fa fa-smile-o "></i> <span class="hidden-xs">festivals</span></button>
-			<button class="btn bg-grey cat_6 mb5 filter_cat_6"><i class="fa fa-graduation-cap "></i> <span class="hidden-xs">presentation/lecture</span></button>
-			<button class="btn bg-brown cat_7 mb5 filter_cat_7"><i class="fa fa-globe "></i> <span class="hidden-xs">other</span></button>
+			<button class="btn active disabled mb5 filter_cat_all"><i class="fa fa-asterisk "></i> <span class="hidden-xs">всі</span></button>
+			<button class="btn bg-red cat_1 mb5 filter_cat_1"><i class="fa fa-music "></i> <span class="hidden-xs">музика</span></button>
+			<button class="btn bg-green cat_2 mb5 filter_cat_2"><i class="fa fa-film "></i> <span class="hidden-xs">кіно</span></button>
+			<button class="btn bg-blue cat_3 mb5 filter_cat_3"><i class="fa fa-picture-o "></i> <span class="hidden-xs">виставки</span></button>
+			<button class="btn bg-yellow cat_4 mb5 filter_cat_4"><i class="fa fa-users "></i> <span class="hidden-xs">театр</span></button>
+			<button class="btn bg-dblue cat_5 mb5 filter_cat_5"><i class="fa fa-smile-o "></i> <span class="hidden-xs">фестивалі</span></button>
+			<button class="btn bg-grey cat_6 mb5 filter_cat_6"><i class="fa fa-graduation-cap "></i> <span class="hidden-xs">презентації/лекції</span></button>
+			<button class="btn bg-brown cat_7 mb5 filter_cat_7"><i class="fa fa-globe "></i> <span class="hidden-xs">інше</span></button>
 		</div>
 		<div class="clr mb10"></div>
 	</div>
 	<!-- ng-repeat="event in eventlist.events | orderBy: 'startdate' | filter : search "  -->
 	<div class="event-list-item mb10" ng-repeat="event in events | orderBy: 'startdate' | filter : search " >
-		<div class="link_cat_{{event.category}} link_cat_all ">
+		<div class="link_cat_{{event.category}} link_cat_all cat_{{event.category}}_border pt10 pb10">
 			<div class="col-lg-2">
 				<span class="event-img">
 					<a href="#event/{{event.id}}"><img ng-src="{{event.image}}" class="img-responsive " /></a>
 				</span>
-				<button class=" dnone btn cat_{{event.category}} filter_cat_{{event.category}}">{{event.category}}</button>
+				<span class="dnone btn cat_{{event.category}} filter_cat_{{event.category}}">{{event.category}}</span>
 			</div>
 
 			<div class="col-lg-10">
 				<h2 class="show_event_{{event.id}}" ><a href="#event/{{event.id}}">{{event.title}}</a></h2>
 				
-				<div class="mt10"><i class="fa fa-clock-o blue"></i> <strong>{{event.startdate}} - {{event.enddate}}</strong></div>
+				<div class="mt10"><i class="fa fa-clock-o blue"></i> <strong>{{event.startdate | date: 'dd MMMM yyyy'}}</strong></div>
 				<div class="mt10"><i class="fa fa-map-marker blue"></i> {{event.location}}</div>
-				<div class="mt10">
+				<div class="mt10" ng-show="event_single.tickets.length>0">
 					<i class="fa fa-ticket blue"></i> {{event.tickets}}
-					<span ng-show="event.buy_tick.length>0"><a href="{{event.buy_tick}}" target="_blank" >Buy</a></span>
+					<span ng-show="event.tickets_link.length>0"><a href="{{event.tickets_link}}" target="_blank" >Купити</a></span>
 				</div>
 
 				<div class="dnone">{{event.description | limitTo : 60 }}</div>
-				<div class="clr"></div>
-				
-					
 			</div>			
+			<div class="clr"></div>
 		</div>
 		<div class="clr"></div>
 	</div>

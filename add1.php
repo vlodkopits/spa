@@ -19,8 +19,8 @@ if(isset($_POST['submit'])){ // Fetching variables of the form which travels in 
 	$enddate = $_POST['event-enddate'];
 	$tickets = $_POST['event-tickets'];
 	$location = $_POST['event-location'];
-	$lat = $_POST['event-lat'];
-	$lng = $_POST['event-lng'];
+	$lat = $_POST['lat'];
+	$lng = $_POST['lng'];
 	$web = $_POST['event-web'];
 	$email = $_POST['event-email'];
 	$phone = $_POST['event-phone'];
@@ -32,12 +32,12 @@ if(isset($_POST['submit'])){ // Fetching variables of the form which travels in 
 	 so please reduce the file size and then upload.<BR>";
 	$file_upload="false";}
 
-	if (!($_FILES[event_image][type] =="image/jpeg" OR $_FILES[event_image][type] =="image/gif" OR $_FILES[event_image][type] =="image/png"))
+	if (!($_FILES[event_image][type] =="image/jpeg" OR $_FILES[event_image][type] =="image/jpg" OR $_FILES[event_image][type] =="image/gif" OR $_FILES[event_image][type] =="image/png"))
 	{$msg=$msg."Your uploaded file must be of JPG or GIF. Other file types are not allowed<BR>";
 	$file_upload="false";}
 
 	$file_name=$_FILES[event_image][name];
-	$add="data/$file_name"; // the path with the file name where the file will be stored
+	$add="data/posters/$file_name"; // the path with the file name where the file will be stored
 
 	if($file_upload=="true"){
 

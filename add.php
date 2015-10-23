@@ -1,9 +1,55 @@
 ﻿<?php
+/* add event form */
+
+/*
+event_image
+event_title
+event_category
+event_location
+event_location_formatted_address
+event_lat
+event_lng
+event_startdate ????
+event_tickets
+event_tickets_link ??? admin
+event_web
+event_email
+event_phone
+event_description
+
+*********** sql
+
+--
+-- Структура таблиці `events`
+--
+
+CREATE TABLE IF NOT EXISTS `events` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `image` text,
+  `title` text NOT NULL,
+  `category` text NOT NULL,
+  `location` text NOT NULL,
+  `location_addr` text NOT NULL,
+  `lat` varchar(255) NOT NULL,
+  `lng` varchar(255) NOT NULL,
+  `startdate` varchar(255) NOT NULL,
+  `tickets` varchar(255) DEFAULT NULL,
+  `tickets_link` varchar(255) DEFAULT NULL,
+  `web` text,
+  `email` text,
+  `phone` varchar(255) DEFAULT NULL,
+  `description` longtext NOT NULL,
+  `enable` varchar(255) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+*/
+
 	$host="db7.unlim.com"; // Host name
 	$username="h3u111_mapadmin"; // Mysql username
 	$password="43204320map"; // Mysql password
 	$db_name="h3u111_map"; // Database name
-	$tbl_name="events"; // Table name
+	//$tbl_name="events"; // Table name
 
 	// Connect to server and select database.
 	mysql_connect("$host", "$username", "$password")or die("cannot connect");
@@ -11,52 +57,34 @@
 	mysql_select_db("$db_name")or die("cannot select DB");
 
 
-if(isset($_POST['submit'])){ // Fetching variables of the form which travels in URL
+	echo "<p>I in add.php</p>";
+
 	$image = $_POST['event_image'];
-	$title = $_POST['event-title'];
-	$category = $_POST['event-category'];
-	$startdate = $_POST['event-startdate'];
-	$enddate = $_POST['event-enddate'];
-	$tickets = $_POST['event-tickets'];
-	$location = $_POST['event-location'];
-	$lat = $_POST['lat'];
-	$lng = $_POST['lng'];
-	$web = $_POST['event-web'];
-	$email = $_POST['event-email'];
-	$phone = $_POST['event-phone'];
-	$description = $_POST['event-description'];
-	$file_upload="true";
-	$file_up_size=$_FILES['event_image'][size];
-	echo $_FILES[event_image][name];
-	if ($_FILES[event_image][size]>250000){$msg=$msg."Your uploaded file size is more than 250KB
-	 so please reduce the file size and then upload.<BR>";
-	$file_upload="false";}
+	$title = $_POST['event_title'];
+	$category = $_POST['event_category'];
+	$location = $_POST['event_location'];
+	$location_addr = $_POST['event_location_addr'];
+	$lat = $_POST['event_lat'];
+	$lng = $_POST['event_lng'];
+	$startdate = $_POST['event_startdate'];
+	$tickets = $_POST['event_tickets'];
+	$tickets_link = $_POST['event_tickets_link']; //event_tickets_link ??? admin
+	$web = $_POST['event_web'];
+	$email = $_POST['event_email'];
+	$phone = $_POST['event_phone'];
+	$description = $_POST['event_description'];
 
-	if (!($_FILES[event_image][type] =="image/jpeg" OR $_FILES[event_image][type] =="image/jpg" OR $_FILES[event_image][type] =="image/gif" OR $_FILES[event_image][type] =="image/png"))
-	{$msg=$msg."Your uploaded file must be of JPG or GIF. Other file types are not allowed<BR>";
-	$file_upload="false";}
+	echo $title;
 
-	$file_name=$_FILES[event_image][name];
-	$add="data/posters/$file_name"; // the path with the file name where the file will be stored
-
-	if($file_upload=="true"){
-
-	if(move_uploaded_file ($_FILES[event_image][tmp_name], $add)){
-	// do your coding here to give a thanks message or any other thing.
-	}else{echo "Failed to upload file Contact Site admin to fix the problem";}
-
-	}else{
-	echo $msg;
-	}
-if($title !=''||$startdate !=''||$enddate !=''||$location !=''||$description !=''){
-	//Insert Query of SQL
-	$query = mysql_query("insert into events(image, title, category, startdate, enddate, tickets, location, lat, lng, web, email, phone, description) values ('$file_name', '$title', '$category', '$startdate', '$enddate', '$tickets', '$location', '$lat', '$lng', '$web', '$email', '$phone', '$description')");
+	//$insert_event = "INSERT INTO events('image', 'title', 'category', 'location', 'location_formatted_address', 'lat', 'lng', 'startdate', 'tickets', 'tickets_link', 'web', 'email', 'phone', 'description') VALUES ('$image', '$title', '$category', '$location', '$location_formatted_address', '$lat', '$lng', '$startdate', '$tickets', '$tickets_link', '$web', '$email', '$phone', '$description')";
+	//$insert_event = "INSERT INTO events('title') VALUES ('$title')" ;
+	$query = mysql_query("INSERT INTO events(image, title, category, location, location_addr, lat, lng, startdate, tickets, tickets_link, web, email, phone, description) VALUES ('$image', '$title', '$category', '$location', '$location_addr', '$lat', '$lng', '$startdate', '$tickets', '$tickets_link', '$web', '$email', '$phone', '$description')");
 	echo "<br/><br/><span>Data Inserted successfully...!!</span>";
-}
-else{
-	echo "<p>Insertion Failed <br/> Some Fields are Blank....!!</p>";
-	}
-}
-mysql_close(); // Closing Connection with Server
-?>
 
+	//mysql_query($insert_event);
+	echo "<p>data insert</p>";
+	
+	mysql_close(); // Closing Connection with Server
+
+
+?>

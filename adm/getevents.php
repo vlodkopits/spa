@@ -2,7 +2,8 @@
 
 	include 'config.php';
 
-	$sql="SELECT * FROM $tbl_name WHERE enable=1 AND startdate>DATE_FORMAT(NOW(),'%m-%d-%Y ') AND enddate>DATE_FORMAT(NOW(),'%m-%d-%Y ')"; 
+	//$sql="SELECT * FROM $tbl_name WHERE enable=1 AND startdate>DATE_FORMAT(NOW(),'%m-%d-%Y ') AND enddate>DATE_FORMAT(NOW(),'%m-%d-%Y ')"; 
+	$sql="SELECT * FROM $tbl_name WHERE enable=1 "; 
 
 	$response = array();
 	$events = array();
@@ -10,24 +11,25 @@
 	while($row=mysql_fetch_array($result)) 
 	
 	{ 
+
 	$id=$row['id'];
 	$image=$row['image']; 
 	$title=$row['title'];
-	$category=$row['category'];
-	$description=$row['description'];
-	$startdate=$row['startdate']; 
-	$enddate=$row['enddate']; 
-	$tickets=$row['tickets']; 
-	$buy_tick=$row['buy_tick'];
+	$category=$row['category'];	
 	$location=$row['location']; 
+	$location_addr=$row['location_addr']; 
 	$lat=$row['lat'];
 	$lng=$row['lng'];
+	$startdate=$row['startdate']; 
+	$tickets=$row['tickets']; 
+	$tickets_link=$row['tickets_link'];
 	$web=$row['web']; 
 	$email=$row['email']; 
 	$phone=$row['phone'];
+	$description=$row['description'];
 	$enable=$row['enable'];
 	
-		$events[] = array('id'=>$id,'image'=>'data/posters/'.$image,'title'=>$title,'category'=>$category,'description'=>$description,'startdate'=>$startdate,'enddate'=>$enddate,'tickets'=>$tickets,'buy_tick'=>$buy_tick,'location'=>$location,'lat'=>$lat,'lng'=>$lng,'web'=>$web,'email'=>$email,'phone'=>$phone,'enable'=>$enable);
+		$events[] = array('id'=>$id,'image'=>'data/posters/'.$image,'title'=>$title,'category'=>$category,'description'=>$description,'startdate'=>$startdate,'tickets'=>$tickets,'tickets_link'=>$tickets_link,'location'=>$location, 'location_addr'=>$location_addr,'lat'=>$lat,'lng'=>$lng,'web'=>$web,'email'=>$email,'phone'=>$phone,'enable'=>$enable);
 		
 	} 
 	
