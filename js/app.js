@@ -134,7 +134,7 @@ var eventData = (function () {
     $.ajax({
         'async': false,
         'global': false,
-        'url': 'data/events.json',
+        'url': 'adm/eventslist.php',
         'dataType': "json",
         'success': function (data) {
             json = data;
@@ -142,6 +142,8 @@ var eventData = (function () {
     });
     return json;
 })(); 
+
+
 
 // configure our routes
 eventApp.config(function($routeProvider) {

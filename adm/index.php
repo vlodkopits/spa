@@ -7,7 +7,6 @@
 		<title>Events On Map - admin</title>
 		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.5/custom/bootstrap.min.css">
 		<link rel="stylesheet" href="../css/style.css">
-		<link rel="stylesheet" href="../css/jquery.datetimepicker.css">
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
 	</head>
@@ -29,6 +28,7 @@
 			<div class="">
 				
 				<? include 'config.php'; ?>
+				<? $today = date("Y-m-d") ?>
 				<?
 				if(isset($_POST['delete'])){
 			       $id = $_POST['delete_rec_id'];  
@@ -49,8 +49,9 @@
 			    <div class="container">
 					<br/>
 						<a href="getevents.php" target="_blank" class="btn bg-green">generate .json</a>
-						<span target="_blank" class="btn bg-red">show disable</span>
-						<a href="" target="_blank" class="btn bg-grey">show out of date</a>
+						<span target="_blank" class="btn bg-red show_disable">show disable</span>
+						<span target="_blank" class="btn bg-blue show_all">show all</span>
+						<span target="_blank" class="btn bg-grey show_out">show out of date</span>
 					<br/>
 				</div>
 				<div class="clr mb10"><br/></div>
@@ -73,7 +74,7 @@
 					// Start looping rows in mysql database.
 					while($rows=mysql_fetch_array($result)){
 					?>
-					<tr class="event-list-item <?if ($rows['enable'] == 0) {?>bg-red<?}?>" >
+					<tr class="event-list-item <?if ($rows['enable'] == 0) {?>bg-red<?}?> <?if ($rows['startdate'] < $today) {?>bg-grey<?}?>" >
 						<td>
 							<img src="../data/posters/<? echo $rows['image']; ?>" class="img-respons" style="max-height: 100px;" /></td>
 						<td><? echo $rows['startdate']; ?></td>
@@ -123,6 +124,37 @@
 				// close while loop
 				}
 
+				$response = array();
+				$events = array();
+				$result=mysql_query($sql);
+				while($row=mysql_fetch_array($result)) 
+				
+				{ 
+
+				$id=$row['id'];
+				$image=$row['image']; 
+				$title=$row['title'];
+				$category=$row['category'];	
+				$location=$row['location']; 
+				$location_addr=$row['location_addr']; 
+				$lat=$row['lat'];
+				$lng=$row['lng'];
+				$startdate=$row['startdate']; 
+				$tickets=$row['tickets']; 
+				$tickets_link=$row['tickets_link'];
+				$web=$row['web']; 
+				$email=$row['email']; 
+				$phone=$row['phone'];
+				$description=$row['description'];
+				$enable=$row['enable'];
+				
+					$events[] = array('id'=>$id,'image'=>'data/posters/'.$image,'title'=>$title,'category'=>$category,'description'=>$description,'startdate'=>$startdate,'tickets'=>$tickets,'tickets_link'=>$tickets_link,'location'=>$location, 'location_addr'=>$location_addr,'lat'=>$lat,'lng'=>$lng,'web'=>$web,'email'=>$email,'phone'=>$phone,'enable'=>$enable);
+					
+				} 
+	
+				$response['events'] = $events;
+			    echo json_encode($events);
+
 				// close connection
 				mysql_close();
 				?>
@@ -132,6 +164,26 @@
 		</section>
 
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-		<script src="//maps.googleapis.com/maps/api/js?key=AIzaSyDcQ7O6FhwFVRX-C91mc0SqX9s4XcFS9lM"></script>			
+		<script src="//maps.googleapis.com/maps/api/js?key=AIzaSyDcQ7O6FhwFVRX-C91mc0SqX9s4XcFS9lM"></script>	
+		<script>
+		$(function(){
+
+			$(".show_all").click(function(){    	
+	        	$(".event-list-item").show();
+		    });
+
+		    $(".show_disable").click(function(){    	
+		        $(".event-list-item").hide();
+	        	$(".event-list-item.bg-red").show();
+		    });
+
+		    $(".show_out").click(function(){    	
+		        $(".event-list-item").hide();
+	        	$(".event-list-item.bg-grey").show();
+		    });
+
+		    
+		});
+		</script>		
 	</body>
 </html> 
