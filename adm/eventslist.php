@@ -1,9 +1,10 @@
-﻿<? 
+<? 
+//header('Content-Type: application/json');
 
 include 'config.php'; 
 
 $today = date("Y-m-d"); 
-$sql="SELECT * FROM $tbl_name ";
+$sql="SELECT * FROM $tbl_name WHERE enable=1 ";
 $response = array();
 $events = array();
 $result=mysql_query($sql);
@@ -33,7 +34,7 @@ $enable=$row['enable'];
 } 
 
 $response['events'] = $events;
-//header('Content-Type: application/json');
+
 echo json_encode($events);
 
 // close connection

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 	$host="db7.unlim.com"; // Host name
 	$username="h3u111_mapadmin"; // Mysql username
