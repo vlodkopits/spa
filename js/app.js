@@ -129,15 +129,32 @@ $provide.value("$locale", {
 }]);
 
 // data from JSON file
+/*
 var eventData = (function () {
     var json = null;
     $.ajax({
         'async': false,
         'global': false,
-        'url': 'adm/eventslist.php',
+        'cache':false,
+        'url': 'data/events.json',
         'dataType': "json",
         'success': function (data) {
             json = data;
+        }
+    });
+    return json;
+})(); 
+*/
+var eventData = (function () {
+    var json = null;
+    $.ajax({
+        'async': false,
+        'global': false,
+        'cache':false,
+        'url': 'adm/eventslist.php',
+        'dataType': "json",
+        'success': function (data) {
+            json = data["events"];
         }
     });
     return json;
