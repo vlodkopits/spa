@@ -160,8 +160,6 @@ var eventData = (function () {
     return json;
 })(); 
 
-
-
 // configure our routes
 eventApp.config(function($routeProvider) {
     $routeProvider
