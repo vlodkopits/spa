@@ -129,7 +129,7 @@ $provide.value("$locale", {
 }]);
 
 // data from JSON file
-/*
+
 var eventData = (function () {
     var json = null;
     $.ajax({
@@ -144,7 +144,7 @@ var eventData = (function () {
     });
     return json;
 })(); 
-*/
+/*
 var eventData = (function () {
     var json = null;
     $.ajax({
@@ -159,7 +159,7 @@ var eventData = (function () {
     });
     return json;
 })(); 
-
+*/
 
 
 // configure our routes
