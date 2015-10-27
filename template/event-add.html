@@ -1,7 +1,7 @@
 ﻿<div class="container" ng-controller="AddEventCtrl">
 	<div class="h45p"></div>
 	
-	<form name="addEvent" novalidate method="POST" action="add.php">
+	<form name="addEvent" novalidate method="POST" >
 		<div class="clr"><br/></div>
 		<div class="col-lg-2">
 			<span class="btn-file">
@@ -150,7 +150,7 @@
         		}
 			});
 		
-		$('#event_submit').click(function(){
+		$('#event_submit_btn').click(function(){
 			
 			$dates = $('#dates .select_date').map(function() {
 				//moment(this.id, "DD, d MM yy").format("YYYY-MM-DD")

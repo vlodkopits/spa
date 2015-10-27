@@ -38,15 +38,22 @@ $enable=$row['enable'];
 
 
 $startdate=$row['startdate']; 
+echo $startdate;
+
+echo '<br/>';
+
 
 
 	$events[] = array( 'startdate'=>(explode(",",$startdate)) );
-	
+
+echo 'json - ';
+echo json_encode($startdate,JSON_PRETTY_PRINT);
+echo '<br/><br/>';
+
 } 
 
-$response['events'] = $events;
-
-echo json_encode($events,JSON_PRETTY_PRINT);
+//$response['events'] = $events;
+//echo json_encode($events,JSON_PRETTY_PRINT);
 
 // close connection
 mysql_close();
