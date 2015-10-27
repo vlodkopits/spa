@@ -1,10 +1,10 @@
-﻿<div class="container" >
+﻿<div class="container" ng-controller="SingleEventCtrl">
 	<div class="h45p"></div>
 	<div class="event-single-item mt10" >
 
 		<div class="col-md-8 col-lg-8">
 			<div class="col-sm-4 col-md-4 col-lg-4">
-				<img ng-src="{{event_single.image}}" class="img-responsive " />
+				<img  ng-src="{{event_single.image}}" class="img-responsive " alt="{{event_single.title}}" />
 			</div>
 
 			<div class="col-sm-8 col-md-8 col-lg-8 cat_{{event_single.category}}_border">
@@ -12,11 +12,13 @@
 			
 				<span class="dnone btn cat_{{event_single.category}}">{{event_single.category}}</span>
 			
-				<div class="mb10"><i class="fa fa-clock-o blue"></i> <b>{{event_single.startdate | date: 'dd MMMM yyyy'}} </b></div>
+				<div ng-repeat="date in startdate"></div>
+				<span>{{event_single.startdate.date[0]}}</span>
+				<div class="mb10"><i class="fa fa-clock-o blue"></i> <b>{{event_single.startdate.date[0] | date: 'dd MMMM yyyy'}} </b></div>
 			
-				<div class="mb10" ng-show="event_single.tickets.length>0">
+				<div class="mb10" ng-show="event_single.tickets.length">
 					<i class="fa fa-ticket blue"></i> {{event_single.tickets}} 
-					<span ng-show="event_single.tickets_link.length>0"><a href="{{event_single.tickets_link}}" target="_blank" class="btn bg-yellow">Buy</a></span>
+					<span ng-show="event_single.tickets_link.length"><a href="{{event_single.tickets_link}}" target="_blank" class="btn bg-yellow">Buy</a></span>
 				</div>
 			</div>
 			<div class="clr"></div>

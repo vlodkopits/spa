@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /* add event form */
 
 /*
@@ -57,16 +57,20 @@ CREATE TABLE IF NOT EXISTS `events` (
 	mysql_select_db("$db_name")or die("cannot select DB");
 
 
-	echo "<p>I in add.php</p>";
+	
 
-	$image = $_POST['event_image'];
+	if(empty($_POST['event_image'])) {
+		$image = 'no-photo.png';
+	} else {
+		$image = $_POST['event_image'];
+	};
 	$title = $_POST['event_title'];
 	$category = $_POST['event_category'];
 	$location = $_POST['event_location'];
 	$location_addr = $_POST['event_location_addr'];
 	$lat = $_POST['lat'];
 	$lng = $_POST['lng'];
-	$startdate = $_POST['event_startdate'];
+	$startdate = $_POST['event_dates'];
 	$tickets = $_POST['event_tickets'];
 	$tickets_link = $_POST['event_tickets_link']; //event_tickets_link ??? admin
 	$web = $_POST['event_web'];

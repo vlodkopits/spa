@@ -135,6 +135,7 @@ var eventData = (function () {
         'global': false,
         'cache':false,
         'url': 'adm/eventslist.php',
+        //'url': 'data/events.json',
         'dataType': "json",
         'success': function (data) {
             json = data;
@@ -246,7 +247,7 @@ eventApp.controller ('EventMapCtrl',function ($scope){
             position: new google.maps.LatLng(info.lat, info.lng),
             title: info.title
         });
-        marker.content = '<div class="infoWindowContent"><img src="'+ info.image +'" alt="" class="  " /></div>';
+        marker.content = '<div class="infoWindowContent"><img src="'+ info.image +'" alt="" class="img-responsive" /></div>';
         
         google.maps.event.addListener(marker, 'click', function(){
             infoWindow.setContent('<h2><a href="#event/'+info.id+'">' + marker.title + '</a></h2>' + marker.content);

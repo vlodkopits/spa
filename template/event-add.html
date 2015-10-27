@@ -1,7 +1,7 @@
 ﻿<div class="container" ng-controller="AddEventCtrl">
 	<div class="h45p"></div>
 	
-	<form name="addEvent" novalidate method="POST" action="add.php" >
+	<form name="addEvent" novalidate method="POST" action="add.php">
 		<div class="clr"><br/></div>
 		<div class="col-lg-2">
 			<span class="btn-file">
@@ -65,9 +65,10 @@
 
 		<div class="col-lg-8">
 			<i class="fa fa-calendar blue"></i> Виберіть дату <span class="color-red">*</span>:
-	        <input type="text" name="event_startdate" placeholder=""  value="" id="events-add-startdate" required>
+	        <!--<input type="text" name="event_startdate" placeholder=""  value="" id="events-add-startdate" required>-->
 	        <div id="events-add-startdate-container"></div>
-	        <span id="date"></span>
+	        <span id="dates"></span>
+	        <input name="event_dates" id="event_dates" value="">
 			<div class="clr mb10"></div>
 		</div>
 		<div class="col-lg-4">
@@ -97,7 +98,8 @@
 				<p ng-show="addEvent.event_description.$invalid && !addEvent.event_description.$pristine" class="help-block">Description is required.</p>
 				<div class="clr mb10"></div>
 			</div>
-			<button type="submit" name="submit" class="btn" ng-disabled="addEvent.$invalid"><i class="fa fa-check"></i> Додати подію</button>
+			<button type="submit" name="submit" class="btn" id="event_submit" ng-disabled="addEvent.$invalid"><i class="fa fa-check"></i> Додати подію</button>
+			<button class="btn" id="event_submit_btn" ><i class="fa fa-check"></i> test</button>
 		</div>
 		<div class="clr "><br/></div>
 	<form>
@@ -140,7 +142,27 @@
 		$('#events-add-startdate-container').datepicker(
 			{
 				altField: "#events-add-startdate",
-		    	altFormat: "yy-mm-dd"
+		    	altFormat: "yy-mm-dd",
+		    	dateFormat: "DD, d MM yy",
+		    	minDate: new Date(),
+		    	onSelect:function(date) {
+            		$('#dates').append('<div class="select_date" id="'+date+'">' + date +'</div');
+        		}
 			});
+		
+		$('#event_submit').click(function(){
+			
+			$dates = $('#dates .select_date').map(function() {
+				//moment(this.id, "DD, d MM yy").format("YYYY-MM-DD")
+		    	return ('{"date":"' + moment(this.id, "dddd, D MMMM YYYY").format("YYYY-MM-DD") + '"}');
+			})
+			//.get()
+			//.join( ", " ) 
+
+
+			$('#event_dates').val($.makeArray($dates))
+		});
+			
 	});
+
 </script>

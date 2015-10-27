@@ -23,7 +23,9 @@
 		<div class="link_cat_{{event.category}} link_cat_all cat_{{event.category}}_border pt10 pb10">
 			<div class="col-lg-2">
 				<span class="event-img">
-					<a href="#event/{{event.id}}"><img ng-src="{{event.image}}" class="img-responsive " /></a>
+					<a href="#event/{{event.id}}">
+						<img ng-src="{{event.image}}" class="img-responsive " alt="{{event.title}}" />
+					</a>
 				</span>
 				<span class="dnone btn cat_{{event.category}} filter_cat_{{event.category}}">{{event.category}}</span>
 			</div>
@@ -33,9 +35,9 @@
 				
 				<div class="mt10"><i class="fa fa-clock-o blue"></i> <strong>{{event.startdate | date: 'dd MMMM yyyy'}}</strong></div>
 				<div class="mt10"><i class="fa fa-map-marker blue"></i> {{event.location}}</div>
-				<div class="mt10" ng-show="event_single.tickets.length>0">
+				<div class="mt10" ng-show="event.tickets.length">
 					<i class="fa fa-ticket blue"></i> {{event.tickets}}
-					<span ng-show="event.tickets_link.length>0"><a href="{{event.tickets_link}}" target="_blank" >Купити</a></span>
+					<span ng-show="event.tickets_link.length"><a href="{{event.tickets_link}}" target="_blank" class="btn bg-yellow">Купити</a></span>
 				</div>
 
 				<div class="dnone">{{event.description | limitTo : 60 }}</div>
