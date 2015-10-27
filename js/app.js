@@ -128,23 +128,6 @@ $provide.value("$locale", {
 });
 }]);
 
-// data from JSON file
-/*
-var eventData = (function () {
-    var json = null;
-    $.ajax({
-        'async': false,
-        'global': false,
-        'cache':false,
-        'url': 'data/events.json',
-        'dataType': "json",
-        'success': function (data) {
-            json = data;
-        }
-    });
-    return json;
-})(); 
-*/
 var eventData = (function () {
     var json = null;
     $.ajax({
@@ -193,13 +176,11 @@ eventApp.config(function($routeProvider) {
 
 });
 
-
 // event list 
-
 eventApp.controller('EventListCtrl', function ($scope) {
     $scope.events = [];
     $scope.events = eventData;
-  });
+});
 
 // event single 
 eventApp.controller('SingleEventCtrl', ['$scope', '$routeParams', '$filter',
@@ -226,9 +207,8 @@ eventApp.controller('SingleEventCtrl', ['$scope', '$routeParams', '$filter',
 
 // event add 
 eventApp.controller('AddEventCtrl', function ($scope) {
-  
     
-  });
+});
 
 // big map with events 
 eventApp.controller ('EventMapCtrl',function ($scope){
@@ -284,10 +264,4 @@ eventApp.controller ('EventMapCtrl',function ($scope){
         e.preventDefault();
         google.maps.event.trigger(selectedMarker, 'click');
     }
-
-
 });
-
-// add event
-
-
