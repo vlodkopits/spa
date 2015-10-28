@@ -14,7 +14,14 @@
 			
 				<div ng-repeat="date in startdate"></div>
 				<span>{{event_single.startdate.date[0]}}</span>
-				<div class="mb10"><i class="fa fa-clock-o blue"></i> <b>{{event_single.startdate.date[0] | date: 'dd MMMM yyyy'}} </b></div>
+				<div class="mb10">
+					<i class="fa fa-calendar blue fl mr10"></i>
+					<div class="dib">
+						<span ng-repeat="date in event_single.startdate" >
+							<b >{{date.date | date: 'EEEE, d MMMM yyyy'}}<span ng-show="date.timefrom.length && date.timetill.length">, <i class="fa fa-clock-o blue mr10"></i>{{date.timefrom}} - {{date.timetill}}</span></b><br/>
+						</span>
+					</div>
+				</div>
 			
 				<div class="mb10" ng-show="event_single.tickets.length">
 					<i class="fa fa-ticket blue"></i> {{event_single.tickets}} 

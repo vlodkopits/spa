@@ -10,7 +10,7 @@ $events = array();
 $result=mysql_query($sql);
 while($row=mysql_fetch_array($result)) 
 
-/*
+
 { 
 
 $id=$row['id'];
@@ -21,7 +21,7 @@ $location=$row['location'];
 $location_addr=$row['location_addr']; 
 $lat=$row['lat'];
 $lng=$row['lng'];
-$startdate=$row['startdate']; 
+$dates=$row['startdate']; 
 $tickets=$row['tickets']; 
 $tickets_link=$row['tickets_link'];
 $web=$row['web']; 
@@ -29,31 +29,12 @@ $email=$row['email'];
 $phone=$row['phone'];
 $description=$row['description'];
 $enable=$row['enable'];
-
-	$events[] = array('id'=>$id,'image'=>'data/posters/'.$image,'title'=>$title,'category'=>$category,'description'=>$description,'startdate'=>(explode(",",$startdate)),'tickets'=>$tickets,'tickets_link'=>$tickets_link,'location'=>$location, 'location_addr'=>$location_addr,'lat'=>$lat,'lng'=>$lng,'web'=>$web,'email'=>$email,'phone'=>$phone,'enable'=>$enable);
 	
-} */
-
-{ 
-
-
-$startdate=$row['startdate']; 
-echo $startdate;
-
-echo '<br/>';
-
-
-
-	$events[] = array( 'startdate'=>(explode(",",$startdate)) );
-
-echo 'json - ';
-echo json_encode($startdate,JSON_PRETTY_PRINT);
-echo '<br/><br/>';
-
+	$events[] = array('id'=>$id,'image'=>'data/posters/'.$image,'title'=>$title,'category'=>$category,'description'=>$description,'tickets'=>$tickets,'tickets_link'=>$tickets_link,'location'=>$location, 'location_addr'=>$location_addr,'lat'=>$lat,'lng'=>$lng,'web'=>$web,'email'=>$email,'phone'=>$phone,'enable'=>$enable, 'dates'=>$dates);
 } 
 
-//$response['events'] = $events;
-//echo json_encode($events,JSON_PRETTY_PRINT);
+$response['events'] = $events;
+echo json_encode($events,JSON_PRETTY_PRINT);
 
 // close connection
 mysql_close();

@@ -66,13 +66,11 @@
 		<div class="col-lg-8">
 			<i class="fa fa-calendar blue"></i> Виберіть дату <span class="color-red">*</span>:
 			<div class="clr"></div>
-			<!-- event dates -->
-	        <div id="event_dates" class="form-group" ng-class="{ 'has-error' : addEvent.event_date.$invalid && !addEvent.event_date.$pristine }">
-	        	<input type="text" id="event_date" name="event_date" ng-model="event.event_date" class="col-lg-6 mr10" required>	
-	        	<input type="text" id="event_timefrom" name="event_timefrom" class="col-lg-2 mr10" placeholder="start time"> 
-	        	<input type="text" id="event_timetill" name="event_timetill" class="col-lg-2"  placeholder="end time">
-	        	<div ng-show="addEvent.event_date.$invalid && !addEvent.event_date.$pristine" class="help-block">Location is required.</div>
-	        </div>	      
+	        <!--<input type="text" name="event_startdate" placeholder=""  value="" id="events-add-startdate" required>-->
+	        <div id="events-add-startdate-container" class="dib fl mr10" required></div>
+	        <span id="dates" class="dib"></span>
+	        <!--<input id="timefrom"> <input id="timetill">-->
+	        <input name="event_dates" id="event_dates" value="">
 			<div class="clr mb10"></div>
 		</div>
 		<div class="col-lg-4">
@@ -143,8 +141,44 @@
 	});
 
 	$(function(){
-		$("#event_date" ).datepicker({'dateFormat':'DD, d MM, yy'});
-		$("#event_timefrom").timepicker({ 'timeFormat': 'H:i','step': 15 });
-		$("#event_timetill").timepicker({ 'timeFormat': 'H:i','step': 15 });
+
+		var i = 1;
+
+		$('#events-add-startdate-container').datepicker(
+			{
+				altField: "#events-add-startdate",
+		    	altFormat: "yy-mm-dd",
+		    	dateFormat: "DD, d MM yy",
+		    	minDate: new Date(),
+		    	onSelect:function(date) {
+            		$('#dates').append('<div class="select_date" id="'+date+'"><i class="fa fa-times"></i><span style="width: 200px;">' + date + '</span><input id="timefrom_'+i+'" value=""> <input id="timetill_'+i+'" value=""></div');
+            		$('#timefrom_'+i+'').timepicker({ 'timeFormat': 'H:i','step': 15 });
+					$('#timetill_'+i+'').timepicker({ 'timeFormat': 'H:i','step': 15 });
+					i++;
+        		}
+			});
+		
+		$('#event_submit').click(function(){			
+			/*
+			$dates = $('#dates .select_date').map(function() {
+		    	return ('{"date":"' + moment(this.id, "dddd, D MMMM YYYY").format("YYYY-MM-DD") + '", "timefrom": "'+ $("#timefrom_"+i).val() +'", "timetill": "'+ $("#timetill_"+i).val() +'"}');
+			})
+			.get()
+			.join( ", " ) */
+			$dates = $('#dates .select_date').map(function () {
+			    var date = moment(this.id, "dddd, D MMMM YYYY").format("YYYY-MM-DD"),
+			        timeFrom = $($(this).find('input')[0]).val(),
+			        timeTill = $($(this).find('input')[1]).val(),
+			        result = {
+			            date: date,
+			            timefrom: timeFrom,
+			            timetill: timeTill
+			        };
+
+			    return JSON.stringify(result);
+			}).get().join(", ");
+
+			$('#event_dates').val($.makeArray($dates))
+		});
 	});
 </script>
