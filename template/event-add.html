@@ -71,9 +71,12 @@
 	        	<input type="text" id="event_date" name="event_date" ng-model="event.event_date" class="col-lg-6 mr10" required>	
 	        	<input type="text" id="event_timefrom" name="event_timefrom" class="col-lg-2 mr10" placeholder="start time"> 
 	        	<input type="text" id="event_timetill" name="event_timetill" class="col-lg-2 mr10"  placeholder="end time">
-	        	<button class="btn" id="btn_add_date">додати</button>
+	        	<a href class="btn" id="btn_add_date">додати</a>
 	        	<div ng-show="addEvent.event_date.$invalid && !addEvent.event_date.$pristine" class="help-block">Location is required.</div>
 	        	<!-- here list of dates -->
+	        	<div id="event_dates_list">
+
+	        	</div>
 	        </div>	      
 			<div class="clr mb10"></div>
 		</div>
@@ -145,8 +148,21 @@
 	});
 
 	$(function(){
-		$("#event_date" ).datepicker({'dateFormat':'DD, d MM, yy'});
+		$("#event_date" ).datepicker({'dateFormat':'DD, d MM, yy','minDate': new Date()});
 		$("#event_timefrom").timepicker({ 'timeFormat': 'H:i','step': 15 });
 		$("#event_timetill").timepicker({ 'timeFormat': 'H:i','step': 15 });
+
+		$("#btn_add_date").click(function(){
+			var date = moment($("#event_date").val(), "dddd, D MMMM YYYY").format("YYYY-MM-DD");
+			$('#event_dates_list').append('<div><div class="col-lg-6 mr10" id="'+date+'">'+ $("#event_date").val() +'</div><div class="col-lg-2 mr10">'+ $("#event_timefrom").val() +'</div><div class="col-lg-2 mr10">'+ $("#event_timetill").val() +'</div><i class="fa fa-times fa-2x date_del"></i></div><div class="clr"></div>');
+			$("#event_date").val("");
+			$("#event_timefrom").val("");
+			$("#event_timetill").val("");			
+		});
+
+		$(".date_del").click(function () {
+	      $(this).addClass("bg-red");
+	      $(this).parent().remove();
+	    });
 	});
 </script>
