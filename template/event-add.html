@@ -70,8 +70,10 @@
 	        <div id="event_dates" class="form-group" ng-class="{ 'has-error' : addEvent.event_date.$invalid && !addEvent.event_date.$pristine }">
 	        	<input type="text" id="event_date" name="event_date" ng-model="event.event_date" class="col-lg-6 mr10" required>	
 	        	<input type="text" id="event_timefrom" name="event_timefrom" class="col-lg-2 mr10" placeholder="start time"> 
-	        	<input type="text" id="event_timetill" name="event_timetill" class="col-lg-2"  placeholder="end time">
+	        	<input type="text" id="event_timetill" name="event_timetill" class="col-lg-2 mr10"  placeholder="end time">
+	        	<button class="btn" id="btn_add_date">додати</button>
 	        	<div ng-show="addEvent.event_date.$invalid && !addEvent.event_date.$pristine" class="help-block">Location is required.</div>
+	        	<!-- here list of dates -->
 	        </div>	      
 			<div class="clr mb10"></div>
 		</div>
