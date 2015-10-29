@@ -151,6 +151,12 @@
 
  	// dates 
 	$(function(){
+		$("#event_date" ).datepicker({
+			'dateFormat':'DD, d MM, yy',
+			'minDate': new Date()
+		});
+		$("#event_timefrom").timepicker({ 'timeFormat': 'H:i','step': 15 });
+		$("#event_timetill").timepicker({ 'timeFormat': 'H:i','step': 15 });
 
 		$("#btn_add_date").click(function(){
 			var selectDate =  $( "#event_date").datepicker( "getDate" );
@@ -164,18 +170,6 @@
 		$(document).on("click", "#date_del", function(){
 		   $(this).parent('.select_date').remove();
 		});
-
-		$("#event_date" ).datepicker({
-			'dateFormat':'DD, d MM, yy',
-			'minDate': new Date(),
-			'beforeShowDay': disableDates
-		});
-
-		$("#event_timefrom").timepicker({ 'timeFormat': 'H:i','step': 15 });
-		$("#event_timetill").timepicker({ 'timeFormat': 'H:i','step': 15 });
-
-
-		
 
 		// collect dates
 	    /*$('#event_submit_btn').click(function(){
