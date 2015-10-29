@@ -76,7 +76,9 @@ CREATE TABLE IF NOT EXISTS `events` (
 	$web = $_POST['event_web'];
 	$email = $_POST['event_email'];
 	$phone = $_POST['event_phone'];
-	$description = $_POST['event_description'];
+	//$description = htmlspecialchars ($_POST['event_description']);
+	$description = preg_replace("/\r\n|\r/", "<br />", $_POST["event_description"]);
+	$description = trim($description);
 
 	echo $title;
 
