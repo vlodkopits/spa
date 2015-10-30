@@ -1,7 +1,8 @@
-﻿<div class="container" ng-controller="AddEventCtrl">
+﻿<div class="container" >
 	<div class="h45p"></div>
 	
-	<form name="addEvent" novalidate method="POST" action="add.php" enctype="multipart/form-data">
+	<!--<form name="addEvent" novalidate method="POST" action="add.php" enctype="multipart/form-data">-->
+	<form name="addEvent" id="addEvent" novalidate ng-controller="AddEventCtrl" >
 		<div class="clr"><br/></div>
 		<div class="col-lg-2">
 			<span class="btn-file">
@@ -108,13 +109,12 @@
 				<p ng-show="addEvent.event_description.$invalid && !addEvent.event_description.$pristine" class="help-block">Description is required.</p>
 				<div class="clr mb10"></div>
 			</div>
-			<button type="submit" name="submit" class="btn" id="event_submit" ng-disabled="addEvent.$invalid"><i class="fa fa-check"></i> Додати подію</button>
+			<button type="submit" name="submit" class="btn" id="event_submit" ng-disabled="addEvent.$invalid" ><i class="fa fa-check"></i> Додати подію</button>
 		</div>
 		<div class="clr "><br/></div>
 	<form>
 </div>
 <div class="clr "><br/></div>
-
 
 <script>
  	 // location map 

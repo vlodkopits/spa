@@ -207,8 +207,21 @@ eventApp.controller('SingleEventCtrl', ['$scope', '$routeParams', '$filter',
   }]);
 
 // event add 
-eventApp.controller('AddEventCtrl', function ($scope) {
-    
+eventApp.controller('AddEventCtrl', function ($scope, $http) {
+  $(function() {
+      $("#addEvent").on("submit", function(event) {
+          event.preventDefault();
+
+          $.ajax({
+              url: "add.php",
+              type: "post",
+              data: $(this).serialize(),
+              success: function() {
+                  
+              }
+          });
+      });
+  });
 });
 
 // big map with events 

@@ -15,10 +15,9 @@
 				<div ng-repeat="date in dates"></div>
 				<span>{{event_single.dates.date[0]}}</span>
 				<div class="mb10">
-					<i class="fa fa-calendar blue fl mr10"></i>
 					<div class="dib">
 						<span ng-repeat="date in event_single.dates" >
-							<b >{{date.date | date: 'EEEE, d MMMM yyyy'}}<span ng-show="date.timefrom.length && date.timetill.length">, <i class="fa fa-clock-o blue mr10"></i>{{date.timefrom}} - {{date.timetill}}</span></b><br/>
+							<b ><i class="fa fa-calendar blue mr10"></i>{{date.date | date: 'EEEE, d MMMM yyyy'}}<span ng-show="date.timefrom.length && date.timetill.length">, <i class="fa fa-clock-o blue mr10"></i>{{date.timefrom}} - {{date.timetill}}</span></b><br/>
 						</span>
 					</div>
 				</div>

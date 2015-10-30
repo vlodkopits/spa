@@ -40,8 +40,7 @@ CREATE TABLE IF NOT EXISTS `events` (
 	mysql_connect("$host", "$username", "$password")or die("cannot connect");
 	mysql_query("SET NAMES utf8");
 	mysql_select_db("$db_name")or die("cannot select DB");
-
-if(isset($_POST['submit'])){	
+/*
 	// collect post data
 	$image = $_POST['event_image'];
 	$title = $_POST['event_title'];
@@ -89,8 +88,32 @@ if(isset($_POST['submit'])){
 	
 	echo "<br/><br/><span>Data Inserted successfully...!!</span>";
 	echo "<p>data insert</p>";
-}	
-	mysql_close(); // Closing Connection with Server
 
+	mysql_close(); // Closing Connection with Server
+*/
+$event = $_POST;// you will get an array of all the values
+print_r ($event);
+
+// collect post data
+$image = $event['event_image'];
+$title = $event['event_title'];
+$category = $event['event_category'];
+$location = $event['event_location'];
+$location_addr = $event['event_location_addr'];
+$lat = $event['lat'];
+$lng = $event['lng'];
+$dates = $event['event_dates'];
+$tickets = $event['event_tickets'];
+//$tickets_link = $_POST['event_tickets_link']; //event_tickets_link ??? admin
+$web = $event['event_web'];
+$email = $event['event_email'];
+$phone = $event['event_phone'];
+$description = preg_replace("/\r\n|\r/", "<br />", $event["event_description"]);
+$description = trim($description);
+
+// store to database
+$query = mysql_query("INSERT INTO events(image, title, category, location, location_addr, lat, lng, dates, tickets,  web, email, phone, description) VALUES ('$image', '$title', '$category', '$location', '$location_addr', '$lat', '$lng', '$dates', '$tickets', '$web', '$email', '$phone', '$description')");
+
+mysql_close(); // Closing Connection with Server
 
 ?>
