@@ -2,23 +2,8 @@
 /* add event form */
 
 /*
-event_image
-event_title
-event_category
-event_location
-event_location_formatted_address
-event_lat
-event_lng
-event_startdate ????
-event_tickets
-event_tickets_link ??? admin
-event_web
-event_email
-event_phone
-event_description
 
 *********** sql
-
 --
 -- Структура таблиці `events`
 --
@@ -32,7 +17,7 @@ CREATE TABLE IF NOT EXISTS `events` (
   `location_addr` text NOT NULL,
   `lat` varchar(255) NOT NULL,
   `lng` varchar(255) NOT NULL,
-  `startdate` varchar(255) NOT NULL,
+  `dates` varchar(255) NOT NULL,
   `tickets` varchar(255) DEFAULT NULL,
   `tickets_link` varchar(255) DEFAULT NULL,
   `web` text,
@@ -56,40 +41,55 @@ CREATE TABLE IF NOT EXISTS `events` (
 	mysql_query("SET NAMES utf8");
 	mysql_select_db("$db_name")or die("cannot select DB");
 
-
-	
-
-	if(empty($_POST['event_image'])) {
-		$image = 'no-photo.png';
-	} else {
-		$image = $_POST['event_image'];
-	};
+if(isset($_POST['submit'])){	
+	// collect post data
+	$image = $_POST['event_image'];
 	$title = $_POST['event_title'];
 	$category = $_POST['event_category'];
 	$location = $_POST['event_location'];
 	$location_addr = $_POST['event_location_addr'];
 	$lat = $_POST['lat'];
 	$lng = $_POST['lng'];
-	$startdate = $_POST['event_dates'];
+	$dates = $_POST['event_dates'];
 	$tickets = $_POST['event_tickets'];
-	$tickets_link = $_POST['event_tickets_link']; //event_tickets_link ??? admin
+	//$tickets_link = $_POST['event_tickets_link']; //event_tickets_link ??? admin
 	$web = $_POST['event_web'];
 	$email = $_POST['event_email'];
 	$phone = $_POST['event_phone'];
-	//$description = htmlspecialchars ($_POST['event_description']);
 	$description = preg_replace("/\r\n|\r/", "<br />", $_POST["event_description"]);
 	$description = trim($description);
 
-	echo $title;
+	$file_upload="true";
+	$file_up_size=$_FILES['event_image'][size];
+	echo $_FILES[event_image][name];
+	if ($_FILES[event_image][size]>250000){$msg=$msg."Your uploaded file size is more than 250KB
+	 so please reduce the file size and then upload.<BR>";
+	$file_upload="false";}
 
-	//$insert_event = "INSERT INTO events('image', 'title', 'category', 'location', 'location_formatted_address', 'lat', 'lng', 'startdate', 'tickets', 'tickets_link', 'web', 'email', 'phone', 'description') VALUES ('$image', '$title', '$category', '$location', '$location_formatted_address', '$lat', '$lng', '$startdate', '$tickets', '$tickets_link', '$web', '$email', '$phone', '$description')";
-	//$insert_event = "INSERT INTO events('title') VALUES ('$title')" ;
-	$query = mysql_query("INSERT INTO events(image, title, category, location, location_addr, lat, lng, startdate, tickets, tickets_link, web, email, phone, description) VALUES ('$image', '$title', '$category', '$location', '$location_addr', '$lat', '$lng', '$startdate', '$tickets', '$tickets_link', '$web', '$email', '$phone', '$description')");
-	echo "<br/><br/><span>Data Inserted successfully...!!</span>";
+	if (!($_FILES[event_image][type] =="image/jpeg" OR $_FILES[event_image][type] =="image/jpg" OR $_FILES[event_image][type] =="image/gif" OR $_FILES[event_image][type] =="image/png"))
+	{$msg=$msg."Your uploaded file must be of JPG or GIF. Other file types are not allowed<BR>";
+	$file_upload="false";}
 
-	//mysql_query($insert_event);
-	echo "<p>data insert</p>";
+	$image=$_FILES[event_image][name];
+	$add="data/posters/$image"; // the path with the file name where the file will be stored
+
+	if($file_upload=="true"){
+
+	if(move_uploaded_file ($_FILES[event_image][tmp_name], $add)){
+	// do your coding here to give a thanks message or any other thing.
+	}else{echo "Failed to upload file Contact Site admin to fix the problem";}
+
+	}else{
+	echo $msg;
+	}
+
+
+	// store to database
+	$query = mysql_query("INSERT INTO events(image, title, category, location, location_addr, lat, lng, dates, tickets,  web, email, phone, description) VALUES ('$image', '$title', '$category', '$location', '$location_addr', '$lat', '$lng', '$dates', '$tickets', '$web', '$email', '$phone', '$description')");
 	
+	echo "<br/><br/><span>Data Inserted successfully...!!</span>";
+	echo "<p>data insert</p>";
+}	
 	mysql_close(); // Closing Connection with Server
 
 

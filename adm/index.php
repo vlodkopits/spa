@@ -48,7 +48,7 @@
 			    ?>
 			    <div class="container">
 					<br/>
-						<a href="getevents.php" target="_blank" class="btn bg-green">generate .json</a>
+						<a href="getevents.php" target="_blank" class="btn bg-green dnone">generate .json</a>
 						<span target="_blank" class="btn bg-red show_disable">show disable</span>
 						<span target="_blank" class="btn bg-blue show_all">show all</span>
 						<span target="_blank" class="btn bg-grey show_out">show out of date</span>
@@ -74,31 +74,10 @@
 					// Start looping rows in mysql database.
 					while($rows=mysql_fetch_array($result)){
 					?>
-					<tr class="event-list-item <?if ($rows['enable'] == 0) {?>bg-red<?}?> <?if ($rows['startdate'] < $today) {?>bg-grey<?}?>" >
+					<tr class="event-list-item <?if ($rows['enable'] == 0) {?>bg-red<?}?> <?if ($rows['dates'] < $today) {?>bg-grey<?}?>" >
 						<td>
-							<img src="../data/posters/<? echo $rows['image']; ?>" class="img-respons" style="max-height: 100px;" /></td>
-						<td><? echo $rows['startdate']; ?></td>
-						<td><? echo $rows['category']; ?></td>
-						<td>
-							<h2><? echo $rows['title']; ?></h2>
-							<? echo $rows['description']; ?>
-						</td>
-						<td>
-							<? echo $rows['location']; ?>
-							<div class="clr"></div>
-							<a href="https://www.google.com/maps/place/<? echo $rows['lat']; ?>,<? echo $rows['lng']; ?>/" target="_blank">
-							<img src="http://maps.googleapis.com/maps/api/staticmap?center=<? echo $rows['lat']; ?>,<? echo $rows['lng']; ?>&zoom=15&scale=false&size=200x200&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:1%7C<? echo $rows['lat']; ?>,<? echo $rows['lng']; ?>" class="img-respons" alt="Google Map">
-							</a>
-							<br/>
-							lat:<? echo $rows['lat']; ?> - lng:<? echo $rows['lng']; ?>
-						</td>
-						<td>
-							<b>Tickets cost:</b><? echo $rows['tickets']; ?><br/>	
-							<b>website:</b> <? echo $rows['web']; ?><br/>
-							<b>e-mail:</b> <? echo $rows['email']; ?><br/>
-							<b>phone:</b> <? echo $rows['phone']; ?>
-						</td>
-						<td>
+							<img src="../data/posters/<? echo $rows['image']; ?>" class="img-respons" style="max-height: 100px;" />
+							<div class="clr"><br /></div>
 							<?if ($rows['enable'] == 0) {?>
 								<form id="enable" method="post" action="">
 									<input type="hidden" name="enable_rec_id" value="<? echo $rows['id']; ?>" />
@@ -119,13 +98,32 @@
 						        <button type="submit" name="delete" class="btn bg-red fl"><i class="fa fa-trash"></i> delete</button>
 					        </form>
 						</td>
+						<td style="width: 50px;"><? echo $rows['dates']; ?></td>
+						<td><? echo $rows['category']; ?></td>
+						<td>
+							<div id="show_descr">
+								<h2 ><? echo $rows['title']; ?></h2>
+								<div class="event_descr" style="display: none;"><? echo $rows['description']; ?></div>
+							</div>
+						</td>
+						<td>
+							<? echo $rows['location']; ?>
+							<div class="clr"></div>
+							<a href="https://www.google.com/maps/place/<? echo $rows['lat']; ?>,<? echo $rows['lng']; ?>/" target="_blank">
+							<img src="http://maps.googleapis.com/maps/api/staticmap?center=<? echo $rows['lat']; ?>,<? echo $rows['lng']; ?>&zoom=16&scale=false&size=200x200&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:1%7C<? echo $rows['lat']; ?>,<? echo $rows['lng']; ?>" class="img-respons" alt="Google Map">
+							</a>
+							<div class="clr"><hr></div>
+							<? echo $rows['location_addr']; ?>
+							<div class="clr"><hr></div>
+							<b>Tickets cost:</b><? echo $rows['tickets']; ?><br/>	
+							<b>website:</b> <? echo $rows['web']; ?><br/>
+							<b>e-mail:</b> <? echo $rows['email']; ?><br/>
+							<b>phone:</b> <? echo $rows['phone']; ?>
+						</td>
 					</tr>
 					<?
 				// close while loop
 				}
-
-				
-
 				// close connection
 				mysql_close();
 				?>
@@ -151,6 +149,10 @@
 		    $(".show_out").click(function(){    	
 		        $(".event-list-item").hide();
 	        	$(".event-list-item.bg-grey").show();
+		    });
+
+		    $("#show_descr").click(function(){
+		        $(".event_descr").toggle();
 		    });
 
 		    
