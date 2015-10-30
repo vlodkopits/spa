@@ -207,21 +207,35 @@ eventApp.controller('SingleEventCtrl', ['$scope', '$routeParams', '$filter',
   }]);
 
 // event add 
-eventApp.controller('AddEventCtrl', function ($scope, $http) {
+eventApp.controller('AddEventCtrl', function ($scope, $http, $location) {
   $(function() {
       $("#addEvent").on("submit", function(event) {
           event.preventDefault();
-
+          var img=$('#event_image').val();
+          var forms=($(this).serialize());
+          
           $.ajax({
               url: "add.php",
               type: "post",
-              data: $(this).serialize(),
+              data: forms+'&event_image='+encodeURIComponent(img),
               success: function() {
-                  
+                $location.path('/map');
+                alert ("Hello!");
               }
           });
+
       });
   });
+  /*
+  var img=$('#event_image').val();
+  var forms=($(this).serialize());
+  $http({
+    method: 'POST',
+    url: '/add.php',
+    data: forms+'&event_image='+encodeURIComponent(img),
+  }).success(function (data) {
+    $location.path('/map');
+  });*/
 });
 
 // big map with events 
