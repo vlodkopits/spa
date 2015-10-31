@@ -1,9 +1,7 @@
 <?php
 /* add event form */
 
-/*
-
-*********** sql
+/************ sql
 --
 -- Структура таблиці `events`
 --
@@ -29,7 +27,8 @@ CREATE TABLE IF NOT EXISTS `events` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 */
-
+	include 'adm/config.php';
+	/* 
 	$host="db7.unlim.com"; // Host name
 	$username="h3u111_mapadmin"; // Mysql username
 	$password="43204320map"; // Mysql password
@@ -40,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `events` (
 	mysql_connect("$host", "$username", "$password")or die("cannot connect");
 	mysql_query("SET NAMES utf8");
 	mysql_select_db("$db_name")or die("cannot select DB");
-/*
+
 	// collect post data
 	$image = $_POST['event_image'];
 	$title = $_POST['event_title'];
@@ -92,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `events` (
 	mysql_close(); // Closing Connection with Server
 */
 $event = $_POST;// you will get an array of all the values
-print_r ($event);
+//print_r ($event);
 
 // collect post data
 $image = $event['event_image'];
@@ -104,7 +103,6 @@ $lat = $event['lat'];
 $lng = $event['lng'];
 $dates = $event['event_dates'];
 $tickets = $event['event_tickets'];
-//$tickets_link = $_POST['event_tickets_link']; //event_tickets_link ??? admin
 $web = $event['event_web'];
 $email = $event['event_email'];
 $phone = $event['event_phone'];
