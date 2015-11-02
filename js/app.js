@@ -149,7 +149,7 @@ eventApp.config(function($routeProvider) {
     $routeProvider
 
         // route for the map page
-        .when('/map', {
+        .when('/', {
             templateUrl : 'template/event-map.html',
             controller  : 'EventMapCtrl'
         })
@@ -172,7 +172,7 @@ eventApp.config(function($routeProvider) {
             controller  : 'SingleEventCtrl'
         }).
         otherwise({
-        redirectTo: '/map'
+        redirectTo: '/'
       });
 
 });
