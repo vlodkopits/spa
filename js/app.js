@@ -151,7 +151,8 @@ eventApp.config(function($routeProvider) {
         // route for the map page
         .when('/map', {
             templateUrl : 'template/event-map.html',
-            controller  : 'EventMapCtrl'
+            controller  : 'EventMapCtrl',
+            activelink: 'home'
         })
 
         // route for the list page
@@ -175,6 +176,13 @@ eventApp.config(function($routeProvider) {
         redirectTo: '/map'
       });
 
+});
+
+// event nav 
+eventApp.controller('EventNav', function ($scope, $location) {
+    $scope.isActive = function (viewLocation) { 
+        return viewLocation === $location.path();
+    };
 });
 
 // event list 

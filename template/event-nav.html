@@ -1,33 +1,15 @@
-﻿<div class="container">
+﻿<div class="container" ng-controller="EventNav">
 	<nav>		
-		<span><img src="images/logo.png" class="img-responsive" alt="EventsOnMap"/></span>
-		<span >
-			<a href="#map"><i class="fa fa-map-marker"></i> <span>events map</span></a>
+		<span class="logo"><img src="images/logo.png" class="img-responsive" alt="EventsOnMap"/></span>
+		<span>
+			<a href="#map" ng-class="{ active: isActive('/')}"><i class="fa fa-map-marker"></i> <span>Карта подій</span></a>
 		</span>
-		<span >
-			<a href="#list" ><i class="fa fa-calendar"></i> <span>events list</span></a>
+		<span>
+			<a href="#list" ng-class="{ active: isActive('/list')}"><i class="fa fa-list"></i> <span>Список подій</span></a>
 		</span>
-		<span >
-			<a href="#add" ><i class="fa fa-plus"></i> <span>add event</span></a>
+		<span>
+			<a href="#add" ng-class="{ active: isActive('/add')}"><i class="fa fa-plus"></i> <span>Додати подію</span></a>
 		</span>
 		<div class="clr"></div>
 	</nav>
 </div>
-
-<!--
-<div class="container">
-	<nav>		
-		<span><img src="images/logo.png" class="img-responsive" alt="EventsOnMap"/></span>
-		<span ng-class="{ active:link.isLink(1) }" >
-			<a href ng-click="link.setLink(1)"><i class="fa fa-map-marker"></i> <span>events map</span></a>
-		</span>
-		<span ng-class="{ active:link.isLink(2) }">
-			<a href ng-click="link.setLink(2)"><i class="fa fa-calendar"></i> <span>events list</span></a>
-		</span>
-		<span ng-class="{ active:link.isLink(3) }">
-			<a href="" ng-click="link.setLink(3)"><i class="fa fa-plus"></i> <span>add event</span></a>
-		</span>
-		<div class="clr"></div>
-	</nav>
-</div>
--->
