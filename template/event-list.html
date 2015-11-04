@@ -21,7 +21,7 @@
 	<!-- ng-repeat="event in eventlist.events | orderBy: 'startdate' | filter : search "  -->
 	<div class="event-list-item mb10" ng-repeat="event in events | orderBy: 'event.dates[0].date' | filter : search " >
 		<div class="link_cat_{{event.category}} link_cat_all cat_{{event.category}}_border pt10 pb10" data-id="{{event.category}}">
-			<div class="col-lg-2">
+			<div class="col-xs-4 col-lg-2">
 				<span class="event-img">
 					<a href="#event/{{event.id}}">
 						<img ng-src="{{event.image}}" class="img-responsive " alt="{{event.title}}" />
@@ -30,7 +30,7 @@
 				<span class="dnone btn cat_{{event.category}} filter_cat_{{event.category}}">{{event.category}}</span>
 			</div>
 
-			<div class="col-lg-10">
+			<div class="col-xs-8 col-lg-10">
 				<h2 class="show_event_{{event.id}}"><a href="#event/{{event.id}}">{{event.title}}</a></h2>
 				<div class="mt10">
 					<i class="fa fa-calendar blue fl mr10"></i> 

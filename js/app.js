@@ -128,6 +128,7 @@ $provide.value("$locale", {
 });
 }]);
 
+// get data from db
 var eventData = (function () {
     var json = null;
     $.ajax({
@@ -151,8 +152,7 @@ eventApp.config(function($routeProvider) {
         // route for the map page
         .when('/map', {
             templateUrl : 'template/event-map.html',
-            controller  : 'EventMapCtrl',
-            activelink: 'home'
+            controller  : 'EventMapCtrl'
         })
 
         // route for the list page
@@ -172,10 +172,10 @@ eventApp.config(function($routeProvider) {
             templateUrl : 'template/event-single.html',
             controller  : 'SingleEventCtrl'
         }).
-        otherwise({
-        redirectTo: '/map'
-      });
 
+        otherwise({
+            redirectTo: '/map'
+        });
 });
 
 // event nav 
@@ -241,8 +241,8 @@ eventApp.controller('AddEventCtrl', function ($scope, $http, $location) {
           map: "#event-map",
           details: "form",
           mapOptions: {
-        zoom: 16
-      },
+            zoom: 16
+          },
           markerOptions: {
             draggable: true
           }
@@ -253,8 +253,7 @@ eventApp.controller('AddEventCtrl', function ($scope, $http, $location) {
           $("input[name=lng]").val(latLng.lng());
           $("#reset").show();
         });
-        
-        
+             
         $("#reset").click(function(){
           $("#geocomplete").geocomplete("resetMarker");
           $("#reset").hide();
@@ -305,16 +304,7 @@ eventApp.controller('AddEventCtrl', function ($scope, $http, $location) {
       $('#event_dates').val($.makeArray($dates))
     });
   });
-  /*
-  var img=$('#event_image').val();
-  var forms=($(this).serialize());
-  $http({
-    method: 'POST',
-    url: '/add.php',
-    data: forms+'&event_image='+encodeURIComponent(img),
-  }).success(function (data) {
-    $location.path('/map');
-  });*/
+
 });
 
 // big map with events 
