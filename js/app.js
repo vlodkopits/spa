@@ -189,6 +189,7 @@ eventApp.controller('EventNav', function ($scope, $location) {
 eventApp.controller('EventListCtrl', function ($scope) {
     $scope.events = [];
     $scope.events = eventData;
+
 });
 
 // event single 
