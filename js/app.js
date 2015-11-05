@@ -1,4 +1,4 @@
-﻿var eventApp = angular.module ('eventApp', ['ngRoute','ngLocale','ngSanitize'] );
+var eventApp = angular.module ('eventApp', ['ngRoute','ngLocale','ngSanitize'] );
 
 angular.module("ngLocale", [], ["$provide", function($provide) {
 var PLURAL_CATEGORY = {ZERO: "zero", ONE: "one", TWO: "two", FEW: "few", MANY: "many", OTHER: "other"};
@@ -223,7 +223,7 @@ eventApp.controller('AddEventCtrl', function ($scope, $http, $location) {
           var forms=($(this).serialize());
           
           $.ajax({
-              url: "add.php",
+              url: "adm/add.php",
               type: "post",
               data: forms+'&event_image='+encodeURIComponent(img),
               success: function() {

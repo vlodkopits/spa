@@ -27,7 +27,31 @@ CREATE TABLE IF NOT EXISTS `events` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 */
-	include 'adm/config.php';
+	include ('config.php');
+	include( 'function.php');
+	// settings
+	$max_file_size = 1024*500; // 500kb
+	$valid_exts = array('jpeg', 'jpg', 'png', 'gif');
+	// thumbnail sizes
+	$sizes = array(100 => 100, 150 => 150, 250 => 250);
+
+	if ($_SERVER['REQUEST_METHOD'] == 'POST' AND isset($_FILES['event_image'])) {
+		if( $_FILES['event_image']['size'] < $max_file_size ){
+			// get file extension
+			$ext = strtolower(pathinfo($_FILES['event_image']['name'], PATHINFO_EXTENSION));
+			if (in_array($ext, $valid_exts)) {
+				/* resize image */
+				foreach ($sizes as $w => $h) {
+					$files[] = resize($w, $h);
+				}
+
+			} else {
+				$msg = 'Unsupported file';
+			}
+		} else{
+			$msg = 'Please upload image smaller than 200KB';
+		}
+	}
 	/* 
 	$host="db7.unlim.com"; // Host name
 	$username="h3u111_mapadmin"; // Mysql username

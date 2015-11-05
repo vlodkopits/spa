@@ -4,13 +4,15 @@
 	<!--<form name="addEvent" novalidate method="POST" action="add.php" enctype="multipart/form-data">-->
 	<form name="addEvent" id="addEvent" novalidate  enctype="multipart/form-data">
 		<div class="clr"><br/></div>
-		<div class="col-lg-2">
+
+		<div class="col-lg-6">
+			<!-- шьфпу -->
 			<span class="btn-file">
 				<i class="fa fa-picture-o blue"></i>
 				<input name="event_image" id="event_image" type="file">
 			</span>
-		</div>
-		<div class="col-lg-6">
+			<div class="clr mb10"></div>
+
 			<!-- title -->
 			<div class="form-group" ng-class="{ 'has-error' : addEvent.event_title.$invalid && !addEvent.event_title.$pristine }">
 				Назва події <span class="color-red">*</span>:
@@ -52,7 +54,7 @@
 				<p ng-show="addEvent.event_location_addr.$invalid && !addEvent.event_location_addr.$pristine" class="help-block">Location is required.</p>
 			</div>
 		</div>	
-		<div class="col-lg-4">
+		<div class="col-lg-6">
 			<br/>
 			<div id="event-map" class="events-add-map" style="width: 100%; height: 210px;"></div>
 			* виможете переміщати маркер
