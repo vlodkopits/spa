@@ -18,13 +18,12 @@
 		</div>
 		<div class="clr mb10"></div>
 	</div>
-	<div class="event-list-item mb10" ng-repeat="event in events | orderBy: 'event.dates[0].date':false | filter : search " >
+	<div class="event-list-item mb10" ng-repeat="event in events | orderBy: event.dates | filter : search " >
 		<div class="link_cat_{{event.category}} link_cat_all cat_{{event.category}}_border pt10 pb10" data-id="{{event.category}}">
 			<div class="col-xs-4 col-lg-2">
 				<span class="event-img">
 					<a href="#event/{{event.id}}">
 						<img ng-src="{{event.image}}" class="img-responsive " alt="{{event.title}}" />
-						{{event.dates[0].date}}
 					</a>
 				</span>
 				<span class="dnone btn cat_{{event.category}} filter_cat_{{event.category}}">{{event.category}}</span>
