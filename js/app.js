@@ -318,10 +318,10 @@ eventApp.controller ('EventMapCtrl',function ($scope){
 
     $scope.map = new google.maps.Map(document.getElementById('events-gmap'), mapOptions);
     
-    navigator.geolocation.getCurrentPosition(function(position) {
+    var myPos = navigator.geolocation.getCurrentPosition(function(position) {
         
             var geolocate = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-            
+            var man = '/images/mypos.png';
             var infowindow = new google.maps.InfoWindow({
                 map: $scope.map,
                 position: geolocate,
@@ -329,7 +329,26 @@ eventApp.controller ('EventMapCtrl',function ($scope){
                 content:
                     'ти тут'
             });
-            
+
+            /*var myPos = new google.maps.Marker({
+                map: $scope.map,
+                position: geolocate,
+                title: 'ти тут',
+                icon: man
+            });*/
+           
+            // Add circle overlay and bind to marker
+            var circle = new google.maps.Circle({
+              map: $scope.map,
+              radius: 2000,    // metres
+              strokeColor: '#024478',
+              strokeOpacity: 0.6,
+              strokeWeight: 1,
+              fillOpacity:0.2,
+              fillColor: '#2196f3'
+            });
+            circle.bindTo('center', infowindow, 'position');
+
             $scope.map.setCenter(geolocate);            
         });
 
@@ -363,3 +382,6 @@ eventApp.controller ('EventMapCtrl',function ($scope){
         google.maps.event.trigger(selectedMarker, 'click');
     }
 });
+
+
+// https://picasaweb.google.com/data/feed/api/user/116374279215199619229/albumid/6214043858470050065
