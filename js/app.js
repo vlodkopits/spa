@@ -224,9 +224,9 @@ eventApp.controller('AddEventCtrl', function ($scope, $http, $location) {
           var forms=($(this).serialize());
           
           $.ajax({
-              url: "add.php",
+              url: "adm/add.php",
               type: "post",
-              data: forms+'&event_image='+encodeURIComponent(img),
+              data: forms+'&event_image='+encodeURIComponent(img)+'&image='+encodeURIComponent(img),
               success: function() {
                 $(".form-success").append('<p class="bg-success text-center text-success"><br/>Дякуємо! Подію додано. Після перевірки вона з\'явиться на сайті<br/></p>');
                 $("#addEvent").remove();

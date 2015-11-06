@@ -19,7 +19,7 @@ function resize($width, $height){
 	$x = ($w - $width / $ratio) / 2;
 	$w = ceil($width / $ratio);
 	/* new file name */
-	$path = '../data/posters/'.$width.'x'.$height.'_'.$_FILES['event_image']['name'];
+	$path = 'uploads/'.$width.'x'.$height.'_'.$_FILES['event_image']['name'];
 	/* read binary data from image file */
 	$imgString = file_get_contents($_FILES['event_image']['tmp_name']);
 	/* create image from string */
