@@ -224,7 +224,7 @@ eventApp.controller('AddEventCtrl', function ($scope, $http, $location) {
           var forms=($(this).serialize());
           
           $.ajax({
-              url: "adm/add.php",
+              url: "add.php",
               type: "post",
               data: forms+'&event_image='+encodeURIComponent(img),
               success: function() {
