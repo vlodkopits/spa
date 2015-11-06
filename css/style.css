@@ -4,7 +4,7 @@ body, html {height: 100%; width: 100%;}
 body {font-family: Verdana, Tahoma, Arial; font-size: 14px; color: #000; height: 100vh;}
 h1,h2,h3 {color:#2196F3; margin: 5px 0 10px;}
 h1 {font-size: 20px;}
-h2 {font-size: 18px;}
+h2 {font-size: 20px;}
 a {color:#2196F3; text-decoration: none;}
 a:hover{}
 input,select,textarea{padding: 5px; border: 1px solid #ccc; display: block; border-radius: 5px 5px 5px 5px; -moz-border-radius: 5px 5px 5px 5px; -webkit-border-radius: 5px 5px 5px 5px; width: 100%;}
@@ -26,7 +26,7 @@ input,select,textarea{padding: 5px; border: 1px solid #ccc; display: block; bord
 .w100p {width: 100%;}
 .w100px {width: 100px;}
 .hidden {visibility: hidden;}
-.btn {background-color: #0D47A1; color: #fff;}
+.btn {background-color: #0D47A1; color: #fff; border-radius: 0px 0px 0px 0px; -moz-border-radius: 0px 0px 0px 0px; -webkit-border-radius: 0px 0px 0px 0px;}
 .ng-invalid.ng-dirty  {border-color: red;}   
 .ng-valid.ng-dirty {border-color: green;}
 .blue{color: #2196F3;}
