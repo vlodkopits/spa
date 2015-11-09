@@ -199,7 +199,7 @@ eventApp.controller('EventListCtrl', function ($scope) {
     for (var i=0; i<$scope.eventsAll.length; i++){
 
         for (var b=0; b<$scope.eventsAll[i].dates.length; b++){
-            var compareDate = $scope.eventsAll[i].dates[b].date < $scope.currDate;
+            var compareDate = $scope.eventsAll[i].dates[b].date < $scope.currDate; 
             console.log(' date for event_id=' + $scope.eventsAll[i].id + ' ' + compareDate);
             
             if (compareDate==false){
