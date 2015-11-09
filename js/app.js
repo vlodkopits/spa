@@ -200,25 +200,10 @@ eventApp.controller('EventListCtrl', function ($scope) {
 
         for (var b=0; b<$scope.eventsAll[i].dates.length; b++){
             var compareDate = $scope.eventsAll[i].dates[b].date < $scope.currDate;
-            //console.log(' date for event_id=' + $scope.eventsAll[i].id + ' ' + compareDate);
+            console.log(' date for event_id=' + $scope.eventsAll[i].id + ' ' + compareDate);
             
             if (compareDate==false){
-                if ($scope.events.length<=0){
-                    $scope.events.push($scope.eventsAll[i]);
-                }
-
-                //console.log('new id'+$scope.events[d].id);
-                //console.log('old id'+$scope.eventsAll[i].id);
-                var isEvent = ($scope.events[d].id) == ($scope.eventsAll[i].id);
-
-                for (d=1; d<$scope.eventsAll.length; d++){
-                    console.log(isEvent);
-                    if (isEvent==false){
-                      $scope.events.push($scope.eventsAll[i]);
-                    }
-                }
-                console.log($scope.eventsAll[i]);
-
+                $scope.events.push($scope.eventsAll[i]);
             }
 
         }
