@@ -194,6 +194,10 @@ eventApp.controller('EventListCtrl', function ($scope) {
     $scope.events = [];
     $scope.events = eventData;
     $scope.currDate = currDate;
+    for (var i = 0; i < $scope.events.date.length ; i++) {
+       console.log(i);
+       // more statements
+    }
 });
 
 // event single 
