@@ -194,21 +194,57 @@ eventApp.controller('EventListCtrl', function ($scope) {
     $scope.eventsAll = [];
     $scope.eventsAll = eventData;
     $scope.events = [];
+    //$scope.events = eventData;
     $scope.currDate = moment(currDate).format("YYYY-MM-DD");
 
+    for (var i=0; i<$scope.eventsAll.length; i++){
+      console.log('------------- step '+i+'--------------------');
+      console.log(' date for event_id=' + $scope.eventsAll[i].id);
+      for (var b=0; b<$scope.eventsAll[i].dates.length; b++){
+        var compareDate = $scope.eventsAll[i].dates[b].date >= $scope.currDate; 
+        console.log(' date for event_id=' + $scope.eventsAll[i].id + ' - '+ $scope.eventsAll[i].dates[b].date +' - ' + compareDate);
+
+        if (($scope.events.length <=0) && (compareDate==true)){
+            $scope.events.push($scope.eventsAll[i]);
+            //console.log($scope.events);
+        } /*
+        else if (compareDate==true){
+          for (var d=0; d<$scope.events.length; d++){
+            //console.log($scope.events.length);
+            var isEvent = ($scope.events[d].id) == ($scope.eventsAll[i].id);
+            console.log('event '+$scope.events[d].id+' == '+$scope.eventsAll[i].id+' - '+isEvent);
+            if (isEvent==false){
+              console.log('push - '+$scope.eventsAll[i]);
+              $scope.events.push($scope.eventsAll[i]);
+            }
+          }
+         }*/
+      }
+    }
+/*
     for (var i=0; i<$scope.eventsAll.length; i++){
 
         for (var b=0; b<$scope.eventsAll[i].dates.length; b++){
             var compareDate = $scope.eventsAll[i].dates[b].date < $scope.currDate; 
             console.log(' date for event_id=' + $scope.eventsAll[i].id + ' ' + compareDate);
             
-            if (compareDate==false){
+            if (($scope.events.length <=0) && (compareDate==false)){
                 $scope.events.push($scope.eventsAll[i]);
+                console.log($scope.events);
+            }
+            else if (compareDate==false){
+              for (var d=0; d<$scope.eventsAll.length; d++){
+                console.log($scope.events[d].id);
+                var isEvent = ($scope.events[d].id) == ($scope.eventsAll[i].id);
+                if (isEvent==false){
+                  $scope.events.push($scope.eventsAll[i]);
+                }
+              }
             }
 
         }
-
-    }
+        
+    }*/
 
 });
 
