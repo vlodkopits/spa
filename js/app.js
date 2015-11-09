@@ -145,6 +145,10 @@ var eventData = (function () {
     return json;
 })(); 
 
+// get current date
+var currDate = new Date();
+
+
 // configure our routes
 eventApp.config(function($routeProvider) {
     $routeProvider
@@ -189,12 +193,13 @@ eventApp.controller('EventNav', function ($scope, $location) {
 eventApp.controller('EventListCtrl', function ($scope) {
     $scope.events = [];
     $scope.events = eventData;
-
+    $scope.currDate = currDate;
 });
 
 // event single 
 eventApp.controller('SingleEventCtrl', ['$scope', '$routeParams', '$filter',
   function($scope, $routeParams, $filter) {
+    $scope.currDate = currDate;
     $scope.eventId = $routeParams.eventId;
     $scope.event_single = $filter('filter')(eventData, function (d) {return d.id === $routeParams.eventId;})[0];
 
@@ -211,7 +216,7 @@ eventApp.controller('SingleEventCtrl', ['$scope', '$routeParams', '$filter',
         position: Latlng,
         map: $scope.map,
         title: $scope.event_single.location
-    });
+    });    
 
   }]);
 

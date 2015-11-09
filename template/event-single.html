@@ -11,12 +11,10 @@
 				<h1>{{event_single.title}}</h1>
 			
 				<span class="dnone btn cat_{{event_single.category}}">{{event_single.category}}</span>
-			
 				<div ng-repeat="date in dates"></div>
-				<span>{{event_single.dates.date[0]}}</span>
 				<div class="mb10">
 					<div class="dib">
-						<span ng-repeat="date in event_single.dates" >
+						<span ng-repeat="date in event_single.dates" ng-hide="(currDate | date: 'yyyy-MM-dd') > date.date">
 							<b ><i class="fa fa-calendar blue mr10"></i>{{date.date | date: 'EEEE, d MMMM yyyy'}}<span ng-show="date.timefrom.length && date.timetill.length">, <i class="fa fa-clock-o blue mr10"></i>{{date.timefrom}} - {{date.timetill}}</span></b><br/>
 						</span>
 					</div>
@@ -24,7 +22,7 @@
 			
 				<div class="mb10" ng-show="event_single.tickets.length">
 					<i class="fa fa-ticket blue"></i> {{event_single.tickets}} 
-					<span ng-show="event_single.tickets_link.length"><a href="{{event_single.tickets_link}}" target="_blank" class="btn bg-yellow">Купити квиток</a></span>
+					<span ng-show="event_single.tickets_link.length"><a href="{{event_single.tickets_link}}" target="_blank" class="btn bg-yellow bm10">Купити квиток</a></span>
 				</div>
 			</div>
 			<div class="clr"></div>

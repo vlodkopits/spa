@@ -85,10 +85,6 @@ nav a:hover, nav a.active{color: #fff; background-color: #23527c; text-decoratio
 	/*.container {max-width: 748px;}*/
 	nav > span span {display: inlin-block;}
 	nav > span, nav span.logo {width:25%;}
-	.col-1{width: 25%; }
-	.col-2{ width: 50%;}
-	.col-3{ width: 75%;}
-	.col-4{ width: 100%;}
 }
 
 /* Medium Devices, Desktops */
@@ -96,10 +92,6 @@ nav a:hover, nav a.active{color: #fff; background-color: #23527c; text-decoratio
 	/*.container {max-width: 972px;}*/
 	nav > span span {display: inline-block;}
 	nav > span, nav span.logo {width:25%;}
-	.col-1{width: 25%; }
-	.col-2{ width: 50%;}
-	.col-3{ width: 75%;}
-	.col-4{ width: 100%;}
 }
 
 /* Large Devices, Wide Screens */
@@ -107,8 +99,4 @@ nav a:hover, nav a.active{color: #fff; background-color: #23527c; text-decoratio
 	/*.container {max-width: 1180px;}*/
 	nav > span span {display: inline-block;}
 	nav > span, nav span.logo {width:25%;}
-	.col-1{width: 25%; }
-	.col-2{ width: 50%;}
-	.col-3{ width: 75%;}
-	.col-4{ width: 100%;}
 	}

@@ -19,7 +19,7 @@
 		<div class="clr mb10"></div>
 	</div>
 	<div class="event-list-item mb10" ng-repeat="event in events | orderBy: 'dates[0].date' | filter : search " >
-		<div class="link_cat_{{event.category}} link_cat_all cat_{{event.category}}_border pt10 pb10" data-id="{{event.category}}">
+		<div class="link_cat_{{event.category}} link_cat_all cat_{{event.category}}_border pt10 pb10" data-id="{{event.category}}" >
 			<div class="col-xs-4 col-lg-2">
 				<span class="event-img">
 					<a href="#event/{{event.id}}">
@@ -34,7 +34,7 @@
 				<div class="mt10">
 					<i class="fa fa-calendar blue fl mr10"></i> 
 					<div class="dib">
-						<span ng-repeat="date in event.dates  | limitTo:2">
+						<span ng-repeat="date in event.dates  | limitTo:2" ng-hide="(currDate | date: 'yyyy-MM-dd') > date.date">
 							<strong >{{date.date | date: 'd MMMM yyyy'}}<span ng-show="date.timefrom.length && date.timetill.length">, <i class="fa fa-clock-o blue mr10"></i>{{date.timefrom}} - {{date.timetill}} </span></strong><br/>
 						</span>
 					</div>
