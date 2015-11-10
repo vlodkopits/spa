@@ -261,7 +261,7 @@ eventApp.controller('SingleEventCtrl', ['$scope', '$routeParams', '$filter',
         title: $scope.event_single.location
     });    
 
-  }]);
+}]);
 
 // event add 
 eventApp.controller('AddEventCtrl', function ($scope, $http, $location) {
