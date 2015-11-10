@@ -145,6 +145,50 @@ var eventData = (function () {
     return json;
 })(); 
 
+// get actual event list
+var actualEvents = (function(){
+    var eventsAll = [];
+    var eventsAll = eventData;
+    var events = [];
+    currDate = moment(currDate).format("YYYY-MM-DD");
+
+    for (var i=0; i<eventsAll.length; i++){
+            for (var b=0; b<eventsAll[i].dates.length; b++){
+                var compareDate = eventsAll[i].dates[b].date >= currDate; 
+                    if(compareDate==true){
+                        if(events.length==0){
+                            events.push(eventsAll[i]);
+                        }else if (events.length>0){
+                            for (var j=0; j<events.length; j++){
+                                var isEvent = (events[j].id) == (eventsAll[i].id);
+                                    if(isEvent==true){
+                                    }
+                                    else {
+                                        events.push(eventsAll[i]);
+                                    }
+                            }
+                        }
+                    }
+            }
+
+    }
+    // remove dublicate id
+    var arr = events;
+    arr.sort( function( a, b){ return a.id - b.id; } );
+
+    // delete all duplicates from the array
+    for( var i=0; i<arr.length-1; i++ ) {
+      if ( arr[i].id == arr[i+1].id ) {
+        delete arr[i];
+      }
+    }
+
+    // remove the "undefined entries"
+    arr = arr.filter( function( el ){ return (typeof el !== "undefined"); } );
+    events = arr;
+    return events;
+})();
+
 // get current date
 var currDate = new Date();
 
@@ -191,61 +235,8 @@ eventApp.controller('EventNav', function ($scope, $location) {
 
 // event list 
 eventApp.controller('EventListCtrl', function ($scope) {
-    $scope.eventsAll = [];
-    $scope.eventsAll = eventData;
     $scope.events = [];
-    //$scope.events = eventData;
-    $scope.currDate = moment(currDate).format("YYYY-MM-DD");
-
-    for (var i=0; i<$scope.eventsAll.length; i++){
-      console.log('------------- step '+i+'--------------------');
-      console.log(' date for event_id=' + $scope.eventsAll[i].id);
-      for (var b=0; b<$scope.eventsAll[i].dates.length; b++){
-        var compareDate = $scope.eventsAll[i].dates[b].date >= $scope.currDate; 
-        console.log(' date for event_id=' + $scope.eventsAll[i].id + ' - '+ $scope.eventsAll[i].dates[b].date +' - ' + compareDate);
-
-        if (($scope.events.length <=0) && (compareDate==true)){
-            $scope.events.push($scope.eventsAll[i]);
-            //console.log($scope.events);
-        } /*
-        else if (compareDate==true){
-          for (var d=0; d<$scope.events.length; d++){
-            //console.log($scope.events.length);
-            var isEvent = ($scope.events[d].id) == ($scope.eventsAll[i].id);
-            console.log('event '+$scope.events[d].id+' == '+$scope.eventsAll[i].id+' - '+isEvent);
-            if (isEvent==false){
-              console.log('push - '+$scope.eventsAll[i]);
-              $scope.events.push($scope.eventsAll[i]);
-            }
-          }
-         }*/
-      }
-    }
-/*
-    for (var i=0; i<$scope.eventsAll.length; i++){
-
-        for (var b=0; b<$scope.eventsAll[i].dates.length; b++){
-            var compareDate = $scope.eventsAll[i].dates[b].date < $scope.currDate; 
-            console.log(' date for event_id=' + $scope.eventsAll[i].id + ' ' + compareDate);
-            
-            if (($scope.events.length <=0) && (compareDate==false)){
-                $scope.events.push($scope.eventsAll[i]);
-                console.log($scope.events);
-            }
-            else if (compareDate==false){
-              for (var d=0; d<$scope.eventsAll.length; d++){
-                console.log($scope.events[d].id);
-                var isEvent = ($scope.events[d].id) == ($scope.eventsAll[i].id);
-                if (isEvent==false){
-                  $scope.events.push($scope.eventsAll[i]);
-                }
-              }
-            }
-
-        }
-        
-    }*/
-
+    $scope.events = actualEvents;
 });
 
 // event single 
@@ -430,8 +421,8 @@ eventApp.controller ('EventMapCtrl',function ($scope){
         $scope.markers.push(marker);        
     }  
     
-    for (i = 0; i < eventData.length; i++){
-        createMarker(eventData[i]);
+    for (i = 0; i < actualEvents.length; i++){
+        createMarker(actualEvents[i]);
     }
 
     $scope.openInfoWindow = function(e, selectedMarker){
