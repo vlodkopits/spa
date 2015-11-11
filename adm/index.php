@@ -56,16 +56,12 @@
 				</div>
 				<div class="clr mb10"><br/></div>
 
-				<table class="table">
+				<table class="table table-striped table-bordered">
 					<tr>
-						<td>image</td>
-						<td>start date</td>
+						<td>date</td>
 						<td>category</td>
 						<td>description</td>
-						<td>location</td>
 						<td></td>
-						<td></td>
-
 					</tr>
 				    <?
 					$sql="SELECT * FROM $tbl_name ";
@@ -75,9 +71,17 @@
 					while($rows=mysql_fetch_array($result)){
 					?>
 					<tr class="event-list-item <?if ($rows['enable'] == 0) {?>bg-red<?}?> <?if ($rows['dates'] < $today) {?>bg-grey<?}?>" >
+						
+						<td style="width: 50px;">
+							<? echo $rows['dates']; ?>
+						</td>
+						<td><? echo $rows['category']; ?></td>
 						<td>
-							<img src="../data/posters/<? echo $rows['image']; ?>" class="img-respons" style="max-height: 100px;" />
-							<div class="clr"><br /></div>
+							<div id="show_descr">
+								<h2 ><? echo $rows['title']; ?></h2>
+							</div>
+						</td>
+						<td>
 							<?if ($rows['enable'] == 0) {?>
 								<form id="enable" method="post" action="">
 									<input type="hidden" name="enable_rec_id" value="<? echo $rows['id']; ?>" />
@@ -97,28 +101,6 @@
 								<input type="hidden" name="delete_rec_id" value="<? echo $rows['id']; ?>" />
 						        <button type="submit" name="delete" class="btn bg-red fl"><i class="fa fa-trash"></i> delete</button>
 					        </form>
-						</td>
-						<td style="width: 50px;"><? echo $rows['dates']; ?></td>
-						<td><? echo $rows['category']; ?></td>
-						<td>
-							<div id="show_descr">
-								<h2 ><? echo $rows['title']; ?></h2>
-								<div class="event_descr" style="display: none;"><? echo $rows['description']; ?></div>
-							</div>
-						</td>
-						<td>
-							<? echo $rows['location']; ?>
-							<div class="clr"></div>
-							<a href="https://www.google.com/maps/place/<? echo $rows['lat']; ?>,<? echo $rows['lng']; ?>/" target="_blank">
-							<img src="http://maps.googleapis.com/maps/api/staticmap?center=<? echo $rows['lat']; ?>,<? echo $rows['lng']; ?>&zoom=16&scale=false&size=200x200&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:1%7C<? echo $rows['lat']; ?>,<? echo $rows['lng']; ?>" class="img-respons" alt="Google Map">
-							</a>
-							<div class="clr"><hr></div>
-							<? echo $rows['location_addr']; ?>
-							<div class="clr"><hr></div>
-							<b>Tickets cost:</b><? echo $rows['tickets']; ?><br/>	
-							<b>website:</b> <? echo $rows['web']; ?><br/>
-							<b>e-mail:</b> <? echo $rows['email']; ?><br/>
-							<b>phone:</b> <? echo $rows['phone']; ?>
 						</td>
 					</tr>
 					<?

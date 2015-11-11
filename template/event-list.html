@@ -18,9 +18,9 @@
 		</div>
 		<div class="clr mb10"></div>
 	</div>
-	<div class="event-list-item mb10" ng-repeat="event in events | orderBy: 'dates[0].date' | filter : search " >
-		<div class="link_cat_{{event.category}} link_cat_all cat_{{event.category}}_border pt10 pb10" data-id="{{event.category}}" >
-			<div class="col-xs-4 col-lg-3">
+	<div class="event-list-item mb10 " ng-repeat="event in events | orderBy: 'dates[0].date' | filter : search " >
+		<div class="col-lg-4 link_cat_{{event.category}} link_cat_all cat_{{event.category}}_border pt10 pb10" data-id="{{event.category}}" >
+			<div class="">
 				<span class="event-img">
 					<a href="#event/{{event.id}}">
 						<img ng-src="{{event.image}}" class="img-responsive " alt="{{event.title}}" />
@@ -29,7 +29,7 @@
 				<span class="dnone btn cat_{{event.category}} filter_cat_{{event.category}}">{{event.category}}</span>
 			</div>
 
-			<div class="col-xs-8 col-lg-9">
+			<div class="">
 				<h2 class="show_event_{{event.id}}"><a href="#event/{{event.id}}">{{event.title}}</a></h2>
 				<div class="mt10">
 					<i class="fa fa-calendar blue fl mr10"></i> 
@@ -49,8 +49,10 @@
 			</div>			
 			<div class="clr"></div>
 		</div>
-		<div class="clr"></div>
+		<div class="clr dnone"></div>
 	</div>
+	<div class="clr"></div>
+	<div class="contacts mt5 mb10"><i class="fa fa-envelope-o"></i> eventsmapme@gmail.com</div>
 </div>
 <script>
 $(function(){
