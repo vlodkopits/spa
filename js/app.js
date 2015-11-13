@@ -405,11 +405,12 @@ eventApp.controller ('EventMapCtrl',function ($scope){
     var infoWindow = new google.maps.InfoWindow();
     
     var createMarker = function (info){
-        
+        var mapIcon = 'images/map_'+info.category+'.png';
         var marker = new google.maps.Marker({
             map: $scope.map,
             position: new google.maps.LatLng(info.lat, info.lng),
-            title: info.title
+            title: info.title,
+            icon: mapIcon
         });
         marker.content = '<div class="infoWindowContent"><img src="'+ info.image +'" alt="" class="img-responsive" style="max-width: 200px;" /></div>';
         
