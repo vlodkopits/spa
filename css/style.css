@@ -31,6 +31,7 @@ input,select,textarea{padding: 5px; border: 1px solid #ccc; display: block; bord
 .ng-valid.ng-dirty {border-color: green;}
 .blue{color: #2196F3;}
 [class*='bg-']:hover, .btn.active{opacity: 0.6; background-color: #ccc;}
+.btn.active {color: #444;}
 .color-red {color: #B71C1C;}
 .bg-red, .cat_1 {background-color: #B71C1C ;}
 .bg-green, .cat_2 {background-color: #4CAF50;}
@@ -40,13 +41,14 @@ input,select,textarea{padding: 5px; border: 1px solid #ccc; display: block; bord
 .bg-grey, .cat_6 {background-color: #757575;}
 .bg-brown, .cat_7 {background-color: #795548;}
 
-.cat_1_border {border-right: 3px solid #B71C1C ; background-color: #f8e8e8;}
-.cat_2_border {border-right: 3px solid #4CAF50; background-color: #edf7ed;}
-.cat_3_border {border-right: 3px solid #0091EA; background-color: #e5f4fd;}
-.cat_4_border {border-right: 3px solid #FF9800; background-color: #fff4e5;}
-.cat_5_border{border-right: 3px solid #01579b; background-color: #e5eef5;}
-.cat_6_border {border-right: 3px solid #757575; background-color: #f1f1f1;}
-.cat_7_border {border-right: 3px solid #795548; background-color: #f1eeec;}
+.cat_1_border {border-top: 3px solid #B71C1C ; background-color: #f8e8e8;}
+.cat_2_border {border-top: 3px solid #4CAF50; background-color: #edf7ed;}
+.cat_3_border {border-top: 3px solid #0091EA; background-color: #e5f4fd;}
+.cat_4_border {border-top: 3px solid #FF9800; background-color: #fff4e5;}
+.cat_5_border{border-top: 3px solid #01579b; background-color: #e5eef5;}
+.cat_6_border {border-top: 3px solid #757575; background-color: #f1f1f1;}
+.cat_7_border {border-top: 3px solid #795548; background-color: #f1eeec;}
+.link_cat_all {position: relative;}
 
 *, *::before, *::after {-webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
 
@@ -61,6 +63,7 @@ nav a:hover, nav a.active{color: #fff; background-color: #23527c; text-decoratio
 
 #events-gmap, section{ width: 100%; height: 100%;}
 .event-list-item .event-img {max-height: 150px; overflow: hidden;}
+.event-caption {position: absolute; bottom: 0; left: 0; right: 0; background: rgba(250,250,260,0.8); padding: 5px 25px;}
 .select_date input {width: 100px; display:inline-block; margin:0 5px;}
 
 /* Custom, iPhone Retina */ 

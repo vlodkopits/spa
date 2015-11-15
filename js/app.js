@@ -258,7 +258,8 @@ eventApp.controller('SingleEventCtrl', ['$scope', '$routeParams', '$filter',
     var marker = new google.maps.Marker({
         position: Latlng,
         map: $scope.map,
-        title: $scope.event_single.location
+        title: $scope.event_single.location,
+        icon: 'images/map_'+$scope.event_single.category+'.png'
     });    
 
 }]);
