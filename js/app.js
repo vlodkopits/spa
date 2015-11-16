@@ -195,8 +195,8 @@ var currDate = new Date();
 
 // configure our routes
 eventApp.config(function($routeProvider) {
-    $routeProvider
 
+    $routeProvider
         // route for the map page
         .when('/', {
             templateUrl : 'template/event-map.html',
@@ -224,6 +224,7 @@ eventApp.config(function($routeProvider) {
         otherwise({
             redirectTo: '/'
         });
+
 });
 
 // event nav 
