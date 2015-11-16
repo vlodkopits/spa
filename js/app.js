@@ -1,4 +1,4 @@
-var eventApp = angular.module ('eventApp', ['ngRoute','ngLocale','ngSanitize'] );
+var eventApp = angular.module ('eventApp', ['ngRoute','ngLocale','ngSanitize','ngFileUpload'] );
 
 angular.module("ngLocale", [], ["$provide", function($provide) {
 var PLURAL_CATEGORY = {ZERO: "zero", ONE: "one", TWO: "two", FEW: "few", MANY: "many", OTHER: "other"};
@@ -215,6 +215,12 @@ eventApp.config(function($routeProvider) {
             controller  : 'AddEventCtrl'
         })
 
+        // route for the add image page
+        .when('/add-img', {
+            templateUrl : 'template/event-add-img.html',
+            controller  : 'AddImg'
+        })
+
         // route for the single page
         .when('/event/:eventId', {
             templateUrl : 'template/event-single.html',
@@ -357,6 +363,28 @@ eventApp.controller('AddEventCtrl', function ($scope, $http, $location) {
   });
 
 });
+
+//new add
+eventApp.controller('AddImg', ['$scope', 'Upload', '$timeout', function ($scope, Upload, $timeout) {
+    $scope.uploadPic = function(file) {
+    file.upload = Upload.upload({
+      url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
+      data: {file: file, username: $scope.username},
+    });
+
+    file.upload.then(function (response) {
+      $timeout(function () {
+        file.result = response.data;
+      });
+    }, function (response) {
+      if (response.status > 0)
+        $scope.errorMsg = response.status + ': ' + response.data;
+    }, function (evt) {
+      // Math.min is to fix IE which reports 200% sometimes
+      file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+    });
+    }
+}]);
 
 // big map with events 
 eventApp.controller ('EventMapCtrl',function ($scope){

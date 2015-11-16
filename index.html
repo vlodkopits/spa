@@ -17,7 +17,7 @@
 		<header>
 			<div class="container" ng-controller="EventNav">
 				<nav>		
-					<span class="logo">
+					<span class="logo dnone">
 						<img src="images/logomob.png" class="img-responsive visible-xs" alt="EventsOnMap"/>
 						<img src="images/logo.png" class="img-responsive hidden-xs" alt="EventsOnMap"/>
 					</span>
@@ -29,6 +29,9 @@
 					</span>
 					<span>
 						<a href="#add" ng-class="{ active: isActive('/add')}"><i class="fa fa-plus"></i> <span>Додати подію</span></a>
+					</span>
+					<span>
+						<a href="#add-img" ng-class="{ active: isActive('/add-img')}"><i class="fa fa-plus"></i> <span>Додати</span></a>
 					</span>
 					<div class="clr"></div>
 				</nav>
@@ -47,6 +50,8 @@
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.js"></script>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-sanitize.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/10.0.2/ng-file-upload-shim.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/10.0.2/ng-file-upload.min.js"></script>
 		
 		<script src="//maps.googleapis.com/maps/api/js?v=3.exp&amp;libraries=places&amp;language=uk_UA"></script>
 		<script src="js/jquery.geocomplete.js"></script>
