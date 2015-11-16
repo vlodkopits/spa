@@ -62,7 +62,7 @@ nav a {color:#fff; text-align: center; text-transform: uppercase; font-size: 19p
 nav a:hover, nav a.active{color: #fff; background-color: #23527c; text-decoration: none;}
 
 #events-gmap, section{ width: 100%; height: 100%;}
-.event-list-item .event-img {max-height: 150px; overflow: hidden;}
+.event-list-item .event-img img{width: 100%;}
 .event-caption {position: absolute; bottom: 0; left: 0; right: 0; background: rgba(250,250,260,0.8); padding: 5px 25px;}
 .select_date input {width: 100px; display:inline-block; margin:0 5px;}
 
