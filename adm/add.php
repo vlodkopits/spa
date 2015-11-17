@@ -59,10 +59,10 @@ print_r ($event);
 
 // collect post data
 $image = $event['event_image'];
-$title = $event['event_title'];
+$title = addslashes ($event['event_title']);
 $category = $event['event_category'];
-$location = $event['event_location'];
-$location_addr = $event['event_location_addr'];
+$location = addslashes ($event['event_location']);
+$location_addr = addslashes ($event['event_location_addr']);
 $lat = $event['lat'];
 $lng = $event['lng'];
 $dates = $event['event_dates'];

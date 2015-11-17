@@ -17,7 +17,7 @@
 						<span ng-repeat="date in event_single.dates" ng-hide="(currDate | date: 'yyyy-MM-dd') > date.date">
 							<b ><i class="fa fa-calendar blue mr10"></i>{{date.date | date: 'EEEE, d MMMM yyyy'}}<span ng-show="date.timefrom.length && date.timetill.length">, <i class="fa fa-clock-o blue mr10"></i>{{date.timefrom}} - {{date.timetill}}</span></b><br/>
 						</span>
-						<span ng-show="(currDate | date: 'yyyy-MM-dd') > event_single.dates[0].date" class="text-danger">
+						<span ng-show="(currDate | date: 'yyyy-MM-dd') > event_single.dates[event_single.dates.length-1].date" class="text-danger">
 							ця подія вже відбулася
 						</span>
 					</div>

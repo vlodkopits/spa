@@ -407,13 +407,6 @@ eventApp.controller ('EventMapCtrl',function ($scope){
                 content:
                     'ти тут'
             });
-
-            /*var myPos = new google.maps.Marker({
-                map: $scope.map,
-                position: geolocate,
-                title: 'ти тут',
-                icon: man
-            });*/
            
             // Add circle overlay and bind to marker
             var circle = new google.maps.Circle({
@@ -451,11 +444,12 @@ eventApp.controller ('EventMapCtrl',function ($scope){
         
         $scope.markers.push(marker);        
     }  
-    
+
     for (i = 0; i < actualEvents.length; i++){
         createMarker(actualEvents[i]);
     }
 
+    
     $scope.openInfoWindow = function(e, selectedMarker){
         e.preventDefault();
         google.maps.event.trigger(selectedMarker, 'click');
