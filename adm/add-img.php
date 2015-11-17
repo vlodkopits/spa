@@ -28,7 +28,31 @@ CREATE TABLE IF NOT EXISTS `events` (
 
 */
 	include ('config.php');
-	include( 'resize.php');
+	//include( 'resize.php');
+
+
+  $image = $_FILES['file']['name'];
+  // collect post data
+  //$image = $_POST['event_image'];
+  $title = addslashes ($_POST['event_title']);
+  $category = $_POST['event_category'];
+  $location = addslashes ($_POST['event_location']);
+  $location_addr = addslashes ($_POST['event_location_addr']);
+  $lat = $_POST['lat'];
+  $lng = $_POST['lng'];
+  $dates = $_POST['event_dates'];
+  $tickets = $_POST['event_tickets'];
+  $web = $_POST['event_web'];
+  $email = $_POST['event_email'];
+  $phone = $_POST['event_phone'];
+  $description = preg_replace("/\r\n|\r/", "<br />", $_POST["event_description"]);
+  $description = trim($description);
+
+  $destination = '/' . $filename;
+  //move_uploaded_file( $_FILES['file']['tmp_name'] , $destination );
+
+
+/*
 // settings
 $max_file_size = 1024*200; // 200kb
 $valid_exts = array('jpeg', 'jpg', 'png', 'gif');
@@ -40,7 +64,7 @@ if (isset($_FILES['image'])) {
 		// get file extension
 		$ext = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
 		if (in_array($ext, $valid_exts)) {
-			/* resize image */
+			
 			foreach ($sizes as $w => $h) {
 				$files[] = resize($w, $h);
 			}
@@ -70,7 +94,7 @@ $email = $event['event_email'];
 $phone = $event['event_phone'];
 $description = preg_replace("/\r\n|\r/", "<br />", $event["event_description"]);
 $description = trim($description);
-
+*/
 // store to database
 $query = mysql_query("INSERT INTO events(image, title, category, location, location_addr, lat, lng, dates, tickets,  web, email, phone, description) VALUES ('$image', '$title', '$category', '$location', '$location_addr', '$lat', '$lng', '$dates', '$tickets', '$web', '$email', '$phone', '$description')");
 

@@ -368,6 +368,96 @@ eventApp.controller('AddEventCtrl', function ($scope, $http, $location) {
 eventApp.controller('AddImg', ['$scope', 'Upload', '$timeout', function ($scope, Upload, $timeout) {
     $scope.uploadPic = function(file) {
     file.upload = Upload.upload({
+      url: 'adm/add-img.php',
+      data: $scope.event_title,
+      file: file
+    });
+
+    file.upload.then(function (response) {
+      $timeout(function () {
+        file.result = response.data;
+      });
+    }, function (response) {
+      if (response.status > 0)
+        $scope.errorMsg = response.status + ': ' + response.data;
+    }, function (evt) {
+      // Math.min is to fix IE which reports 200% sometimes
+      file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+    });
+    }
+
+    // location map 
+   $(function (){
+        $("#geocomplete").geocomplete({
+          map: "#event-map",
+          mapOptions: {
+            zoom: 16
+          },
+          markerOptions: {
+            draggable: true
+          }
+        });
+        
+        $("#geocomplete").bind("geocode:dragged", function(event, latLng){
+          $("input[name=lat]").val(latLng.lat());
+          $("input[name=lng]").val(latLng.lng());
+          $("#reset").show();
+        });
+             
+        $("#reset").click(function(){
+          $("#geocomplete").geocomplete("resetMarker");
+          $("#reset").hide();
+          return false;
+        });
+        
+        $("#find").click(function(){
+          $("#geocomplete").trigger("geocode");
+        }).click();
+  });
+
+  // dates 
+  $(function(){
+    $("#event_date" ).datepicker({
+      'dateFormat':'DD, d MM, yy',
+      'minDate': new Date()
+    });
+    $("#event_timefrom").timepicker({ 'timeFormat': 'H:i','step': 15 });
+    $("#event_timetill").timepicker({ 'timeFormat': 'H:i','step': 15 });
+
+    $("#btn_add_date").click(function(){
+      var selectDate =  $( "#event_date").datepicker( "getDate" );
+      var date = moment(selectDate).format("YYYY-MM-DD");
+      $('#event_dates_list').append('<div class="select_date"><div class="col-lg-6 mr10 date" id="'+date+'" data-val="'+date+'">'+ $("#event_date").val() +'</div><div class="col-lg-2 mr10 timefrom" >'+ $("#event_timefrom").val() +'</div><div class="col-lg-2 mr10 timetill" >'+ $("#event_timetill").val() +'</div><i class="fa fa-times fa-2x" id="date_del"></i></div><div class="clr"></div>');
+      $("#event_date").val("");
+      $("#event_timefrom").val("");
+      $("#event_timetill").val("");     
+    });
+
+    $(document).on("click", "#date_del", function(){
+       $(this).parent('.select_date').remove();
+    });
+
+    // collect dates
+      $('#event_submit').click(function(){
+        $dates = $('#event_dates_list .select_date').map(function () { 
+          var date = $($(this).find('.date')).attr('id'),
+              timeFrom = $($(this).find('.timefrom')).text(),
+              timeTill = $($(this).find('.timetill')).text(),
+              result = {
+                  date: date,
+                  timefrom: timeFrom,
+                  timetill: timeTill
+              };
+
+          return JSON.stringify(result);
+      }).get().join(", ");
+      $('#event_dates').val($.makeArray($dates))
+    });
+  });
+}]);
+/*eventApp.controller('AddImg', ['$scope', 'Upload', '$timeout', function ($scope, Upload, $timeout) {
+    $scope.uploadPic = function(file) {
+    file.upload = Upload.upload({
       url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
       data: {file: file, username: $scope.username},
     });
@@ -385,6 +475,7 @@ eventApp.controller('AddImg', ['$scope', 'Upload', '$timeout', function ($scope,
     });
     }
 }]);
+*/
 
 // big map with events 
 eventApp.controller ('EventMapCtrl',function ($scope){
@@ -394,35 +485,34 @@ eventApp.controller ('EventMapCtrl',function ($scope){
         mapTypeId: google.maps.MapTypeId.ROADMAP
     }
 
-    $scope.map = new google.maps.Map(document.getElementById('events-gmap'), mapOptions);
-    var oms = new OverlappingMarkerSpiderfier($scope.map);
-    
-    var myPos = navigator.geolocation.getCurrentPosition(function(position) {
-        
-            var geolocate = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-            var man = '/images/mypos.png';
-            var infowindow = new google.maps.InfoWindow({
-                map: $scope.map,
-                position: geolocate,
-                zIndex: 1,
-                content:
-                    'ти тут'
-            });
-           
-            // Add circle overlay and bind to marker
-            var circle = new google.maps.Circle({
-              map: $scope.map,
-              radius: 2000,    // metres
-              strokeColor: '#024478',
-              strokeOpacity: 0.6,
-              strokeWeight: 1,
-              fillOpacity:0.2,
-              fillColor: '#2196f3'
-            });
-            circle.bindTo('center', infowindow, 'position');
+  $scope.map = new google.maps.Map(document.getElementById('events-gmap'), mapOptions);
+  var oms = new OverlappingMarkerSpiderfier($scope.map,{keepSpiderfied:true});  
+  var myPos = navigator.geolocation.getCurrentPosition(function(position) {
+      
+    var geolocate = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    var man = '/images/mypos.png';
+    var infowindow = new google.maps.InfoWindow({
+        map: $scope.map,
+        position: geolocate,
+        zIndex: 1,
+        content:
+            'ти тут'
+    });
+   
+    // Add circle overlay and bind to marker
+    var circle = new google.maps.Circle({
+      map: $scope.map,
+      radius: 2000,    // metres
+      strokeColor: '#024478',
+      strokeOpacity: 0.6,
+      strokeWeight: 1,
+      fillOpacity:0.2,
+      fillColor: '#2196f3'
+    });
+    circle.bindTo('center', infowindow, 'position');
 
-            $scope.map.setCenter(geolocate);            
-        });
+    $scope.map.setCenter(geolocate);            
+  });
 
     $scope.markers = [];
     
