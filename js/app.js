@@ -373,8 +373,8 @@ eventApp.controller('AddImg', ['$scope', 'Upload', '$timeout', function ($scope,
         file: file, 
         title: $scope.title, 
         category: $scope.category,
-        location: $scope.location, 
-        /*location_addr: $scope.location_addr, 
+        location: $scope.elocation, 
+        location_addr: $scope.location_addr, 
         lat: $scope.lat, 
         lng: $scope.lng, 
         dates: $scope.dates, 
@@ -382,7 +382,7 @@ eventApp.controller('AddImg', ['$scope', 'Upload', '$timeout', function ($scope,
         web: $scope.web, 
         email: $scope.email, 
         phone: $scope.phone, 
-        description: $scope.description*/
+        description: $scope.description
       },
     });
 
@@ -398,6 +398,38 @@ eventApp.controller('AddImg', ['$scope', 'Upload', '$timeout', function ($scope,
       file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
     });
     }
+
+    // location map 
+   $(function (){
+        $("#geocomplete").geocomplete({
+          map: "#event-map",
+          details: "form",
+          mapOptions: {
+            zoom: 16
+          },
+          markerOptions: {
+            draggable: true
+          }
+        });
+        
+        $("#geocomplete").bind("geocode:dragged", function(event, latLng){
+          $("input[name=lat]").val(latLng.lat());
+          $("input[name=lng]").val(latLng.lng());
+          $("#reset").show();
+        });
+             
+        $("#reset").click(function(){
+          $("#geocomplete").geocomplete("resetMarker");
+          $("#reset").hide();
+          return false;
+        });
+        
+        $("#find").click(function(){
+          $("#geocomplete").trigger("geocode");
+        }).click();
+  });
+
+
 }]);
 
 // big map with events 

@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `events` (
   // collect post data
   $title = $_POST['title'];
   $category = $_POST['category'];
-  $location = $_POST['location'];
+  $location = $_POST['elocation'];
   $location_addr = $_POST['location_addr'];
   $lat = $_POST['lat'];
   $lng = $_POST['lng'];

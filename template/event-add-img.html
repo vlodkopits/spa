@@ -1,14 +1,37 @@
 ﻿<div class="container" >
   <div class="h45p"></div>
   <form name="eventForm" novalidate>
-    <fieldset>
-      Username:
-      <input type="text" name="title" ng-model="title" size="31" required>
+    <div class="clr"><br/></div>
+
+    <!-- image -->
+    <div class="form-group col-lg-3">
+      <i class="fa fa-picture-o blue"></i>
+      Додайте афішу <span class="color-red" ng-show="eventForm.file.$error.required">*</span>:<br/>
+      <input type="file" ngf-select ng-model="picFile" name="file" accept="image/*" ngf-max-size="1MB" required>
+      <i ng-show="eventForm.file.$error.maxSize">File too large {{picFile.size / 1000000|number:1}}MB: max 1MB</i>
+      <img ng-show="eventForm.file.$valid" ngf-thumbnail="picFile" class="mt10 img-responsive"> <button class="mt10 btn" ng-click="picFile = null" ng-show="picFile">Remove</button>
+      <div class="clr"></div>
+
+      <span class="progress" ng-show="picFile.progress >= 0">
+        <div style="width:{{picFile.progress}}%" ng-bind="picFile.progress + '%'"></div>
+      </span>
+      <span ng-show="picFile.result">Upload Successful</span>
+      <div class="clr mb10"></div>
+    </div>
+
+    <div class="col-lg-4">
+
+      <!-- title -->
+      <div class="form-group">
+        Назва події <span class="color-red" ng-show="eventForm.title.$error.required">*</span>:
+        <input type="text" name="title" ng-model="title" size="31" required>
+        <div class="clr mb10"></div>
+      </div>
       
       
       <!-- category -->
-      <div class="form-group" >
-        Категорія <span class="color-red">*</span>:
+      <div class="form-group">
+        Категорія <span class="color-red" ng-show="eventForm.category.$error.required">*</span>:
         <select  name="category" ng-model="category" required>
           <option value="1">музика</option>
           <option value="2">кіно</option>
@@ -18,36 +41,50 @@
           <option value="6">лекції/презентації</option>
           <option value="7">інше</option>
         </select>
-        <p ng-show="eventForm.category.$invalid && !eventForm.category.$pristine" class="help-block">Category is required.</p>
         <div class="clr mb10"></div>
       </div>
 
       <!-- Location -->
-      <div class="form-group" ng-class="{ 'has-error' : addEvent.location.$invalid && !addEvent.location.$pristine }">
-        <i class="fa fa-map-marker blue"></i> Місце проведення <span class="color-red">*</span>:
-        <input type="text" name="location" placeholder="Event location" ng-model="location" required>
-        <p ng-show="addEvent.location.$invalid && !addEvent.location.$pristine" class="help-block">Location is required.</p>
+      <div class="form-group">
+        <i class="fa fa-map-marker blue"></i> Місце проведення <span class="color-red" ng-show="eventForm.elocation.$error.required">*</span>:
+        <input type="text" name="elocation" placeholder="Event location" ng-model="elocation" required>
         <div class="clr mb10"></div>
       </div>
 
-      <br>Photo:
-      <input type="file" ngf-select ng-model="picFile" name="file" accept="image/*" ngf-max-size="1MB" required>
-      <i ng-show="eventForm.file.$error.maxSize">File too large {{picFile.size / 1000000|number:1}}MB: max 1MB</i>
-      <img ng-show="eventForm.file.$valid" ngf-thumbnail="picFile" class="thumb img-responsive"> <button ng-click="picFile = null" ng-show="picFile">Remove</button>
-      <br>
+      <!-- location addr -->
+      <div class="form-group">
+        Адреса <span class="color-red" ng-show="eventForm.locationaddr.$error.required">*</span>:<br/>
+        <input id="geocomplete" type="text" placeholder="Type location address" name="locationaddr" value="" class="fl mr10" ng-model="event.locationaddr" required>
+        <input id="find" type="button" value="Знайти" class="fl btn" />
+        <a id="reset" class="fl btn" href="#" style="display:none; width: 20%;">Стерти</a>
+        <div class="clr mb10"></div>
+        <div id="event-map" class="events-add-map" style="width: 100%; height: 210px;"></div>
+        * виможете переміщати маркер
+        <div style="height: 0px; overflow:hidden;"> 
+          <input name="lat" type="text" value="" class="" />
+          <input name="lng" type="text" value="" class="" />
+          <input name="event_location_formatted_address" type="text" value="" />
+        </div>
+        <div class="clr mb10"></div>
+      </div>
+    </div>
+
+    <!-- description -->
+    <div class="form-group col-lg-8" >
+      Опис події <span class="color-red" ng-show="eventForm.description.$error.required">*</span>:
+      <textarea  name="description" rows="15" placeholder="Event Description" ng-model="description" required></textarea>
+      <div class="clr mb10"></div>
+    </div>
+
+    
 
 
 
+    <div class="clr"></div>
+    <button ng-disabled="!eventForm.$valid" ng-click="uploadPic(picFile)" class="btn"><i class="fa fa-check"></i> Додати подію</button>
 
-      <button ng-disabled="!eventForm.$valid" 
-              ng-click="uploadPic(picFile)">Submit</button>
-      <span class="progress" ng-show="picFile.progress >= 0">
-        <div style="width:{{picFile.progress}}%" 
-            ng-bind="picFile.progress + '%'"></div>
-      </span>
-      <span ng-show="picFile.result">Upload Successful</span>
-      <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
-    </fieldset>
+    <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+
   </form>
 </div>
 <div class="clr "><br/></div>
