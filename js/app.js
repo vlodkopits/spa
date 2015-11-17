@@ -369,7 +369,21 @@ eventApp.controller('AddImg', ['$scope', 'Upload', '$timeout', function ($scope,
     $scope.uploadPic = function(file) {
     file.upload = Upload.upload({
       url: 'adm/add-img.php',
-      data: {file: file, username: $scope.username},
+      data: {
+        file: file, 
+        title: $scope.title, 
+        category: $scope.category,
+        location: $scope.location, 
+        /*location_addr: $scope.location_addr, 
+        lat: $scope.lat, 
+        lng: $scope.lng, 
+        dates: $scope.dates, 
+        tickets: $scope.tickets,  
+        web: $scope.web, 
+        email: $scope.email, 
+        phone: $scope.phone, 
+        description: $scope.description*/
+      },
     });
 
     file.upload.then(function (response) {

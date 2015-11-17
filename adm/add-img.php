@@ -29,28 +29,21 @@ CREATE TABLE IF NOT EXISTS `events` (
 */
 	include ('config.php');
 
-
-  $image = $_FILES['file']['name'];
   // collect post data
-  //$image = $_POST['event_image'];
-  $title = $_POST['username'];
-  /*$category = $_POST['event_category'];
-  $location = $_POST['event_location'];
-  $location_addr = $_POST['event_location_addr'];
+  $title = $_POST['title'];
+  $category = $_POST['category'];
+  $location = $_POST['location'];
+  $location_addr = $_POST['location_addr'];
   $lat = $_POST['lat'];
   $lng = $_POST['lng'];
-  $dates = $_POST['event_dates'];
-  $tickets = $_POST['event_tickets'];
-  $web = $_POST['event_web'];
-  $email = $_POST['event_email'];
-  $phone = $_POST['event_phone'];
+  $dates = $_POST['dates'];
+  $tickets = $_POST['tickets'];
+  $web = $_POST['web'];
+  $email = $_POST['email'];
+  $phone = $_POST['phone'];
   $description = $_POST['event_description'];
-  //$description = preg_replace("/\r\n|\r/", "<br />", $_POST["event_description"]);
+  $description = preg_replace("/\r\n|\r/", "<br />", $_POST["event_description"]);
   $description = trim($description);
-  */
-
-  //$destination = '../data/posters/'.$newImgNameame;
-  //move_uploaded_file( $_FILES['file']['tmp_name'] , $destination );
 
   $tempImgName = explode(".", $_FILES["file"]["name"]);
   $newImgName = round(microtime(true)) . '.' . end($tempImgName);
