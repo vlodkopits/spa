@@ -395,6 +395,7 @@ eventApp.controller ('EventMapCtrl',function ($scope){
     }
 
     $scope.map = new google.maps.Map(document.getElementById('events-gmap'), mapOptions);
+    var oms = new OverlappingMarkerSpiderfier($scope.map);
     
     var myPos = navigator.geolocation.getCurrentPosition(function(position) {
         
@@ -425,9 +426,15 @@ eventApp.controller ('EventMapCtrl',function ($scope){
 
     $scope.markers = [];
     
-    var infoWindow = new google.maps.InfoWindow();
+    var infoWindows = [];
+    function closeInfoWindows(){
+        var i = infoWindows.length;
+        while(i--){
+            infoWindows[i].close();
+        }
+    }
     
-    var createMarker = function (info){
+    var createMarker = function (map,info,osm){
         var mapIcon = 'images/map_'+info.category+'.png';
         var marker = new google.maps.Marker({
             map: $scope.map,
@@ -435,19 +442,26 @@ eventApp.controller ('EventMapCtrl',function ($scope){
             title: info.title,
             icon: mapIcon
         });
-        marker.content = '<div class="infoWindowContent"><img src="'+ info.image +'" alt="" class="img-responsive" style="max-width: 200px;" /></div>';
-        
+        oms.addMarker(marker);
+        var infoContent = { content:'<h2><a href="#event/'+info.id+'">' + marker.title + '</a></h2><div class="infoWindowContent"><img src="'+ info.image +'" alt="" class="img-responsive" style="max-width: 200px;" /></div>'}
+        var infoWindow = new google.maps.InfoWindow(infoContent);
+        //marker.content = '<div class="infoWindowContent"><img src="'+ info.image +'" alt="" class="img-responsive" style="max-width: 200px;" /></div>';
+        infoWindows.push(infoWindow);
         google.maps.event.addListener(marker, 'click', function(){
-            infoWindow.setContent('<h2><a href="#event/'+info.id+'">' + marker.title + '</a></h2>' + marker.content);
+            //infoWindow.setContent('<h2><a href="#event/'+info.id+'">' + marker.title + '</a></h2>' + marker.content);
+            closeInfoWindows();
             infoWindow.open($scope.map, marker);
         });
         
-        $scope.markers.push(marker);        
+        //$scope.markers.push(marker);        
     }  
 
     for (i = 0; i < actualEvents.length; i++){
-        createMarker(actualEvents[i]);
+        //createMarker(actualEvents[i]);
+       $scope.markers.push(createMarker($scope.map, actualEvents[i], oms));
     }
+
+    //var markerCluster = new MarkerClusterer($scope.map, $scope.markers,{zoomOnClick:false});
 
     
     $scope.openInfoWindow = function(e, selectedMarker){
