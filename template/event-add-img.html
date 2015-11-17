@@ -1,145 +1,20 @@
 ﻿<div class="container" >
   <div class="h45p"></div>
-  <div class="form-success"></div>
-  <!--<form name="addEvent" novalidate method="POST" action="add.php" enctype="multipart/form-data">-->
-  <form name="addEvent" id="addEvent" novalidate >
-    <div class="clr"><br/></div>
-
-    <div class="col-lg-6">
-      <!-- image -->
-      <span class="btn-file">
-        <i class="fa fa-picture-o blue"></i>
-        <br>Photo:
-        <input type="file" ngf-select ng-model="picFile" name="file" accept="image/*" ngf-max-size="2MB" required>
-        <i ng-show="addEvent.file.$error.maxSize">File too large 
-            {{picFile.size / 1000000|number:1}}MB: max 2M</i>
-        <img ng-show="addEvent.file.$valid" ngf-thumbnail="picFile" class="thumb img-responsive"> <button ng-click="picFile = null" ng-show="picFile">Remove</button>
-        <br>
-      </span>
-      <div class="clr mb10"></div>
-
-      <!-- title -->
-      <div class="form-group" ng-class="{ 'has-error' : addEvent.event_title.$invalid && !addEvent.event_title.$pristine }">
-        Назва події <span class="color-red">*</span>:
-        <input type="text" name="event_title" placeholder="Event Title" ng-model="event.event_title" required>
-              <p ng-show="addEvent.event_title.$invalid && !addEvent.event_title.$pristine" class="help-block">Title is required.</p>
-        <div class="clr mb10"></div>
-      </div>
-
-      <!-- category -->
-      <div class="form-group" ng-class="{ 'has-error' : addEvent.event_category.$invalid && !addEvent.event_category.$pristine }">
-        Категорія <span class="color-red">*</span>:
-        <select  name="event_category" ng-model="event.event_category" required>
-          <option value="1">музика</option>
-          <option value="2">кіно</option>
-          <option value="3">виставки</option>
-          <option value="4">театр</option>
-          <option value="5">фестивалі</option>
-          <option value="6">лекції/презентації</option>
-          <option value="7">інше</option>
-        </select>
-        <p ng-show="addEvent.event_category.$invalid && !addEvent.event_category.$pristine" class="help-block">Category is required.</p>
-        <div class="clr mb10"></div>
-      </div>
-
-      <!-- Location -->
-      <div class="form-group" ng-class="{ 'has-error' : addEvent.event_location.$invalid && !addEvent.event_location.$pristine }">
-        <i class="fa fa-map-marker blue"></i> Місце проведення <span class="color-red">*</span>:
-        <input type="text" name="event_location" placeholder="Event location" ng-model="event.event_location" required>
-        <p ng-show="addEvent.event_location.$invalid && !addEvent.event_location.$pristine" class="help-block">Location is required.</p>
-        <div class="clr mb10"></div>
-      </div>
-      <!-- location addr -->
-      <div class="form-group" ng-class="{ 'has-error' : addEvent.event_location_addr.$invalid && !addEvent.event_location_addr.$pristine }">
-        Адреса <span class="color-red">*</span>:<br/>
-        <input id="geocomplete" type="text" placeholder="Type location address" name="event_location_addr" value="" class="fl mr10" style="width: 60%; "  ng-model="event.event_location_addr" required>
-        <input id="find" type="button" value="Знайти" class="fl btn" style="width: 15%; padding: 6px 0;" />
-        <a id="reset" class="fl btn" href="#" style="display:none; width: 20%;">Стерти</a>
-        <div class="clr"></div>
-        <p ng-show="addEvent.event_location_addr.$invalid && !addEvent.event_location_addr.$pristine" class="help-block">Location is required.</p>
-      </div>
-    </div>  
-    <div class="col-lg-6">
-      <br/>
-      <div id="event-map" class="events-add-map" style="width: 100%; height: 210px;"></div>
-      * виможете переміщати маркер
-      <div style="height:1px; overflow:hidden;"> 
-        <input name="lat" type="text" value="" class="" />
-        <input name="lng" type="text" value="" class="" />
-        <input name="event_location_formatted_address" type="text" value="" />
-      </div>
-    </div>
-    <div class="clr "></div>
-
-    <div class="col-lg-8">
-      <i class="fa fa-calendar blue"></i> Виберіть дату <span class="color-red">*</span>:
-      <div class="clr"></div>
-      <!-- event dates -->
-          <div  class="form-group" ng-class="{ 'has-error' : addEvent.event_date.$invalid && !addEvent.event_date.$pristine }">
-            <input type="text" id="event_date" name="event_date" ng-model="event.event_date" class="col-lg-6 mr10" required>  
-            <input type="text" id="event_timefrom" name="event_timefrom" class="col-lg-2 mr10" placeholder="start time"> 
-            <input type="text" id="event_timetill" name="event_timetill" class="col-lg-2 mr10"  placeholder="end time">
-            <a href class="btn" id="btn_add_date">додати</a>
-            <div ng-show="addEvent.event_date.$invalid && !addEvent.event_date.$pristine" class="help-block">Location is required.</div>
-            <!-- here list of dates -->
-            <div id="event_dates_list">
-
-            </div>
-            <input name="event_dates" id="event_dates" type="hidden">
-          </div>        
-      <div class="clr mb10"></div>
-    </div>
-    <div class="col-lg-4">
-      <i class="fa fa-ticket blue"></i> Вартість квитків:
-      <input type="text" name="event_tickets" placeholder="Free or ticket price" >
-      <div class="clr mb10"></div>
-
-      сайт:
-      <input type="text" name="event_web" placeholder="Event website" >
-      <div class="clr mb10"></div>
-
-      e-mail:
-      <input type="text" name="event_email" placeholder="e-mail" >
-      <div class="clr mb10"></div>
-
-      телефон:
-      <input type="text" name="event_phone" placeholder="phone" >
-      <div class="clr mb10"></div>
-    </div>
-    <div class="clr "></div>
-
-    <div class="col-lg-8">
-      <!-- description -->
-      <div class="form-group" ng-class="{ 'has-error' : addEvent.event_description.$invalid && !addEvent.event_description.$pristine }">
-        Опис події <span class="color-red">*</span>:
-        <textarea  name="event_description" rows="15" placeholder="Event Description" ng-model="event.event_description" required></textarea>
-        <p ng-show="addEvent.event_description.$invalid && !addEvent.event_description.$pristine" class="help-block">Description is required.</p>
-        <div class="clr mb10"></div>
-      </div>
-      <button type="submit" name="submit" class="btn" id="event_submit" ng-disabled="addEvent.$invalid" ng-click="uploadPic(picFile)"><i class="fa fa-check"></i> Додати подію</button>
-    </div>
-    <div class="clr "><br/></div>
-  <form>
-</div>
-<div class="clr "><br/></div>
-
-<!--
-<div  >
-  <form name="addEvent">
+  <form name="myForm">
     <fieldset>
       <legend>Upload on form submit</legend>
       Username:
       <input type="text" name="userName" ng-model="username" size="31" required>
-      <i ng-show="addEvent.userName.$error.required">*required</i>
+      <i ng-show="myForm.userName.$error.required">*required</i>
       <br>Photo:
       <input type="file" ngf-select ng-model="picFile" name="file"    
              accept="image/*" ngf-max-size="2MB" required>
-      <i ng-show="addEvent.file.$error.required">*required</i><br>
-      <i ng-show="addEvent.file.$error.maxSize">File too large 
+      <i ng-show="myForm.file.$error.required">*required</i><br>
+      <i ng-show="myForm.file.$error.maxSize">File too large 
           {{picFile.size / 1000000|number:1}}MB: max 2M</i>
-      <img ng-show="addEvent.file.$valid" ngf-thumbnail="picFile" class="thumb"> <button ng-click="picFile = null" ng-show="picFile">Remove</button>
+      <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile" class="thumb"> <button ng-click="picFile = null" ng-show="picFile">Remove</button>
       <br>
-      <button ng-disabled="!addEvent.$valid" 
+      <button ng-disabled="!myForm.$valid" 
               ng-click="uploadPic(picFile)">Submit</button>
       <span class="progress" ng-show="picFile.progress >= 0">
         <div style="width:{{picFile.progress}}%" 
@@ -151,4 +26,4 @@
     <br>
   </form>
 </div>
--->
+<div class="clr "><br/></div>
