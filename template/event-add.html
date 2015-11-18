@@ -1,119 +1,131 @@
 ﻿<div class="container" >
-	<div class="h45p"></div>
-	<div class="form-success"></div>
-	<!--<form name="addEvent" novalidate method="POST" action="add.php" enctype="multipart/form-data">-->
-	<form name="addEvent" id="addEvent" novalidate  enctype="multipart/form-data">
-		<div class="clr"><br/></div>
+  <div class="h45p"></div>
+  <form name="eventForm" novalidate>
+    <div class="clr"><br/></div>
 
-		<div class="col-lg-6">
-			<!-- image -->
-			<span class="btn-file">
-				<i class="fa fa-picture-o blue"></i>
-				<input name="image" id="event_image" type="file">
-			</span>
-			<div class="clr mb10"></div>
+    <!-- image -->
+    <div class="form-group col-lg-3">
+      <i class="fa fa-picture-o blue"></i>
+      Додайте афішу <span class="color-red" ng-show="eventForm.file.$error.required">*</span>:<br/>
+      <input type="file" ngf-select ng-model="picFile" name="file" accept="image/*" ngf-max-size="1MB" required>
+      <i ng-show="eventForm.file.$error.maxSize">File too large {{picFile.size / 1000000|number:1}}MB: max 1MB</i>
+      <img ng-show="eventForm.file.$valid" ngf-thumbnail="picFile" class="mt10 img-responsive" style="max-height: 140px;"> <button class="mt10 btn" ng-click="picFile = null" ng-show="picFile">Remove</button>
+      <div class="clr"></div>
 
-			<!-- title -->
-			<div class="form-group" ng-class="{ 'has-error' : addEvent.event_title.$invalid && !addEvent.event_title.$pristine }">
-				Назва події <span class="color-red">*</span>:
-				<input type="text" name="event_title" placeholder="Event Title" ng-model="event.event_title" required>
-            	<p ng-show="addEvent.event_title.$invalid && !addEvent.event_title.$pristine" class="help-block">Title is required.</p>
-				<div class="clr mb10"></div>
-			</div>
+      <span class="progress bg-green m0 dib fl"  ng-show="picFile.progress >= 0">
+        <div style="width:{{picFile.progress}}%" ng-bind="picFile.progress + '%'"></div>
+      </span>
+      <span class="dib" ng-show="picFile.result">Upload Successful</span>
+    </div>
 
-			<!-- category -->
-			<div class="form-group" ng-class="{ 'has-error' : addEvent.event_category.$invalid && !addEvent.event_category.$pristine }">
-				Категорія <span class="color-red">*</span>:
-				<select  name="event_category" ng-model="event.event_category" required>
-					<option value="1">музика</option>
-					<option value="2">кіно</option>
-					<option value="3">виставки</option>
-					<option value="4">театр</option>
-					<option value="5">фестивалі</option>
-					<option value="6">лекції/презентації</option>
-					<option value="7">інше</option>
-				</select>
-				<p ng-show="addEvent.event_category.$invalid && !addEvent.event_category.$pristine" class="help-block">Category is required.</p>
-				<div class="clr mb10"></div>
-			</div>
+    <div class="col-lg-5">
 
-			<!-- Location -->
-			<div class="form-group" ng-class="{ 'has-error' : addEvent.event_location.$invalid && !addEvent.event_location.$pristine }">
-				<i class="fa fa-map-marker blue"></i> Місце проведення <span class="color-red">*</span>:
-				<input type="text" name="event_location" placeholder="Event location" ng-model="event.event_location" required>
-				<p ng-show="addEvent.event_location.$invalid && !addEvent.event_location.$pristine" class="help-block">Location is required.</p>
-				<div class="clr mb10"></div>
-			</div>
-			<!-- location addr -->
-			<div class="form-group" ng-class="{ 'has-error' : addEvent.event_location_addr.$invalid && !addEvent.event_location_addr.$pristine }">
-				Адреса <span class="color-red">*</span>:<br/>
-				<input id="geocomplete" type="text" placeholder="Type location address" name="event_location_addr" value="" class="fl mr10" style="width: 60%; "  ng-model="event.event_location_addr" required>
-				<input id="find" type="button" value="Знайти" class="fl btn" style="width: 15%; padding: 6px 0;" />
-				<a id="reset" class="fl btn" href="#" style="display:none; width: 20%;">Стерти</a>
-				<div class="clr"></div>
-				<p ng-show="addEvent.event_location_addr.$invalid && !addEvent.event_location_addr.$pristine" class="help-block">Location is required.</p>
-			</div>
-		</div>	
-		<div class="col-lg-6">
-			<br/>
-			<div id="event-map" class="events-add-map" style="width: 100%; height: 210px;"></div>
-			* виможете переміщати маркер
-			<div style="height:1px; overflow:hidden;"> 
-				<input name="lat" type="text" value="" class="" />
-				<input name="lng" type="text" value="" class="" />
-				<input name="event_location_formatted_address" type="text" value="" />
-			</div>
-		</div>
-		<div class="clr "></div>
+      <!-- title -->
+      <div class="form-group">
+        Назва події <span class="color-red" ng-show="eventForm.title.$error.required">*</span>:
+        <input type="text" name="title" ng-model="title" required>
+        <div class="clr mb10"></div>
+      </div>
 
-		<div class="col-lg-8">
-			<i class="fa fa-calendar blue"></i> Виберіть дату <span class="color-red">*</span>:
-			<div class="clr"></div>
-			<!-- event dates -->
-	        <div  class="form-group" ng-class="{ 'has-error' : addEvent.event_date.$invalid && !addEvent.event_date.$pristine }">
-	        	<input type="text" id="event_date" name="event_date" ng-model="event.event_date" class="col-lg-6 mr10" required>	
-	        	<input type="text" id="event_timefrom" name="event_timefrom" class="col-lg-2 mr10" placeholder="start time"> 
-	        	<input type="text" id="event_timetill" name="event_timetill" class="col-lg-2 mr10"  placeholder="end time">
-	        	<a href class="btn" id="btn_add_date">додати</a>
-	        	<div ng-show="addEvent.event_date.$invalid && !addEvent.event_date.$pristine" class="help-block">Location is required.</div>
-	        	<!-- here list of dates -->
-	        	<div id="event_dates_list">
+      <!-- category -->
+      <div class="form-group">
+        Категорія <span class="color-red" ng-show="eventForm.category.$error.required">*</span>:
+        <select  name="category" ng-model="category" required>
+          <option value="1">музика</option>
+          <option value="2">кіно</option>
+          <option value="3">виставки</option>
+          <option value="4">театр</option>
+          <option value="5">фестивалі</option>
+          <option value="6">лекції/презентації</option>
+          <option value="7">інше</option>
+        </select>
+        <div class="clr mb10"></div>
+      </div>
 
-	        	</div>
-	        	<input name="event_dates" id="event_dates" type="hidden">
-	        </div>	      
-			<div class="clr mb10"></div>
-		</div>
-		<div class="col-lg-4">
-			<i class="fa fa-ticket blue"></i> Вартість квитків:
-			<input type="text" name="event_tickets" placeholder="Free or ticket price" >
-			<div class="clr mb10"></div>
+       <!-- Location -->
+      <div class="form-group">
+        <i class="fa fa-map-marker blue"></i> Місце проведення <span class="color-red" ng-show="eventForm.elocation.$error.required">*</span>:
+        <input type="text" name="elocation" ng-model="elocation" required>
+        <div class="clr mb10"></div> 
+      </div>
 
-			сайт:
-			<input type="text" name="event_web" placeholder="Event website" >
-			<div class="clr mb10"></div>
+      <!-- location addr -->
+      Адреса <span class="color-red" ng-show="eventForm.locationaddr.$error.required">*</span>:<br/>
+      <input id="geocomplete" type="text" name="locationaddr" value="" class="fl mr10" ng-model="locationaddr" required>
+      <input id="find" type="button" value="Знайти" class="fl btn w50p" />
+      <a id="reset" class="fl btn w50p" href="#" style="display:none;">Стерти</a>
+      <div class="clr mb10"></div>
+      
 
-			e-mail:
-			<input type="text" name="event_email" placeholder="e-mail" >
-			<div class="clr mb10"></div>
+    </div>
 
-			телефон:
-			<input type="text" name="event_phone" placeholder="phone" >
-			<div class="clr mb10"></div>
-		</div>
-		<div class="clr "></div>
+    <div class="col-lg-4">
 
-		<div class="col-lg-8">
-			<!-- description -->
-			<div class="form-group" ng-class="{ 'has-error' : addEvent.event_description.$invalid && !addEvent.event_description.$pristine }">
-				Опис події <span class="color-red">*</span>:
-				<textarea  name="event_description" rows="15" placeholder="Event Description" ng-model="event.event_description" required></textarea>
-				<p ng-show="addEvent.event_description.$invalid && !addEvent.event_description.$pristine" class="help-block">Description is required.</p>
-				<div class="clr mb10"></div>
-			</div>
-			<button type="submit" name="submit" class="btn" id="event_submit" ng-disabled="addEvent.$invalid" ><i class="fa fa-check"></i> Додати подію</button>
-		</div>
-		<div class="clr "><br/></div>
-	<form>
+      <!-- location map -->
+      <div id="event-map" class="events-add-map" style="width: 100%; height: 210px;"></div>
+      * виможете переміщати маркер
+      <div style="height: 0px; overflow:hidden;"> 
+        <input name="lat" ng-model="lat" id="lat" type="text" value="" class="" />
+        <input name="lng" ng-model="lng" id="lng" type="text" value="" class="" />
+        <input name="event_location_formatted_address" type="text" value="" />
+      </div>
+      <div class="clr mb10"></div>
+
+
+      
+    </div>
+
+    <div class="col-lg-8">
+      <!-- dates -->
+      <i class="fa fa-calendar blue"></i> Виберіть дату <span class="color-red" ng-show="eventForm.date.$error.required">*</span>:
+      <div class="clr"></div>
+      <!-- event dates -->
+          <div  class="form-group">
+            <input type="text" id="event_date" name="event_date" ng-model="date" class="col-lg-5 mr10" required>  
+            <input type="text" id="event_timefrom" name="timefrom" class="col-lg-2 mr10" placeholder="start time"> 
+            <input type="text" id="event_timetill" name="timetill" class="col-lg-2 mr10"  placeholder="end time">
+            <a href class="btn" id="btn_add_date">додати</a>
+            <!-- here list of dates -->
+            <div id="event_dates_list"></div>
+            <input name="dates" ng-model="dates" id="event_dates" type="hidden">
+          </div>        
+      <div class="clr mb10"></div>
+
+      <!-- description -->
+      <div class="form-group" >
+        Опис події <span class="color-red" ng-show="eventForm.description.$error.required">*</span>:
+        <textarea  name="description" rows="15" placeholder="Event Description" ng-model="description" required></textarea>
+        <div class="clr mb10"></div>
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <i class="fa fa-ticket blue"></i> Вартість квитків:
+      <input type="text" name="tickets" ng-model="tickets" placeholder="Free or ticket price" >
+      <div class="clr mb10"></div>
+
+      сайт:
+      <input type="text" name="web" ng-model="web" placeholder="Event website" >
+      <div class="clr mb10"></div>
+
+      e-mail:
+      <input type="text" name="email" ng-model="email" placeholder="e-mail" >
+      <div class="clr mb10"></div>
+
+      телефон:
+      <input type="text" name="phone" ng-model="phone" placeholder="phone" >
+      <div class="clr mb10"></div>
+    </div>
+
+    
+
+
+
+    <div class="clr"></div>
+    <button ng-disabled="!eventForm.$valid" ng-click="uploadPic(picFile)" class="btn" id="event_submit"><i class="fa fa-check"></i> Додати подію</button>
+
+    <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+
+  </form>
 </div>
 <div class="clr "><br/></div>

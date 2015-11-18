@@ -215,12 +215,6 @@ eventApp.config(function($routeProvider) {
             controller  : 'AddEventCtrl'
         })
 
-        // route for the add image page
-        .when('/add-img', {
-            templateUrl : 'template/event-add-img.html',
-            controller  : 'AddImg'
-        })
-
         // route for the single page
         .when('/event/:eventId', {
             templateUrl : 'template/event-single.html',
@@ -271,28 +265,10 @@ eventApp.controller('SingleEventCtrl', ['$scope', '$routeParams', '$filter',
 
 }]);
 
-// event add 
-eventApp.controller('AddEventCtrl', function ($scope, $http, $location) {
-  $(function() {
-      $("#addEvent").on("submit", function(event) {
-          event.preventDefault();
-          var img=$('#event_image').val();
-          var forms=($(this).serialize());
-          
-          $.ajax({
-              url: "adm/add.php",
-              type: "post",
-              data: forms+'&event_image='+encodeURIComponent(img)+'&image='+encodeURIComponent(img),
-              success: function() {
-                $(".form-success").append('<p class="bg-success text-center text-success"><br/>Дякуємо! Подію додано. Після перевірки вона з\'явиться на сайті<br/></p>');
-                $("#addEvent").remove();
-              }
-          });
 
-      });
-  });
-
-  // location map 
+//add event
+eventApp.controller('AddEventCtrl', ['$scope', 'Upload', '$timeout', function ($scope, Upload, $timeout) {
+    // location map 
    $(function (){
         $("#geocomplete").geocomplete({
           map: "#event-map",
@@ -324,66 +300,63 @@ eventApp.controller('AddEventCtrl', function ($scope, $http, $location) {
 
   // dates 
   $(function(){
-    $("#event_date" ).datepicker({
-      'dateFormat':'DD, d MM, yy',
-      'minDate': new Date()
+      $("#event_date" ).datepicker({
+        'dateFormat':'DD, d MM, yy',
+        'minDate': new Date()
+      });
+      $("#event_timefrom").timepicker({ 'timeFormat': 'H:i','step': 15 });
+      $("#event_timetill").timepicker({ 'timeFormat': 'H:i','step': 15 });
+
+      $("#btn_add_date").click(function(){
+        var selectDate =  $( "#event_date").datepicker( "getDate" );
+        var date = moment(selectDate).format("YYYY-MM-DD");
+        $('#event_dates_list').append('<div class="select_date"><div class="col-lg-6 mr10 date" id="'+date+'" data-val="'+date+'">'+ $("#event_date").val() +'</div><div class="col-lg-2 mr10 timefrom" >'+ $("#event_timefrom").val() +'</div><div class="col-lg-2 mr10 timetill" >'+ $("#event_timetill").val() +'</div><i class="fa fa-times fa-2x" id="date_del"></i></div><div class="clr"></div>');
+        $("#event_date").val("");
+        $("#event_timefrom").val("");
+        $("#event_timetill").val("");     
+      });
+
+      $(document).on("click", "#date_del", function(){
+         $(this).parent('.select_date').remove();
+      });
+
+      // collect dates
+        $('#event_submit').click(function(){
+          $dates = $('#event_dates_list .select_date').map(function () { 
+            var date = $($(this).find('.date')).attr('id'),
+                timeFrom = $($(this).find('.timefrom')).text(),
+                timeTill = $($(this).find('.timetill')).text(),
+                result = {
+                    date: date,
+                    timefrom: timeFrom,
+                    timetill: timeTill
+                };
+
+            return JSON.stringify(result);
+        }).get().join(", ");
+        $('#event_dates').val($.makeArray($dates))
+      });
     });
-    $("#event_timefrom").timepicker({ 'timeFormat': 'H:i','step': 15 });
-    $("#event_timetill").timepicker({ 'timeFormat': 'H:i','step': 15 });
 
-    $("#btn_add_date").click(function(){
-      var selectDate =  $( "#event_date").datepicker( "getDate" );
-      var date = moment(selectDate).format("YYYY-MM-DD");
-      $('#event_dates_list').append('<div class="select_date"><div class="col-lg-6 mr10 date" id="'+date+'" data-val="'+date+'">'+ $("#event_date").val() +'</div><div class="col-lg-2 mr10 timefrom" >'+ $("#event_timefrom").val() +'</div><div class="col-lg-2 mr10 timetill" >'+ $("#event_timetill").val() +'</div><i class="fa fa-times fa-2x" id="date_del"></i></div><div class="clr"></div>');
-      $("#event_date").val("");
-      $("#event_timefrom").val("");
-      $("#event_timetill").val("");     
-    });
-
-    $(document).on("click", "#date_del", function(){
-       $(this).parent('.select_date').remove();
-    });
-
-    // collect dates
-      $('#event_submit').click(function(){
-        $dates = $('#event_dates_list .select_date').map(function () { 
-          var date = $($(this).find('.date')).attr('id'),
-              timeFrom = $($(this).find('.timefrom')).text(),
-              timeTill = $($(this).find('.timetill')).text(),
-              result = {
-                  date: date,
-                  timefrom: timeFrom,
-                  timetill: timeTill
-              };
-
-          return JSON.stringify(result);
-      }).get().join(", ");
-      $('#event_dates').val($.makeArray($dates))
-    });
-  });
-
-});
-
-//new add
-eventApp.controller('AddImg', ['$scope', 'Upload', '$timeout', function ($scope, Upload, $timeout) {
     $scope.uploadPic = function(file) {
     file.upload = Upload.upload({
-      url: 'adm/add-img.php',
-      data: {
-        file: file, 
+      url: 'adm/add.php',
+      file: file,
+      sendFieldsAs: 'form',
+      fields: {
         title: $scope.title, 
         category: $scope.category,
-        location: $scope.elocation, 
-        location_addr: $scope.location_addr, 
-        lat: $scope.lat, 
-        lng: $scope.lng, 
-        dates: $scope.dates, 
+        elocation: $scope.elocation, 
+        locationaddr: $('#geocomplete').val(), 
+        lat: $('#lat').val(), 
+        lng: $('#lng').val(), 
+        dates: $('#event_dates').val(), 
         tickets: $scope.tickets,  
         web: $scope.web, 
         email: $scope.email, 
         phone: $scope.phone, 
         description: $scope.description
-      },
+      }
     });
 
     file.upload.then(function (response) {
@@ -398,36 +371,6 @@ eventApp.controller('AddImg', ['$scope', 'Upload', '$timeout', function ($scope,
       file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
     });
     }
-
-    // location map 
-   $(function (){
-        $("#geocomplete").geocomplete({
-          map: "#event-map",
-          details: "form",
-          mapOptions: {
-            zoom: 16
-          },
-          markerOptions: {
-            draggable: true
-          }
-        });
-        
-        $("#geocomplete").bind("geocode:dragged", function(event, latLng){
-          $("input[name=lat]").val(latLng.lat());
-          $("input[name=lng]").val(latLng.lng());
-          $("#reset").show();
-        });
-             
-        $("#reset").click(function(){
-          $("#geocomplete").geocomplete("resetMarker");
-          $("#reset").hide();
-          return false;
-        });
-        
-        $("#find").click(function(){
-          $("#geocomplete").trigger("geocode");
-        }).click();
-  });
 
 
 }]);
