@@ -307,8 +307,7 @@ eventApp.controller('AddEventCtrl', ['$scope', 'Upload', '$timeout', function ($
       $("#event_timefrom").timepicker({ 'timeFormat': 'H:i','step': 15, 'disableTextInput': true });
       $("#event_timetill").timepicker({ 'timeFormat': 'H:i','step': 15, 'disableTextInput': true });
 
-      $( "#btn_add_date" ).change(function() {
-        $("#btn_add_date").prop("disabled", false);
+      $("#event_date").change(function() {
         $("#btn_add_date").click(function(){
           var selectDate =  $( "#event_date").datepicker( "getDate" );
           var date = moment(selectDate).format("YYYY-MM-DD");
@@ -317,7 +316,7 @@ eventApp.controller('AddEventCtrl', ['$scope', 'Upload', '$timeout', function ($
           $("#event_timefrom").val("");
           $("#event_timetill").val("");     
         });
-      }
+      });
 
 
       $(document).on("click", "#date_del", function(){
