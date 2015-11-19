@@ -304,17 +304,21 @@ eventApp.controller('AddEventCtrl', ['$scope', 'Upload', '$timeout', function ($
         'dateFormat':'DD, d MM, yy',
         'minDate': new Date()
       });
-      $("#event_timefrom").timepicker({ 'timeFormat': 'H:i','step': 15 });
-      $("#event_timetill").timepicker({ 'timeFormat': 'H:i','step': 15 });
+      $("#event_timefrom").timepicker({ 'timeFormat': 'H:i','step': 15, 'disableTextInput': true });
+      $("#event_timetill").timepicker({ 'timeFormat': 'H:i','step': 15, 'disableTextInput': true });
 
-      $("#btn_add_date").click(function(){
-        var selectDate =  $( "#event_date").datepicker( "getDate" );
-        var date = moment(selectDate).format("YYYY-MM-DD");
-        $('#event_dates_list').append('<div class="select_date"><div class="col-lg-6 mr10 date" id="'+date+'" data-val="'+date+'">'+ $("#event_date").val() +'</div><div class="col-lg-2 mr10 timefrom" >'+ $("#event_timefrom").val() +'</div><div class="col-lg-2 mr10 timetill" >'+ $("#event_timetill").val() +'</div><i class="fa fa-times fa-2x" id="date_del"></i></div><div class="clr"></div>');
-        $("#event_date").val("");
-        $("#event_timefrom").val("");
-        $("#event_timetill").val("");     
-      });
+      $( "#btn_add_date" ).change(function() {
+        $("#btn_add_date").prop("disabled", false);
+        $("#btn_add_date").click(function(){
+          var selectDate =  $( "#event_date").datepicker( "getDate" );
+          var date = moment(selectDate).format("YYYY-MM-DD");
+          $('#event_dates_list').append('<div class="select_date"><div class="col-lg-6 mr10 date" id="'+date+'" data-val="'+date+'">'+ $("#event_date").val() +'</div><div class="col-lg-2 mr10 timefrom" >'+ $("#event_timefrom").val() +'</div><div class="col-lg-2 mr10 timetill" >'+ $("#event_timetill").val() +'</div><i class="fa fa-times fa-2x" id="date_del"></i></div><div class="clr"></div>');
+          $("#event_date").val("").removeClass("ng-dirty ng-valid-parse ng-valid ng-valid-required").addClass("ng-invalid ng-invalid-required");
+          $("#event_timefrom").val("");
+          $("#event_timetill").val("");     
+        });
+      }
+
 
       $(document).on("click", "#date_del", function(){
          $(this).parent('.select_date').remove();
