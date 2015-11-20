@@ -30,20 +30,23 @@
 			</div>
 
 			<div class="event-caption">
-				<h2 class="show_event_{{event.id}}"><a href="#event/{{event.id}}">{{event.title}}</a></h2>
-				<div class="mt10">
+				<h3 class="show_event_{{event.id}}"><a href="#event/{{event.id}}">{{event.title}}</a></h3>
+				<div class="mt10 list_dates">
 					<i class="fa fa-calendar blue fl"></i> 
-					<div class="fl fsize10 ml10">
-						<span ng-repeat="date in event.dates  | limitTo:2" ng-hide="(currDate | date: 'yyyy-MM-dd') > date.date">
-							<strong >{{date.date | date: 'd MMMM yyyy'}}<span ng-show="date.timefrom.length && date.timetill.length">, <i class="fa fa-clock-o blue ml5 mr5"></i>{{date.timefrom}} - {{date.timetill}} </span></strong><br/>
+					<div class="fl fsize11 ml5">
+						<span ng-repeat="date in event.dates" ng-hide="(currDate | date: 'yyyy-MM-dd') > date.date" >
+							<strong >{{date.date | date: 'd MMMM yyyy'}}<span ng-show="date.timefrom.length && date.timetill.length"><i class="fa fa-clock-o blue ml5 mr5"></i>{{date.timefrom}}-{{date.timetill}}</span></strong><br/>
 						</span>
 					</div>
+					<div class="clr"></div>
 				</div>
 				<div class="clr"></div>
-				<div class="mt10"><i class="fa fa-map-marker blue"></i> {{event.location}}</div>
+				<div class="mt10">
+					<i class="fa fa-map-marker blue"></i> <span class="fsize11">{{event.location}}</span>
+				</div>
 				<div class="mt10" ng-show="event.tickets.length">
 					<i class="fa fa-ticket blue"></i> {{event.tickets}}
-					<span ng-show="event.tickets_link.length"><a href="{{event.tickets_link}}" target="_blank" class="btn bg-yellow">Купити квиток</a></span>
+					<span ng-show="event.tickets_link.length"><a href="{{event.tickets_link}}" target="_blank" class="btn bg-yellow">купити</a></span>
 				</div>
 
 				<div class="dnone">{{event.description | limitTo : 60 }}</div>

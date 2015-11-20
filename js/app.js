@@ -145,6 +145,9 @@ var eventData = (function () {
     return json;
 })(); 
 
+// get current date
+var currDate = new Date();
+
 // get actual event list
 var actualEvents = (function(){
     var eventsAll = [];
@@ -188,10 +191,6 @@ var actualEvents = (function(){
     events = arr;
     return events;
 })();
-
-// get current date
-var currDate = new Date();
-
 
 // configure our routes
 eventApp.config(function($routeProvider) {
@@ -238,6 +237,7 @@ eventApp.controller('EventNav', function ($scope, $location) {
 eventApp.controller('EventListCtrl', function ($scope) {
     $scope.events = [];
     $scope.events = actualEvents;
+    $scope.currDate = moment(currDate).format("YYYY-MM-DD");
 });
 
 // event single 
@@ -361,7 +361,10 @@ eventApp.controller('AddEventCtrl', ['$scope', 'Upload', '$timeout', function ($
         phone: $scope.phone, 
         description: $scope.description
       }
-    });
+    }).success(function(data) {
+        $(".form-success").append('<p class="bg-success text-center text-success"><br/>Дякуємо! Подію додано. Після перевірки вона з\'явиться на сайті<br/><br/></p>');
+        $("#eventForm").remove();
+      });
 
     file.upload.then(function (response) {
       $timeout(function () {
