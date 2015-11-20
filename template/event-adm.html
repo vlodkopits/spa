@@ -1,0 +1,139 @@
+﻿<div class="container" >
+	<div class="h45p"></div>
+	<div class="w100p mt10">
+		<div class="col-lg-12">
+			<i class="fa fa-search blue"></i> Знайти подію:
+			<input type="text" ng-model="search">
+		</div>
+		<div class="clr mb10"></div>
+		<div class="col-lg-12 ">
+			<button class="btn active disabled mb5 filter_cat_all"><i class="fa fa-asterisk "></i> <span class="hidden-xs">всі</span></button>
+			<button class="btn bg-red cat_1 mb5 filter_cat_1"><i class="fa fa-music "></i> <span class="hidden-xs">музика</span></button>
+			<button class="btn bg-green cat_2 mb5 filter_cat_2"><i class="fa fa-film "></i> <span class="hidden-xs">кіно</span></button>
+			<button class="btn bg-blue cat_3 mb5 filter_cat_3"><i class="fa fa-picture-o "></i> <span class="hidden-xs">виставки</span></button>
+			<button class="btn bg-yellow cat_4 mb5 filter_cat_4"><i class="fa fa-users "></i> <span class="hidden-xs">театр</span></button>
+			<button class="btn bg-dblue cat_5 mb5 filter_cat_5"><i class="fa fa-smile-o "></i> <span class="hidden-xs">фестивалі</span></button>
+			<button class="btn bg-grey cat_6 mb5 filter_cat_6"><i class="fa fa-graduation-cap "></i> <span class="hidden-xs">презентації/лекції</span></button>
+			<button class="btn bg-brown cat_7 mb5 filter_cat_7"><i class="fa fa-globe "></i> <span class="hidden-xs">інше</span></button>
+			<div class="clr"></div>
+			<button class="btn bg-red"><i class="fa fa-ban"></i> disable</button>
+			<button class="btn bg-green"><i class="fa fa-check"></i> enable</button>
+			<button class="btn bg-grey"><i class="fa fa-globe "></i> out of date</button>
+		</div>
+		<div class="clr mb10"></div>
+	</div>
+    
+	<div class="event-list-item" ng-repeat="event in events | orderBy: 'dates[0].date' | filter : search " >
+		<div class=" link_cat_{{event.category}} link_cat_all cat_{{event.category}}_border pt10 pb10" data-id="{{event.category}}" >
+			<div class="col-lg-1">
+				<span class="">
+					<a href="#event/{{event.id}}">
+						<img ng-src="{{event.image}}" class="img-responsive " alt="{{event.title}}" />
+					</a>
+				</span>
+				<span class="dnone btn cat_{{event.category}} filter_cat_{{event.category}}">{{event.category}}</span>
+			</div>
+
+			<div class="col-lg-7">
+				<h3 class="show_event_{{event.id}}"><a href="#event/{{event.id}}">{{event.title}}</a></h3>
+				<div class="mt10 list_dates">
+					<i class="fa fa-calendar blue fl"></i> 
+					<div class="fl fsize11 ml5">
+						<span ng-repeat="date in event.dates" ng-hide="(currDate | date: 'yyyy-MM-dd') > date.date" >
+							<strong >{{date.date | date: 'd MMMM yyyy'}}<span ng-show="date.timefrom.length && date.timetill.length"><i class="fa fa-clock-o blue ml5 mr5"></i>{{date.timefrom}}-{{date.timetill}}</span></strong><br/>
+						</span>
+						<span ng-show="(currDate | date: 'yyyy-MM-dd') > event.dates[event.dates.length-1].date" class="text-danger">
+							ця подія вже відбулася
+						</span>
+					</div>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+				<div class="mt10">
+					<i class="fa fa-map-marker blue"></i> <span class="fsize11">{{event.location}}</span>
+				</div>
+				<div class="mt10" ng-show="event.tickets.length">
+					<i class="fa fa-ticket blue"></i> {{event.tickets}}
+					<span ng-show="event.tickets_link.length"><a href="{{event.tickets_link}}" target="_blank" class="btn bg-yellow">купити</a></span>
+				</div>
+
+				<div class="dnone">{{event.description | limitTo : 60 }}</div>
+			</div>	
+			<div class="col-lg-4">
+				
+		        <button class="btn bg-green mb5" ng-show="event.enable == 0"><i class="fa fa-check"></i> enable</button>
+		        <button class="btn bg-red mb5" ng-show="event.enable == 1"><i class="fa fa-ban"></i> disable</button>
+			    
+				<button class="btn bg-green mb5"><i class="fa fa-pencil-square-o"></i> edit</button>
+				<button class="btn bg-red mb5"><i class="fa fa-trash"></i> delete</button>
+			</div>
+
+			<div class="clr"></div>
+		</div>
+	</div>
+	
+	<div class="clr"></div>
+</div>
+<div class="contact mt5 ">
+	<div class="container"><i class="fa fa-envelope-o"></i> eventsmapme@gmail.com</div>
+</div>
+<script>
+$(function(){
+
+    $(".filter_cat_all").click(function(){    	
+        $("button.btn").removeClass("active disabled");
+		$(this).addClass("active disabled");
+        $(".link_cat_all").show();
+    });
+
+    $(".filter_cat_1").click(function(){
+	    	$("button.btn").removeClass("active disabled");
+	    	$(this).addClass("active disabled");
+	        $(".link_cat_all").hide();
+	        $(".link_cat_1").show();
+	});
+
+	$(".filter_cat_2").click(function(){
+	    	$("button.btn").removeClass("active disabled");
+	    	$(this).addClass("active disabled");
+	        $(".link_cat_all").hide();
+	        $(".link_cat_2").show();
+	});
+
+	$(".filter_cat_3").click(function(){
+	    	$("button.btn").removeClass("active disabled");
+	    	$(this).addClass("active disabled");
+	        $(".link_cat_all").hide();
+	        $(".link_cat_3").show();
+	});
+
+	$(".filter_cat_4").click(function(){
+	    	$("button.btn").removeClass("active disabled");
+	    	$(this).addClass("active disabled");
+	        $(".link_cat_all").hide();
+	        $(".link_cat_4").show();
+	});
+
+	$(".filter_cat_5").click(function(){
+	    	$("button.btn").removeClass("active disabled");
+	    	$(this).addClass("active disabled");
+	        $(".link_cat_all").hide();
+	        $(".link_cat_5").show();
+	});
+
+	$(".filter_cat_6").click(function(){
+	    	$("button.btn").removeClass("active disabled");
+	    	$(this).addClass("active disabled");
+	        $(".link_cat_all").hide();
+	        $(".link_cat_6").show();
+	});
+
+	$(".filter_cat_7").click(function(){
+	    	$("button.btn").removeClass("active disabled");
+	    	$(this).addClass("active disabled");
+	        $(".link_cat_all").hide();
+	        $(".link_cat_7").show();
+	});
+	
+});
+</script>

@@ -128,7 +128,8 @@ $provide.value("$locale", {
 });
 }]);
 
-// get data from db
+
+// get enable event from db
 var eventData = (function () {
     var json = null;
     $.ajax({
@@ -218,9 +219,15 @@ eventApp.config(function($routeProvider) {
         .when('/event/:eventId', {
             templateUrl : 'template/event-single.html',
             controller  : 'SingleEventCtrl'
-        }).
+        })
 
-        otherwise({
+        // route for the single page
+        .when('/iadmin', {
+            templateUrl : 'template/event-adm.html',
+            controller  : 'AdminEventCtrl'
+        })
+
+        .otherwise({
             redirectTo: '/'
         });
 
@@ -465,5 +472,25 @@ eventApp.controller ('EventMapCtrl',function ($scope){
     }
 });
 
+// admin events
+eventApp.controller('AdminEventCtrl', function ($scope) {
+    // get all event from db
+    var eventDataAll = (function () {
+        var json = null;
+        $.ajax({
+            'async': false,
+            'global': false,
+            'cache':false,
+            'url': 'adm/alleventslist.php',
+            'dataType': "json",
+            'success': function (data) {
+                json = data;
+            }
+        });
+        return json;
+    })(); 
 
-// https://picasaweb.google.com/data/feed/api/user/116374279215199619229/albumid/6214043858470050065
+    $scope.events = [];
+    $scope.events = eventDataAll;
+    $scope.currDate = moment(currDate).format("YYYY-MM-DD");
+});
