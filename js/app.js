@@ -157,24 +157,31 @@ var actualEvents = (function(){
     currDate = moment(currDate).format("YYYY-MM-DD");
 
     for (var i=0; i<eventsAll.length; i++){
-            for (var b=0; b<eventsAll[i].dates.length; b++){
-                var compareDate = eventsAll[i].dates[b].date >= currDate; 
-                    if(compareDate==true){
-                        if(events.length==0){
-                            events.push(eventsAll[i]);
-                        }else if (events.length>0){
-                            for (var j=0; j<events.length; j++){
-                                var isEvent = (events[j].id) == (eventsAll[i].id);
-                                    if(isEvent==true){
-                                    }
-                                    else {
-                                        events.push(eventsAll[i]);
-                                    }
-                            }
-                        }
-                    }
-            }
+      for (var b=0; b<eventsAll[i].dates.length; b++){
+          var compareDate = eventsAll[i].dates[b].date >= currDate; 
+          
+          if(compareDate==true){
+              
+              if(events.length==0){
 
+                events.push(eventsAll[i]);
+
+              } else if (events.length>0){
+                  
+                for (var j=0; j<events.length; j++){
+
+                  var isEvent = (events[j].id) == (eventsAll[i].id);
+                  
+                  if(isEvent==true){
+                      
+                  }
+                  else {
+                    events.push(eventsAll[i]);
+                  }
+                }                
+              }
+          }
+      }
     }
     // remove dublicate id
     var arr = events;
