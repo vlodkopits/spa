@@ -314,18 +314,16 @@ eventApp.controller('AddEventCtrl', ['$scope', 'Upload', '$timeout', function ($
       $("#event_timefrom").timepicker({ 'timeFormat': 'H:i','step': 15, 'disableTextInput': true });
       $("#event_timetill").timepicker({ 'timeFormat': 'H:i','step': 15, 'disableTextInput': true });
 
-      $("#event_date").change(function() {
         
-        $("#btn_add_date").click(function(){
-          var selectDate =  $( "#event_date").datepicker( "getDate" );
-          var date = moment(selectDate).format("YYYY-MM-DD");
-          $("#event_dates_list").append('<div class="select_date"><div class="col-lg-6 mr10 date" id="'+date+'" data-val="'+date+'">'+ $("#event_date").val() +'</div><div class="col-lg-2 mr10 timefrom" >'+ $("#event_timefrom").val() +'</div><div class="col-lg-2 mr10 timetill" >'+ $("#event_timetill").val() +'</div><i class="fa fa-times fa-2x" id="date_del"></i></div><div class="clr"></div>');
-          $("#event_date").val("").removeClass("ng-dirty ng-valid-parse ng-valid ng-valid-required").addClass("ng-invalid ng-invalid-required");
-          $("#event_timefrom").val("");
-          $("#event_timetill").val("");     
-        });
-        
+      $("#btn_add_date").click(function(){
+        var selectDate =  $( "#event_date").datepicker( "getDate" );
+        var date = moment(selectDate).format("YYYY-MM-DD");
+        $("#event_dates_list").append('<div class="select_date"><div class="col-lg-6 mr10 date" id="'+date+'" data-val="'+date+'">'+ $("#event_date").val() +'</div><div class="col-lg-2 mr10 timefrom" >'+ $("#event_timefrom").val() +'</div><div class="col-lg-2 mr10 timetill" >'+ $("#event_timetill").val() +'</div><i class="fa fa-times fa-2x" id="date_del"></i></div><div class="clr"></div>');
+        $("#event_date").val("").removeClass("ng-dirty ng-valid-parse ng-valid ng-valid-required").addClass("ng-invalid ng-invalid-required");
+        $("#event_timefrom").val("");
+        $("#event_timetill").val("");     
       });
+        
 
       $(document).on("click", "#date_del", function(){
          $(this).parent('.select_date').remove();
@@ -392,7 +390,7 @@ eventApp.controller('AddEventCtrl', ['$scope', 'Upload', '$timeout', function ($
 // big map with events 
 eventApp.controller ('EventMapCtrl',function ($scope){
   var mapOptions = {
-        zoom: 13,
+        zoom: 14,
         center: new google.maps.LatLng(49.832, 24.012),
         mapTypeId: google.maps.MapTypeId.ROADMAP
     }
@@ -445,25 +443,20 @@ eventApp.controller ('EventMapCtrl',function ($scope){
             icon: mapIcon
         });
         oms.addMarker(marker);
-        var infoContent = { content:'<h2><a href="#event/'+info.id+'">' + marker.title + '</a></h2><div class="infoWindowContent"><img src="'+ info.image +'" alt="" class="img-responsive" style="max-width: 200px;" /></div>'}
+        var infoContent = { content:'<h2><a href="#event/'+ info.id +'">' + marker.title + '</a></h2><div class="infoWindowContent"><img src="'+ info.image +'" alt="" class="img-responsive" style="max-width: 200px;" /></div>'}
         var infoWindow = new google.maps.InfoWindow(infoContent);
-        //marker.content = '<div class="infoWindowContent"><img src="'+ info.image +'" alt="" class="img-responsive" style="max-width: 200px;" /></div>';
         infoWindows.push(infoWindow);
         google.maps.event.addListener(marker, 'click', function(){
-            //infoWindow.setContent('<h2><a href="#event/'+info.id+'">' + marker.title + '</a></h2>' + marker.content);
             closeInfoWindows();
             infoWindow.open($scope.map, marker);
         });
         
-        //$scope.markers.push(marker);        
     }  
 
     for (i = 0; i < actualEvents.length; i++){
         //createMarker(actualEvents[i]);
        $scope.markers.push(createMarker($scope.map, actualEvents[i], oms));
     }
-
-    //var markerCluster = new MarkerClusterer($scope.map, $scope.markers,{zoomOnClick:false});
 
     
     $scope.openInfoWindow = function(e, selectedMarker){
