@@ -75,7 +75,7 @@ nav a:hover, nav a.active{color: #fff; background-color: #23527c; text-decoratio
 .event-caption {position: absolute; bottom: 0; left: 0; right: 0; background: rgba(250,250,260,0.8); padding: 5px 20px;}
 .select_date input {width: 100px; display:inline-block; margin:0 5px;}
 .list_dates {max-height: 30px; overflow: hidden;}
-.event_fav {position: absolute; bottom: 10px; right: 20px; z-index: 2;}
+.event_fav {position: absolute; bottom: 10px; right: 20px; z-index: 2; cursor: pointer;}
 
 /* Custom, iPhone Retina */ 
 @media only screen and (min-width : 320px) {
