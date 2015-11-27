@@ -1,8 +1,48 @@
 ﻿<div class="container" >
-	<div class="h45p"></div>
+	<div class="h45p {{myLogin}}"></div>	
+	{{myLogin}}
+	<br/>
 	<fb:login-button scope="public_profile,email" autologoutlink="true"></fb:login-button>
-
 	<div id="status"></div>
+	
+	<div class="my_events" ng-show="showMyEvents.length">
+		my favorites events
+		<div class="event-list-item" ng-repeat="event in myEvents | orderBy: 'dates[0].date' | filter : search " >
+			<div class="mb5 col-md-4 col-lg-3 link_cat_{{event.category}} link_cat_all cat_{{event.category}}_border pt10 pb10" data-id="{{event.category}}" style="height: 300px; overflow:hidden;">
+				<div class="">
+					<span class="event-img">
+						<a href="#event/{{event.id}}">
+							<img ng-src="{{event.image}}" class="img-responsive " alt="{{event.title}}" />
+						</a>
+					</span>
+					<span class="dnone btn cat_{{event.category}} filter_cat_{{event.category}}">{{event.category}}</span>
+				</div>
+
+				<div class="event-caption">
+					<h3 class="show_event_{{event.id}}"><a href="#event/{{event.id}}">{{event.title}}</a></h3>
+					<div class="mt10 list_dates">
+						<i class="fa fa-calendar blue fl"></i> 
+						<div class="fl fsize11 ml5">
+							<span ng-repeat="date in event.dates" ng-hide="(currDate | date: 'yyyy-MM-dd') > date.date" >
+								<strong >{{date.date | date: 'd MMMM yyyy'}}<span ng-show="date.timefrom.length && date.timetill.length"><i class="fa fa-clock-o blue ml5 mr5"></i>{{date.timefrom}}-{{date.timetill}}</span></strong><br/>
+							</span>
+						</div>
+						<div class="clr"></div>
+					</div>
+					<div class="clr"></div>
+					<div class="mt10">
+						<i class="fa fa-map-marker blue"></i> <span class="fsize11">{{event.location}}</span>
+					</div>
+					<div class="mt10" ng-show="event.tickets.length">
+						<i class="fa fa-ticket blue"></i> {{event.tickets}}
+						<span ng-show="event.tickets_link.length"><a href="{{event.tickets_link}}" target="_blank" class="btn bg-yellow">купити</a></span>
+					</div>
+
+				</div>			
+				<div class="clr"></div>
+			</div>
+		</div>
+	</div>
 </div>
 <div class="contact mt5 ">
 	<div class="container"><i class="fa fa-envelope-o"></i> eventsmapme@gmail.com</div>
