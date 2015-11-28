@@ -154,7 +154,6 @@ var eventData = (function () {
         'global': false,
         'cache':false,
         'url': 'adm/eventslist.php',
-        //'url': 'data/events.json',
         'dataType': "json",
         'success': function (data) {
             json = data;
@@ -546,16 +545,5 @@ eventApp.controller('AdminEventCtrl', function ($scope) {
 
 // login 
 eventApp.controller('LoginEventCtrl', function ($scope) {
-    FB.login(function(response) {// fb login as soon as the ui loads
-        if (response.authResponse) {
-            FB.api('/me', function(response) {
-                console.log(JSON.stringify(response));
-                $scope.$apply(function() {
-                   $scope.n=response.name;
-                });
-            });
-        } else {
-            //do nothing..
-        }
-    });
+  $scope.MyEvents=[];
 });

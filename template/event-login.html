@@ -5,8 +5,8 @@
 	<fb:login-button scope="public_profile,email" autologoutlink="true"></fb:login-button>
 	<div id="status"></div>
 	
-	<div class="my_events" ng-show="showMyEvents.length">
-		my favorites events
+	<h1>Мої вибрані події:</h1>
+	<div class="my_events" ng-show="MyEvents.length">
 		<div class="event-list-item" ng-repeat="event in myEvents | orderBy: 'dates[0].date' | filter : search " >
 			<div class="mb5 col-md-4 col-lg-3 link_cat_{{event.category}} link_cat_all cat_{{event.category}}_border pt10 pb10" data-id="{{event.category}}" style="height: 300px; overflow:hidden;">
 				<div class="">
