@@ -6,8 +6,8 @@
 	<div id="status"></div>
 	
 	<h1>Мої вибрані події:</h1>
-	<div class="my_events" ng-show="MyEvents.length">
-		<div class="event-list-item" ng-repeat="event in myEvents | orderBy: 'dates[0].date' | filter : search " >
+	<div class="my_events" >
+		<div class="event-list-item" ng-repeat="event in my_events | orderBy: 'dates[0].date' | filter : search " >
 			<div class="mb5 col-md-4 col-lg-3 link_cat_{{event.category}} link_cat_all cat_{{event.category}}_border pt10 pb10" data-id="{{event.category}}" style="height: 300px; overflow:hidden;">
 				<div class="">
 					<span class="event-img">

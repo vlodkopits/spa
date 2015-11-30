@@ -216,6 +216,22 @@ var actualEvents = (function(){
     return events;
 })();
 
+// get user event from db
+  var myEventData = (function () {
+      var json = null;
+      $.ajax({
+          'async': true,
+          'global': false,
+          'cache':false,
+          'url': 'adm/myeventslist.php',
+          'dataType': "json",
+          'success': function (data) {
+              json = data;
+          }
+      });
+      return json;
+  })();
+
 // configure our routes
 eventApp.config(function($routeProvider) {
 
@@ -520,30 +536,10 @@ eventApp.controller ('EventMapCtrl',function ($scope){
     }
 });
 
-// admin events
-eventApp.controller('AdminEventCtrl', function ($scope) {
-    // get all event from db
-    var eventDataAll = (function () {
-        var json = null;
-        $.ajax({
-            'async': false,
-            'global': false,
-            'cache':false,
-            'url': 'adm/alleventslist.php',
-            'dataType': "json",
-            'success': function (data) {
-                json = data;
-            }
-        });
-        return json;
-    })(); 
-
-    $scope.events = [];
-    $scope.events = eventDataAll;
-    $scope.currDate = moment(currDate).format("YYYY-MM-DD");
-});
-
 // login 
-eventApp.controller('LoginEventCtrl', function ($scope) {
-  $scope.MyEvents=[];
+eventApp.controller('LoginEventCtrl', function ($scope, $filter) {
+  $scope.myEvents = myEventData;
+  $scope.events = [];
+  $scope.events = eventData;
+  $scope.my_events = $filter('filter')(eventData, function (d) {return d.id === 1;})[0];
 });
