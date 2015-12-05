@@ -128,23 +128,8 @@ $provide.value("$locale", {
 });
 }]);
 
-//facebook
-window.fbAsyncInit = function() {
-  FB.init({
-    appId      : '1646414425628343',
-    xfbml      : true,
-    version    : 'v2.5'
-  });
-};
-
-(function(d, s, id){
-   var js, fjs = d.getElementsByTagName(s)[0];
-   if (d.getElementById(id)) {return;}
-   js = d.createElement(s); js.id = id;
-   js.src = "//connect.facebook.net/en_US/sdk.js";
-   fjs.parentNode.insertBefore(js, fjs);
- }(document, 'script', 'facebook-jssdk'));
-
+// oauth
+OAuth.initialize('5coariDVtPJg-TXDGF49z_TVvrY');
 
 // get enable event from db
 var eventData = (function () {
@@ -216,22 +201,6 @@ var actualEvents = (function(){
     return events;
 })();
 
-// get user event from db
-  var myEventData = (function () {
-      var json = null;
-      $.ajax({
-          'async': true,
-          'global': false,
-          'cache':false,
-          'url': 'adm/myeventslist.php',
-          'dataType': "json",
-          'success': function (data) {
-              json = data;
-          }
-      });
-      return json;
-  })();
-
 // configure our routes
 eventApp.config(function($routeProvider) {
 
@@ -267,9 +236,9 @@ eventApp.config(function($routeProvider) {
         })
 
         // route for the admin page
-        .when('/login', {
-            templateUrl : 'template/event-login.html',
-            controller  : 'LoginEventCtrl'
+        .when('/user', {
+            templateUrl : 'template/event-user.html',
+            controller  : 'UserEventCtrl'
         })
 
         .otherwise({
@@ -536,10 +505,19 @@ eventApp.controller ('EventMapCtrl',function ($scope){
     }
 });
 
-// login 
-eventApp.controller('LoginEventCtrl', function ($scope, $filter) {
-  $scope.myEvents = myEventData;
-  $scope.events = [];
-  $scope.events = eventData;
-  $scope.my_events = $filter('filter')(eventData, function (d) {return d.id === 1;})[0];
+// event nav 
+eventApp.controller('UserEventCtrl', function ($scope) {
+  OAuth.popup('facebook')
+  .done(function(result) {
+      result.get('/me')
+      .done(function (response) {
+          $scope.name = response.name; 
+      })
+      .fail(function (err) {
+          //handle error with err
+      });
+  })
+  .fail(function (err) {
+      //handle error with err
+  });
 });
