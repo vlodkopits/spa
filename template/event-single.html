@@ -1,4 +1,4 @@
-﻿<div class="container" >
+﻿<div class="container" ng-controller="SingleEventCtrl">
 	<div class="h45p"></div>
 	<div class="event-single-item mt10" >
 
@@ -27,7 +27,6 @@
 					<i class="fa fa-ticket blue"></i> {{event_single.tickets}} 
 					<span ng-show="event_single.tickets_link.length"><a href="{{event_single.tickets_link}}" target="_blank" class="btn bg-yellow bm10">Купити квиток</a></span>
 				</div>
-				<div class="event_fav"><i class="fa fa-heart fa-2x text-muted"></i></div>
 			</div>
 			<div class="clr"></div>
 			<div class="mt10 mb10" ng-bind-html="event_single.description">{{event_single.description}}</div>
@@ -48,6 +47,9 @@
 			<div class="mb10" ng-show="event_single.web.length>0"><i class="fa fa-link blue"></i> {{event_single.web}}</div>
 			<div class="mb10" ng-show="event_single.email.length>0"><i class="fa fa-envelope-o blue"></i> {{event_single.email}}</div>
 			<div class="mb10" ng-show="event_single.phone.length>0"><i class="fa fa-phone blue"></i> {{event_single.phone}}</div>
+			<div class="mb10">
+				<a href="https://www.facebook.com/eventsmap/" target="_blank"><img src="images/fb_btn.png" class="img-responsive" alt="facebook"></a>
+			</div>
 		</div>
 	</div>
 	<div class="clr"></div>
