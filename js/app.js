@@ -128,9 +128,6 @@ $provide.value("$locale", {
 });
 }]);
 
-// oauth
-OAuth.initialize('5coariDVtPJg-TXDGF49z_TVvrY');
-
 // get enable event from db
 var eventData = (function () {
     var json = null;
@@ -157,31 +154,24 @@ var actualEvents = (function(){
     var events = [];
     currDate = moment(currDate).format("YYYY-MM-DD");
 
-    for (var i=0; i<eventsAll.length; i++){
-      for (var b=0; b<eventsAll[i].dates.length; b++){
-          var compareDate = eventsAll[i].dates[b].date >= currDate; 
-          
-          if(compareDate==true){
-              
-              if(events.length==0){
-
-                events.push(eventsAll[i]);
-
-              } else if (events.length>0){
-                  
-                for (var j=0; j<events.length; j++){
-
-                  var isEvent = (events[j].id) == (eventsAll[i].id);
-                  
-                  if(isEvent==true){
-                      
-                  }
-                  else {
-                    events.push(eventsAll[i]);
-                  }
-                }                
+    for (var i=0; i < eventsAll.length; i++){
+      for (var b=0; b < eventsAll[i].dates.length; b++){
+        var compareDate = eventsAll[i].dates[b].date >= currDate; 
+        
+        if(compareDate == true){              
+          if(events.length == 0){
+            events.push(eventsAll[i]);
+          } else if (events.length > 0){                  
+            for (var j=0; j < events.length; j++){
+              var isEvent = (events[j].id) == (eventsAll[i].id);                
+              if(isEvent == true){                      
               }
+              else {
+                events.push(eventsAll[i]);
+              }
+            }                
           }
+        }
       }
     }
     // remove dublicate id
@@ -227,18 +217,6 @@ eventApp.config(function($routeProvider) {
         .when('/event/:eventId', {
             templateUrl : 'template/event-single.html',
             controller  : 'SingleEventCtrl'
-        })
-
-        // route for the admin page
-        .when('/iadmin', {
-            templateUrl : 'template/event-adm.html',
-            controller  : 'AdminEventCtrl'
-        })
-
-        // route for the admin page
-        .when('/user', {
-            templateUrl : 'template/event-user.html',
-            controller  : 'UserEventCtrl'
         })
 
         .otherwise({
@@ -503,21 +481,4 @@ eventApp.controller ('EventMapCtrl',function ($scope){
         e.preventDefault();
         google.maps.event.trigger(selectedMarker, 'click');
     }
-});
-
-// event nav 
-eventApp.controller('UserEventCtrl', function ($scope) {
-  OAuth.popup('facebook')
-  .done(function(result) {
-      result.get('/me')
-      .done(function (response) {
-          $scope.name = response.name; 
-      })
-      .fail(function (err) {
-          //handle error with err
-      });
-  })
-  .fail(function (err) {
-      //handle error with err
-  });
 });

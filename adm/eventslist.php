@@ -1,4 +1,5 @@
 <? 
+//header('Content-Type: application/json');
 echo "[";
 include 'config.php'; 
 
@@ -10,6 +11,24 @@ $result=mysql_query($sql);
 
 while($row=mysql_fetch_array($result)) 
 { 
+/*
+$id=$row['id'];
+$image=$row['image']; 
+$title=$row['title'];
+$category=$row['category'];	
+$location=$row['location']; 
+$location_addr=$row['location_addr']; 
+$lat=$row['lat'];
+$lng=$row['lng'];
+$dates=$row['dates']; 
+$tickets=$row['tickets']; 
+$tickets_link=$row['tickets_link'];
+$web=$row['web']; 
+$email=$row['email']; 
+$phone=$row['phone'];
+$description=$row['description'];
+$enable=$row['enable'];
+*/
 	
 	$event_img = str_replace('"', '', json_encode($row['image']));
         

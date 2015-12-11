@@ -34,7 +34,7 @@
 				<div class="mt10 list_dates">
 					<i class="fa fa-calendar blue fl"></i> 
 					<div class="fl fsize11 ml5">
-						<span ng-repeat="date in event.dates" ng-hide="(currDate | date: 'yyyy-MM-dd') > date.date" >
+						<span ng-repeat="date in event.dates | limitTo:2" ng-hide="(currDate | date: 'yyyy-MM-dd') > date.date" >
 							<strong >{{date.date | date: 'd MMMM yyyy'}}<span ng-show="date.timefrom.length && date.timetill.length"><i class="fa fa-clock-o blue ml5 mr5"></i>{{date.timefrom}}-{{date.timetill}}</span></strong><br/>
 						</span>
 					</div>
