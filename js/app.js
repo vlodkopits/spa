@@ -128,7 +128,7 @@ $provide.value("$locale", {
 });
 }]);
 
-.factory('AllEventData', function() {
+eventApp.factory('AllEventData', function() {
   // get enable event from db
   var eventData = (function () {
       var json = null;
@@ -149,10 +149,10 @@ $provide.value("$locale", {
     all: function() {
       return eventData;
     },
-    get: function(eventId) {
-      for (var i = 0; i < chats.length; i++) {
-        if (events[i].id === parseInt(eventId)) {
-          return events[i];
+    single: function(eventId) {
+      for (var i = 0; i < eventData.length; i++) {
+        if (eventData[i].id == parseInt(eventId)) {
+          return eventData[i];
         }
       }
       return null;
@@ -178,7 +178,7 @@ var eventData = (function () {
 
 // get current date
 var currDate = new Date();
-
+/*
 // get actual event list
 var actualEvents = (function(){
     var eventsAll = [];
@@ -222,7 +222,7 @@ var actualEvents = (function(){
     events = arr;
     return events;
 })();
-
+*/
 // configure our routes
 eventApp.config(function($routeProvider) {
 
@@ -264,6 +264,37 @@ eventApp.controller('EventNav', function ($scope, $location) {
     };
 });
 
+// events list
+eventApp.controller('EventListCtrl', function ($scope, AllEventData) {
+ $scope.events = AllEventData.all();
+ $scope.currDate = moment(currDate).format("YYYY-MM-DD");
+  $(function(){
+
+      $(".filter_cat_all").click(function(){      
+        $("button.btn").removeClass("active disabled");
+        $(this).addClass("active disabled");
+        $(".link_cat_all").show();
+      });
+
+      function FilterCat(i) {
+        $(".filter_cat_" + i).click(function(){
+          $("button.btn").removeClass("active disabled");
+          $(this).addClass("active disabled");
+            $(".link_cat_all").hide();
+            $(".link_cat_" + i).show();
+        });
+      }
+
+      cat_1 = new FilterCat(1);
+      cat_2 = new FilterCat(2);
+      cat_3 = new FilterCat(3);
+      cat_4 = new FilterCat(4);
+      cat_5 = new FilterCat(5);
+      cat_6 = new FilterCat(6);
+      cat_7 = new FilterCat(7);
+    }); 
+});
+/*
 // event list 
 eventApp.controller('EventListCtrl', function ($scope) {
     $scope.events = [];
@@ -296,8 +327,9 @@ eventApp.controller('EventListCtrl', function ($scope) {
       cat_7 = new FilterCat(7);
     });
 });
-
+*/
 // event single 
+/*
 eventApp.controller('SingleEventCtrl', ['$scope', '$routeParams', '$filter',
   function($scope, $routeParams, $filter) {
     $scope.currDate = currDate;
@@ -321,6 +353,26 @@ eventApp.controller('SingleEventCtrl', ['$scope', '$routeParams', '$filter',
     });    
 
 }]);
+*/
+eventApp.controller('SingleEventCtrl', function ($scope, $routeParams, AllEventData) {
+  $scope.event_single = AllEventData.single($routeParams.eventId);
+
+  var Latlng = new google.maps.LatLng($scope.event_single.lat, $scope.event_single.lng);
+    var mapOptions = {
+        zoom: 16,
+        center: Latlng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+
+    $scope.map = new google.maps.Map(document.getElementById('eventmap'), mapOptions);
+    
+    var marker = new google.maps.Marker({
+        position: Latlng,
+        map: $scope.map,
+        title: $scope.event_single.location,
+        icon: 'images/map_'+$scope.event_single.category+'.png'
+    });
+})
 
 
 //add event
