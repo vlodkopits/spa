@@ -9,6 +9,7 @@ h3  {font-size: 18px;}
 a {color:#2196F3; text-decoration: none;}
 a:hover{}
 input,select,textarea{padding: 5px; border: 1px solid #ccc; display: block; border-radius: 0; border-color: #2196F3; width: 100%;}
+.content_main {min-height: 100%;  height: 100%;}
 
 .fsize12 {font-size: 12px;}
 .fsize11 {font-size: 11px;}
@@ -64,7 +65,7 @@ input,select,textarea{padding: 5px; border: 1px solid #ccc; display: block; bord
 header {background-color: #2196F3; width: 100%; position: fixed; width: 100%; z-index: 7; top: 0;}
 .contact {background-color: #2196F3; padding: 5px 0; color: #fff;}
 nav > span:first-child {padding: 0;}
-nav > span{ width: 20%; display: inline-block; text-align: center;  float:left; }
+nav > span{ width: 25%; display: inline-block; text-align: center;  float:left;}
 nav > span.active{background-color: #1565C0; color: #fff;}
 /*nav span img {margin: auto;}*/
 nav a {color:#fff; text-align: center; text-transform: uppercase; font-size: 19px; display: block; text-decoration: none; padding: 6px 0 12px;}
@@ -75,11 +76,12 @@ nav a:hover, nav a.active{color: #fff; background-color: #23527c; text-decoratio
 .event-caption {position: absolute; bottom: 0; left: 0; right: 0; background: rgba(250,250,260,0.8); padding: 5px 20px;}
 .select_date input {width: 100px; display:inline-block; margin:0 5px;}
 .list_dates {max-height: 30px; overflow: hidden;}
-.event_fav {position: absolute; bottom: 10px; right: 20px; z-index: 2; cursor: pointer;}
 
 /* Custom, iPhone Retina */ 
 @media only screen and (min-width : 320px) {
 	button.btn.active span { display: inline !important;}
+	/*.container {max-width: 300px;}
+	[class*='col-'] {width: 100%;}*/
 	nav > span span {display: none;}
 
 }
@@ -87,23 +89,28 @@ nav a:hover, nav a.active{color: #fff; background-color: #23527c; text-decoratio
 /* Extra Small Devices, Phones */ 
 @media only screen and (min-width : 480px) {
 	button.btn.active span { display: inline !important;}
+	/*.container {max-width: 460px;}
+	[class*='col-'] {width: 100%;}*/
 	nav > span span {display: none;}
 }
 
 /* Small Devices, Tablets */
 @media only screen and (min-width : 768px) {
+	/*.container {max-width: 748px;}*/
 	nav > span span {display: inlin-block;}
-	nav > span, nav span.logo {width:20%;}
+	nav > span, nav span.logo {width:25%;}
 }
 
 /* Medium Devices, Desktops */
 @media only screen and (min-width : 992px) {
+	/*.container {max-width: 972px;}*/
 	nav > span span {display: inline-block;}
-	nav > span, nav span.logo {width:20%;}
+	nav > span, nav span.logo {width:25%;}
 }
 
 /* Large Devices, Wide Screens */
 @media only screen and (min-width : 1200px) {
+	/*.container {max-width: 1180px;}*/
 	nav > span span {display: inline-block;}
-	nav > span, nav span.logo {width:20%;}
-}
+	nav > span, nav span.logo {width:25%;}
+	}

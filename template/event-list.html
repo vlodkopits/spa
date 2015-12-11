@@ -1,4 +1,4 @@
-﻿<div class="container" >
+﻿<div class="container content_block" >
 	<div class="h45p"></div>
 	<div class="w100p mt10">
 		<div class="col-lg-12">
@@ -49,6 +49,7 @@
 					<span ng-show="event.tickets_link.length"><a href="{{event.tickets_link}}" target="_blank" class="btn bg-yellow">купити</a></span>
 				</div>
 
+				<div class="dnone">{{event.description | limitTo : 60 }}</div>
 			</div>			
 			<div class="clr"></div>
 		</div>

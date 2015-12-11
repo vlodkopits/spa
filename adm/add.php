@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `events` (
   $title = addslashes ($_POST['title']);
   $category = $_POST['category'];
   $location = addslashes ($_POST['elocation']);
-  $locationaddr = $_POST['locationaddr'];
+  $locationaddr = addslashes ($_POST['locationaddr']);
   $lat = $_POST['lat'];
   $lng = $_POST['lng'];
   $dates = $_POST['dates'];
