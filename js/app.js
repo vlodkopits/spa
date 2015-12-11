@@ -128,6 +128,38 @@ $provide.value("$locale", {
 });
 }]);
 
+.factory('AllEventData', function() {
+  // get enable event from db
+  var eventData = (function () {
+      var json = null;
+      $.ajax({
+          'async': false,
+          'global': false,
+          'cache':false,
+          'url': 'adm/eventslist.php',
+          'dataType': "json",
+          'success': function (data) {
+              json = data;
+          }
+      });
+      return json;
+  })(); 
+
+  return {
+    all: function() {
+      return eventData;
+    },
+    get: function(eventId) {
+      for (var i = 0; i < chats.length; i++) {
+        if (events[i].id === parseInt(eventId)) {
+          return events[i];
+        }
+      }
+      return null;
+    }
+  };
+});
+
 // get enable event from db
 var eventData = (function () {
     var json = null;
