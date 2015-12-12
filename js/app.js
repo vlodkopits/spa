@@ -128,6 +128,9 @@ $provide.value("$locale", {
 });
 }]);
 
+// get current date
+var currDate = new Date();
+
 eventApp.factory('AllEventData', function() {
   // get enable event from db
   var eventData = (function () {
@@ -156,73 +159,24 @@ eventApp.factory('AllEventData', function() {
         }
       }
       return null;
+    },
+    actual: function  () {
+      currDate = moment(currDate).format("YYYY-MM-DD");
+
+      for (var i = eventData.length - 1; i >= 0 ; i--) {
+          
+        eventDate = eventData[i].dates[eventData[i].dates.length - 1].date;
+        if (eventDate < currDate) {
+          eventData.splice(i,1);
+          //break;
+        }    
+      }
+      return eventData;
+
     }
   };
 });
 
-// get enable event from db
-var eventData = (function () {
-    var json = null;
-    $.ajax({
-        'async': false,
-        'global': false,
-        'cache':false,
-        'url': 'adm/eventslist.php',
-        'dataType': "json",
-        'success': function (data) {
-            json = data;
-        }
-    });
-    return json;
-})(); 
-
-// get current date
-var currDate = new Date();
-/*
-// get actual event list
-var actualEvents = (function(){
-    var eventsAll = [];
-    var eventsAll = eventData;
-    var events = [];
-    currDate = moment(currDate).format("YYYY-MM-DD");
-
-    for (var i=0; i < eventsAll.length; i++){
-      for (var b=0; b < eventsAll[i].dates.length; b++){
-        var compareDate = eventsAll[i].dates[b].date >= currDate; 
-        
-        if(compareDate == true){              
-          if(events.length == 0){
-            events.push(eventsAll[i]);
-          } else if (events.length > 0){                  
-            for (var j=0; j < events.length; j++){
-              var isEvent = (events[j].id) == (eventsAll[i].id);                
-              if(isEvent == true){                      
-              }
-              else {
-                events.push(eventsAll[i]);
-              }
-            }                
-          }
-        }
-      }
-    }
-    // remove dublicate id
-    var arr = events;
-    arr.sort( function( a, b){ return a.id - b.id; } );
-
-    // delete all duplicates from the array
-    for( var i=0; i<arr.length-1; i++ ) {
-      if ( arr[i].id == arr[i+1].id ) {
-        delete arr[i];
-      }
-    }
-
-    // remove the "undefined entries"
-    arr = arr.filter( function( el ){ return (typeof el !== "undefined"); } );
-    events = arr;
-    return events;
-})();
-*/
 // configure our routes
 eventApp.config(function($routeProvider) {
 
@@ -266,7 +220,7 @@ eventApp.controller('EventNav', function ($scope, $location) {
 
 // events list
 eventApp.controller('EventListCtrl', function ($scope, AllEventData) {
- $scope.events = AllEventData.all();
+ $scope.events = AllEventData.actual();
  $scope.currDate = moment(currDate).format("YYYY-MM-DD");
   $(function(){
 
@@ -294,69 +248,11 @@ eventApp.controller('EventListCtrl', function ($scope, AllEventData) {
       cat_7 = new FilterCat(7);
     }); 
 });
-/*
-// event list 
-eventApp.controller('EventListCtrl', function ($scope) {
-    $scope.events = [];
-    $scope.events = actualEvents;
-    $scope.currDate = moment(currDate).format("YYYY-MM-DD");
 
-    $(function(){
-
-      $(".filter_cat_all").click(function(){      
-        $("button.btn").removeClass("active disabled");
-        $(this).addClass("active disabled");
-        $(".link_cat_all").show();
-      });
-
-      function FilterCat(i) {
-        $(".filter_cat_" + i).click(function(){
-          $("button.btn").removeClass("active disabled");
-          $(this).addClass("active disabled");
-            $(".link_cat_all").hide();
-            $(".link_cat_" + i).show();
-        });
-      }
-
-      cat_1 = new FilterCat(1);
-      cat_2 = new FilterCat(2);
-      cat_3 = new FilterCat(3);
-      cat_4 = new FilterCat(4);
-      cat_5 = new FilterCat(5);
-      cat_6 = new FilterCat(6);
-      cat_7 = new FilterCat(7);
-    });
-});
-*/
-// event single 
-/*
-eventApp.controller('SingleEventCtrl', ['$scope', '$routeParams', '$filter',
-  function($scope, $routeParams, $filter) {
-    $scope.currDate = currDate;
-    $scope.eventId = $routeParams.eventId;
-    $scope.event_single = $filter('filter')(eventData, function (d) {return d.id === $routeParams.eventId;})[0];
-
-    var Latlng = new google.maps.LatLng($scope.event_single.lat, $scope.event_single.lng);
-    var mapOptions = {
-        zoom: 16,
-        center: Latlng,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-    }
-
-    $scope.map = new google.maps.Map(document.getElementById('eventmap'), mapOptions);
-    
-    var marker = new google.maps.Marker({
-        position: Latlng,
-        map: $scope.map,
-        title: $scope.event_single.location,
-        icon: 'images/map_'+$scope.event_single.category+'.png'
-    });    
-
-}]);
-*/
+// event single
 eventApp.controller('SingleEventCtrl', function ($scope, $routeParams, AllEventData) {
   $scope.event_single = AllEventData.single($routeParams.eventId);
-
+  $scope.currDate = moment(currDate).format("YYYY-MM-DD");
   var Latlng = new google.maps.LatLng($scope.event_single.lat, $scope.event_single.lng);
     var mapOptions = {
         zoom: 16,
@@ -490,7 +386,8 @@ eventApp.controller('AddEventCtrl', ['$scope', 'Upload', '$timeout', function ($
 }]);
 
 // big map with events 
-eventApp.controller ('EventMapCtrl',function ($scope){
+eventApp.controller ('EventMapCtrl',function ($scope, AllEventData){
+  events = AllEventData.actual();
   var mapOptions = {
         zoom: 14,
         center: new google.maps.LatLng(49.832, 24.012),
@@ -555,9 +452,9 @@ eventApp.controller ('EventMapCtrl',function ($scope){
         
     }  
 
-    for (i = 0; i < actualEvents.length; i++){
+    for (i = 0; i < events.length; i++){
         //createMarker(actualEvents[i]);
-       $scope.markers.push(createMarker($scope.map, actualEvents[i], oms));
+       $scope.markers.push(createMarker($scope.map, events[i], oms));
     }
 
     
