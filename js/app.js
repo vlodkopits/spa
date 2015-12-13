@@ -389,7 +389,7 @@ eventApp.controller('AddEventCtrl', ['$scope', 'Upload', '$timeout', function ($
 eventApp.controller ('EventMapCtrl',function ($scope, AllEventData){
   events = AllEventData.actual();
   var mapOptions = {
-        zoom: 14,
+        zoom: 15,
         center: new google.maps.LatLng(49.832, 24.012),
         mapTypeId: google.maps.MapTypeId.ROADMAP
     }
@@ -442,7 +442,7 @@ eventApp.controller ('EventMapCtrl',function ($scope, AllEventData){
             icon: mapIcon
         });
         oms.addMarker(marker);
-        var infoContent = { content:'<h2><a href="#event/'+ info.id +'">' + marker.title + '</a></h2><div class="infoWindowContent"><img src="'+ info.image +'" alt="" class="img-responsive" style="max-width: 200px;" /></div>'}
+        var infoContent = { content:'<h2><a href="#event/'+ info.id +'">' + marker.title + '</a></h2><div class="infoWindowContent"><img src="'+ info.image +'" alt="" class="img-responsive" style="max-width: 200px;" /></div>', maxWidth: 320}
         var infoWindow = new google.maps.InfoWindow(infoContent);
         infoWindows.push(infoWindow);
         google.maps.event.addListener(marker, 'click', function(){
