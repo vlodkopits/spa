@@ -1,5 +1,5 @@
 <? 
-//header('Content-Type: application/json');
+header("Access-Control-Allow-Origin: *");
 echo "[";
 include 'config.php'; 
 
@@ -35,22 +35,22 @@ $enable=$row['enable'];
         //json single event
         $events[] = '
     	{
-    	"id": "'.$row['id'].'",
-            "image": "data\/posters\/'.$event_img.'",
-            "title": '.json_encode($row['title']).',
-            "category": "'.$row['category'].'",
-            "description": '.json_encode($row['description']).',
-            "dates": ['.$row['dates'].'],
-            "tickets": '.json_encode($row['tickets']).',
-            "tickets_link": '.json_encode($row['tickets_link']).',
-            "location": '.json_encode($row['location']).',
-            "location_addr": '.json_encode($row['location_addr']).',
-            "lat": "'.$row['lat'].'",
-            "lng": "'.$row['lng'].'",
-            "web": "'.$row['web'].'",
-            "email": "'.$row['email'].'",
-            "phone": "'.$row['phone'].'",
-            "enable": "'.$row['enable'].'"
+    	"id": '.$row['id'].',
+        "title": '.json_encode($row['title']).',
+        "image": "http:\/\/nm.lviv.ua\/pro\/data\/posters\/'.$event_img.'",
+        "category": "'.$row['category'].'",
+        "description": '.json_encode($row['description']).',
+        "dates": ['.$row['dates'].'],
+        "tickets": '.json_encode($row['tickets']).',
+        "tickets_link": '.json_encode($row['tickets_link']).',
+        "location": '.json_encode($row['location']).',
+        "location_addr": '.json_encode($row['location_addr']).',
+        "lat": "'.$row['lat'].'",
+        "lng": "'.$row['lng'].'",
+        "web": "'.$row['web'].'",
+        "email": "'.$row['email'].'",
+        "phone": "'.$row['phone'].'",
+        "enable": "'.$row['enable'].'"
     	}
     	';
 	
@@ -71,4 +71,7 @@ foreach ($arr as $val) {
 // close connection
 mysql_close();
 echo "]";
+/* 
+
+*/
 ?>
